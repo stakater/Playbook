@@ -15,7 +15,7 @@ playbook:
         certmanager.k8s.io/cluster-issuer: letsencrypt-production
         forecastle.stakater.com/appName: Playbook
         forecastle.stakater.com/expose: true
-        forecastle.stakater.com/icon: https://raw.githubusercontent.com/stakater/ForecastleIcons/master/book.png
+        forecastle.stakater.com/icon: https://raw.githubusercontent.com/stakater/ForecastleIcons/master/playbook.png
       config.xposer.stakater.com/IngressURLTemplate: "{{ `{{.Service}}.{{.Namespace}}.{{.Domain}}` }}"
       config.xposer.stakater.com/Domain: stackator.com
       config.xposer.stakater.com/TLS: "true"
