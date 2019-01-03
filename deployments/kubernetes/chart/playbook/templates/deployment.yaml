@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+{{ include "playbook.labels.stakater" . | indent 4 }}
+{{ include "playbook.labels.chart" . | indent 4 }}
+  name: {{ template "playbook.name" . }}
+  annotations:
+{{ toYaml .Values.playbook.deployment.annotations | indent 4 }}
+spec:
+  replicas: {{ .Values.playbook.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+{{ toYaml .Values.playbook.deployment.podLabels | indent 8 }}
+    spec:
+      imagePullSecrets:
+      - name: {{ .Values.playbook.deployment.imagePullSecrets }}
+      containers:
+      - name: {{ .Values.playbook.deployment.containerName }}
+        image: "{{ .Values.playbook.deployment.image.name }}:{{ .Values.playbook.deployment.image.tag }}"
+        ports:
+        - containerPort: 8080

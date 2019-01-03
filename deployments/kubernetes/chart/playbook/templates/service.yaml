@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+{{ include "playbook.labels.stakater" . | indent 4 }}
+{{ include "playbook.labels.chart" . | indent 4 }}
+    expose: {{ .Values.playbook.service.labels.expose | quote }}
+  name: {{ .Values.playbook.service.name | quote }}
+  annotations:
+{{ toYaml .Values.playbook.service.annotations | indent 4 }}
+spec:
+  selector:
+{{ toYaml .Values.playbook.deployment.podLabels | indent 4 }}
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
