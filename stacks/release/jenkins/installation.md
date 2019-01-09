@@ -61,26 +61,36 @@ Configuration is divided into three parts. Jenkins own configuration, github con
 Steps to Create Github Organizations are same for every github organization. After the scan is complete, follow update these values in each organization to complete the setup.
 
 **Stakater:**
+```text
 Owner: stakater
 Filter by name (with regular expression): ([A-Z][a-z0-9]+)+
 Branch names to build automatically: (PR-\d+|master)
+```
 
 **Stackator Input:**
+```text
 Owner: stakater
 Filter by name (with regular expression): [\w-]*input\b|^stackator-[\w-]*|^stakater-[\w-]*
 Branch names to build automatically: (PR-\d+|master)
+```
 
 **Stakater Charts:**
+```text
 Owner: stakater-charts
 Branch names to build automatically: (PR-\d+|master)
+```
 
 **Stakater Docker:**
+```text
 Owner: stakater-docker
 Branch names to build automatically: (PR-\d+|master)
+```
 
 **Stakater Lab:**
+```text
 Owner: stakater-lab
 Branch names to build automatically: (PR-\d+|master)
+```
 
 ### Gitlab
 
