@@ -1,32 +1,24 @@
-# Introduction
+# Developer Documentation for Elasticsearch Curator
 
-Elasticsearch Curator helps you curate, or manage your elasticsearch indices. In Stakater we use curator to remove our older logs; let’s say 2 months old elasticsearch indices. 
+## Introduction
 
-# Installation
+Elasticsearch Curator helps you curate, or manage your elasticsearch indices. In Stakater we use curator to remove our older logs; let’s say 2 months old elasticsearch indices.
 
-We use public helm chart of elasticsearch-curator to deploy elasticsearch in our cluster. 
-```
-https://github.com/helm/charts/tree/master/stable/elasticsearch-curator
-```
+## Installation
 
-We use version `1.0.1` in our cluster.. We use umbrella charts to deploy cerebro on our cluster. Currently we are using this repository for elasticsearch deployment
-```
-https://github.com/stakater/stakaterkubelogging
-```
+### Chart
 
- but we are depreciating it and replacing it with this repository.
-```
-https://github.com/stakater/stakaterkubehelmLogging
-```
+We use public helm chart of elasticsearch-curator to deploy elasticsearch in our cluster. [Here](https://github.com/helm/charts/tree/master/stable/elasticsearch-curator) is the public chart repo.
+We use version `1.0.1` in our cluster. We use umbrella charts to deploy elasticsearch curator on our cluster. Currently we are using [this](https://github.com/stakater/stakaterkubelogging) repository for elasticsearch curator deployment
 
-# Dependencies
+### Image
 
-Elasticsearch-curator requires an elasticsearch instance to manage its indices
+Currently we are using this `quay.io/pires/docker-elasticsearch-curator:5.5.4` public image for elasticsearch-curator in stakater.
 
-# Steps
+### Cherry Pickable
 
-* Most of the times elasticsearch-curator will be deployed from pipeline of `https://github.com/stakater/stakaterkubehelmLogging` repository. It will have updated configurations and dependencies for elasticsearch-curator. But we can also install it manually (not recommended). To install elasticsearch-curator manually, clone `https://github.com/stakater/stakaterkubehelmLogging` repo and you can run the make targets of repo containing latest used implementation of elasticsearch-curator. This will install all dependencies and elasticsearch-curator as well.
+Yes
 
-    * Clone `https://github.com/stakater/stakaterkubehelmLogging` repository
-    * Update the hardcoded values mentioned in the `hard-coded-values.md`
-    * Run this command. `make install CHART_NAME=logging`
+### Single Sign-on
+
+Not applicable

@@ -1,32 +1,23 @@
-# Introduction
+# Developer Documentation for nginx-ingress
+
+## Introduction
 
 nginx-ingress is an Ingress controller that uses ConfigMap to store the nginx configuration.
 
-# Installation
+## Installation
 
-We use public helm charts to deploy nginx-ingress on our cluster.
-```
-https://github.com/helm/charts/tree/master/stable/nginx-ingress
-```
+### Chart
 
-We use version `0.31.0` in our cluster. We use umbrella charts to deploy cerebro on our cluster. Currently we are using this repository for elasticsearch deployment
-```
-https://github.com/stakater/stakaterkubehelmGlobal
-```
+We use public helm charts to deploy nginx-ingress on our cluster. [Here](https://github.com/helm/charts/tree/master/stable/nginx-ingress) is the repository for public chart. We use version `0.31.0` in our cluster. We use umbrella charts to deploy nginx-ingress on our cluster. Currently we are using [this](https://github.com/stakater/stakaterkubehelmGlobal) repository for nginx-ingress deployment
 
- but we are depreciating it and replacing it with this repository.
-```
-https://github.com/stakater/stakaterkubehelmGlobal
-```
+### Image
 
-# Dependencies
+Currently we are using this `quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0` public image for nginx-ingress in stakater.
 
-nginx-ingress is not dependant on any other tool
+### Cherry Pickable
 
-# Steps
+Yes
 
-* Most of the times nginx-ingress will be deployed from pipeline of `https://github.com/stakater/stakaterkubehelmGlobal` repository. It will have updated configurations and dependencies for nginx-ingress. But we can also install it manually (not recommended). To install nginx-ingress manually, clone `https://github.com/stakater/stakaterkubehelmGlobal` repo and you can run the make targets of repo containing latest used implementation of nginx-ingress. This will install all dependencies and nginx-ingress as well.
+### Single Sign-on
 
-    * Clone `https://github.com/stakater/stakaterkubehelmGlobal` repository
-    * Update the hardcoded values mentioned in the `hard-coded-values.md`
-    * Run this command. `make install CHART_NAME=global`
+Not applicable

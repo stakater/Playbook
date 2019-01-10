@@ -1,17 +1,31 @@
-# Hard coded values
+# Installation and Dependencies of Elasticsearch-Curator
 
-This document contains the hard coded values for elasticsearch curator, and its dependencies. 
+## Installation Steps
 
-# Char Info
-```
+Most of the times elasticsearch-curator will be deployed from pipeline of [this](https://github.com/stakater/stakaterkubehelmLogging) repository. It will have updated configurations and dependencies for elasticsearch-curator. But we can also install it manually (not recommended). To install elasticsearch-curator manually, clone [this](https://github.com/stakater/stakaterkubehelmLogging) repo and you can run the make targets of repo containing latest used implementation of elasticsearch-curator. This will install all dependencies and elasticsearch-curator as well.
+
+1. Clone `https://github.com/stakater/stakaterkubehelmLogging` repository
+2. Update the hardcoded values mentioned [here](#Hard-coded-values)
+3. Run this command. `make install CHART_NAME=logging`
+
+## Dependencies
+
+Elasticsearch-curator requires an elasticsearch instance to manage its indices
+
+## Char Info
+
+```yaml
 name: elasticsearch-curator
 version: 1.0.1
 repository: https://kubernetes-charts.storage.googleapis.com
 alias: elasticsearch-curator
 ```
 
-# Hard coded values
-```
+## Hard-coded-values
+
+This document contains the hard coded values for elasticsearch curator, and its dependencies.
+
+```yaml
 cronjob:
    # At 00:00 every day
    schedule: "0 0 * * *"
