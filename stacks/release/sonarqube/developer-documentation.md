@@ -1,43 +1,21 @@
-# Introduction
+# Developer Documentation for Sonarqube
 
-SonarQube is an open sourced code quality scanning tool. SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically. 
+## Introduction
 
-# Installation:
+SonarQube is an open sourced code quality scanning tool. SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically.
 
-We use public helm chart of sonarqube to deploy sonarqube in our cluster.
+## Chart
 
-```
-https://github.com/upmc-enterprises/elasticsearch-operator/tree/master/charts/sonarqube
-```
+We use public helm charts to deploy sonarqube on our cluster. [Here](https://github.com/helm/charts/tree/master/stable/sonarqube) is the public chart that we use and `0.10.3` is the public chart version that is used in our cluster. We use umbrella charts to deploy sonarqube on our cluster. Currently we are using [this](https://github.com/stakater/stakaterkubehelmrelease) repository for sonarqube deployment.
 
-Right now we have a pending PR so we are using version `0.11.0` from stakater-charts. We use umbrella charts to deploy cerebro on our cluster. Currently we are using this repository for cerebro deployment
-```
-https://github.com/stakater/stakaterkubeRelease
-```
+## Image
 
- but we are depreciating it and replacing it with this repository.
-```
-https://github.com/stakater/stakaterkubehelmRelease
-```
+Currently we are using this `sonarqube:7.4-community` public image for sonarqube in stakater.
 
-# Known Issues:
+## Cherry Pickable
 
-There are 2 known issues with latest public helm chart: 
+Yes
 
-    * It doesn’t install custom plugins with current version of sonarqube used in the public chart. It doesn’t work even with the latest sonarqube image, but only works with the version 7.1 
-    * It doesn’t read & apply custom sonar.properties file 
+## Single Sign-on
 
-1st issue is resolved currently by using 7.1 version of sonarqube docker image. For 2nd issue we contacted the chart owner, and he has identified the issue. He confirmed that he will fix the issue soon. Till then we are configuring custom sonar properties manually. 
-
-# Dependencies
-
-Sonarqube required a database to persist its results. With the public chart we can either use mysql or postgres
-
-# Steps:
-
-* Most of the times sonarqube will be deployed from pipeline of `https://github.com/stakater/stakaterkubehelmRelease` repository. It will have updated configurations and dependencies for sonarqube. But we can also install it manually (not recommended). To install sonarqube manually, clone `https://github.com/stakater/stakaterkubehelmRelease` repo and you can run the make targets of repo containing latest used implementation of sonarqube. This will install all dependencies and sonarqube as well.
-    * Clone `https://github.com/stakater/stakaterkubehelmRelease` repository
-    * Update the hardcoded values mentioned in the `hard-coded-values.md`
-    * Run this command. `make install CHART_NAME=release`
-
-* Verify from UI that cerebro pod is running and accessible.
+Yes
