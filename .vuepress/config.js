@@ -11,11 +11,11 @@ module.exports = {
             {
                 title: 'Versioning',
                 children: [
-                    '/content/versioning/introduction',
-                    '/content/versioning/branching',
-                    '/content/versioning/versioning',
-                    '/content/versioning/github-configuration',
-                    '/content/versioning/repository-structure'
+                    '/content/processes/versioning/introduction',
+                    '/content/processes/versioning/branching',
+                    '/content/processes/versioning/versioning',
+                    '/content/processes/versioning/github-configuration',
+                    '/content/processes/versioning/repository-structure'
                 ]
             }, 
             {
