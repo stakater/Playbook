@@ -13,8 +13,8 @@ playbook:
         forecastle.stakater.com/appName: Playbook
         forecastle.stakater.com/expose: true
         forecastle.stakater.com/icon: https://raw.githubusercontent.com/stakater/ForecastleIcons/master/playbook.png
-      config.xposer.stakater.com/IngressURLTemplate: "{{ `{{.Service}}-{{.Namespace}}.{{.Domain}}` }}"
-      config.xposer.stakater.com/Domain: stackator.com
+      config.xposer.stakater.com/IngressURLTemplate: "{{ `{{.Service}}.{{.Domain}}` }}"
+      config.xposer.stakater.com/Domain: stakater.com
       config.xposer.stakater.com/TLS: "true"
     labels:
       expose: 'true'
@@ -23,16 +23,7 @@ playbook:
     podLabels:      
       app: playbook
     containerName: playbook
-    imagePullSecrets: docker-registry-secret 
-    annotations:
-      authproxy.stakater.com/image-name: quay.io/gambol99/keycloak-proxy
-      authproxy.stakater.com/image-tag: v2.1.1
-      authproxy.stakater.com/enabled: "true"
-      authproxy.stakater.com/upstream-url: "http://127.0.0.1:8080"
-      authproxy.stakater.com/source-service-name: playbook
-      authproxy.stakater.com/redirection-url: "https://playbook.tools.stackator.com"
-      authproxy.stakater.com/listen: "0.0.0.0:80"
-    
+    imagePullSecrets: docker-registry-secret
     image:
       name: stakater/playbook
       tag: 1.0.0
