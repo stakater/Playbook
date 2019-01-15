@@ -52,7 +52,7 @@ Configuration is divided into three parts. Jenkins own configuration, github con
 4. Select Credentials
 5. Enter Owner. It is the name of github organization. Make sure it is in small case.
 6. Update `Discover pull requests from forks -> Trust -> Contributors`
-7. Check `Periodically if not otherwise run` and set its value to 1
+7. Check `Periodically if not otherwise run` and uncheck/disable it.
 8. Enter `Automatic branch project triggering -> Branch names to build automatically PR` (This is a random regex to avoid triggering all webhook)
 9. Click apply and then save. It should automatically start scanning the repos. If it doesn’t start then manually start scanning the organization by clicking the `Scan Organization Now` button on left navigation bar.
 
