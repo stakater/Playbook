@@ -1,17 +1,31 @@
-# Hard coded values
+# Installation and Dependencies of Kibana
 
-This document contains the hard coded values for Kibana, and its dependencies. 
+## Installation Steps
 
-# Char Info
-```
+Most of the times kibana will be deployed from pipeline of [this](https://github.com/stakater/stakaterkubehelmLogging) repository. It will have updated configurations and dependencies for kibana. But we can also install it manually (not recommended). To install kibana manually, clone [this](https://github.com/stakater/stakaterkubehelmLogging) repo and you can run the make targets of repository containing latest used implementation of kibana. This will install all dependencies and kibana as well.
+
+1. Clone `https://github.com/stakater/stakaterkubehelmLogging` repository
+2. Update the hard coded values mentioned [here](#Hard-coded-values)
+3. Run this command. `make install CHART_NAME=logging`
+
+## Dependencies
+
+Kibana requires an elasticsearch instance to be running
+
+## Char Info
+
+```yaml
 name: kibana
 version: 1.1.1
 repository: https://kubernetes-charts.storage.googleapis.com
 alias: kibana
 ```
 
-# Hard coded values
-```
+## Hard-coded-values
+
+This document contains the hard coded values for Kibana, and its dependencies. 
+
+```yaml
 files:
    kibana.yml:
      server.name: kibana

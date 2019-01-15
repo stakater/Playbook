@@ -12,7 +12,7 @@ We use public helm charts to deploy ExternalDNS on our cluster. [Here](https://g
 
 ### Image
 
-Currently we are using this `registry.opensource.zalan.do/teapot/external-dns:v0.5.7` public image for ExternalDNS in stakater.
+Currently we are using this `registry.opensource.zalan.do/teapot/external-dns:v0.5.8` public image for ExternalDNS in stakater.
 
 ### Cherry Pickable
 
