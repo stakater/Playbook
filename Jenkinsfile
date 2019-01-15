@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
-@Library('github.com/stakater/fabric8-pipeline-library@v2.9.11') _
+@Library('github.com/stakater/fabric8-pipeline-library@v2.10.2') _
 
 appWithDockerfileBuildRelease {
-    deploy = true
+    dockerRepositoryURL = 'docker.release.stakater.com:443'
+    deployApp = true
 }
