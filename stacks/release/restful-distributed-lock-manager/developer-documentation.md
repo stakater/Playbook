@@ -10,7 +10,7 @@ We use stakater public helm charts to deploy rdlm on our cluster. [Here](https:/
 
 ### Image
 
-Currently we are using this `stakater/restful-distributed-lock-manager:0.5.3` public image for rdlm in stakater.
+Currently we are using this `stakater/restful-distributed-lock-manager:0.5.3` public image for rdlm in stakater. restful-distributed-lock-manager does not have public image maintained officially so we have created our own image.
 
 ### Cherry Pickable
 

@@ -11,8 +11,7 @@ We use version `0.1.5` in our cluster. We use umbrella charts to deploy elastics
 
 ### Image Issues
 
-Right now we are using stakater elasticsearch image, as we are facing problems with discovery plugin using public elasticsearch image.
-Current Image: `stakater/elasticsearch-kubernetes:6.2.4`
+Currently we are using stakater elasticsearch image `stakater/elasticsearch-kubernetes:6.2.4`, we are not using an official public image because we are facing problems with discovery plugin using public elasticsearch image.
 
 ### Cherry Pickable
 

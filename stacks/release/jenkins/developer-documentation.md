@@ -90,6 +90,7 @@ Branch names to build automatically: (PR-\d+|master)
 ```
 
 **Stackator Input:**
+
 ```text
 Owner: stakater
 Filter by name (with regular expression): [\w-]*input\b|^stackator-[\w-]*|^stakater-[\w-]*
@@ -97,18 +98,21 @@ Branch names to build automatically: (PR-\d+|master)
 ```
 
 **Stakater Charts:**
+
 ```text
 Owner: stakater-charts
 Branch names to build automatically: (PR-\d+|master)
 ```
 
 **Stakater Docker:**
+
 ```text
 Owner: stakater-docker
 Branch names to build automatically: (PR-\d+|master)
 ```
 
 **Stakater Lab:**
+
 ```text
 Owner: stakater-lab
 Branch names to build automatically: (PR-\d+|master)
@@ -141,7 +145,7 @@ Branch names to build automatically: (PR-\d+|master)
 
 ### Dependencies
 
-Below are the dependencies of jenkins. PRs have been created for all these dependencies in public helms chart repository but we are waiting for the approval.
+Below are the dependencies of jenkins. PRs have been created for all these dependencies in public helms chart repository but we are waiting for the approval. `storage`, `secrets`, `rbac`, `configmap` are helper charts that are used in conjunction with Jenkins chart because jenkins does not provide support for addition storage, secret, rbac and configmap.
 We need to deploy these dependencies with jenkins.
 
 ```yaml
@@ -187,6 +191,7 @@ external-docker-registry-url: docker.release.stakater.com:443
 #### xposer values
 
 Update the domain and set it’s value equals to the your domain
+
 ```yaml
 domain: stakater.com
 ```

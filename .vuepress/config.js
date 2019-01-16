@@ -25,7 +25,11 @@ module.exports = {
                     '/stacks/global/gitwebhookproxy/developer-documentation',
                     '/stacks/global/keycloak/developer-documentation',
                     '/stacks/global/kubernetes-dashboard/developer-documentation',
-                    '/stacks/global/nginx-ingress/developer-documentation'
+                    '/stacks/global/nginx-ingress/developer-documentation',
+                    '/stacks/global/configmap/developer-documentation',
+                    '/stacks/global/secrets/developer-documentation',
+                    '/stacks/global/storage/developer-documentation',
+                    '/stacks/global/rbac/developer-documentation'
                 ]
             },
             {

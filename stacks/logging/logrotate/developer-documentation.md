@@ -10,7 +10,7 @@ Right now no public helm chart of logrotate exist, so we have created a PR for t
 
 ### Image
 
-Currently we are using this `stakater/logrotate:3.13.0` stakater public image for logrotate in stakater.
+Currently we are using this `stakater/logrotate:3.13.0` stakater public image for logrotate in stakater. There is no official public image available for logrotate, that's why we have created our own logrotate public image.
 
 ### Cherry Pickable
 
