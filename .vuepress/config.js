@@ -22,6 +22,7 @@ module.exports = {
                 title: 'Tools',
                 children: [
                     '/content/tools/konfigurator/fluentd'
+                ]
             }, 
             {
                 title: 'Global Stack',
