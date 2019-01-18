@@ -17,6 +17,12 @@ module.exports = {
                     '/content/processes/versioning/github-configuration',
                     '/content/processes/versioning/repository-structure'
                 ]
+            },
+            {
+                title: 'Tools',
+                children: [
+                    '/content/tools/konfigurator/fluentd'
+                ]
             }, 
             {
                 title: 'Global Stack',
@@ -55,6 +61,7 @@ module.exports = {
                     '/stacks/release/sonarqube/developer-documentation'
                 ]
             }
+
         ],
         repo: 'stakater/playbook'
     }
