@@ -7,7 +7,6 @@ module.exports = {
 
     themeConfig: {
         sidebar: [
-            '/',
             {
                 title: 'Versioning',
                 children: [
@@ -16,6 +15,23 @@ module.exports = {
                     '/content/processes/versioning/versioning',
                     '/content/processes/versioning/github-configuration',
                     '/content/processes/versioning/repository-structure'
+                ]
+            },
+            {
+                title: 'Exposing apps',
+                children: [
+                    '/content/processes/exposing/introduction',
+                    '/content/processes/exposing/services',
+                    '/content/processes/exposing/service-types',
+                    '/content/processes/exposing/ingress',
+                    '/content/processes/exposing/dns'
+                ]
+            },
+            {
+                title: 'Logging',
+                children: [
+                    '/content/processes/logging/introduction',
+                    '/content/processes/logging/fluentd'
                 ]
             },
             {
