@@ -1,0 +1,8 @@
+# Fluentd
+Fluentd is an open source data collector for unified logging. It has a flexible plugin architecture, allowing easy extension of its functionality. Each application or service will log events as they occur, be it to standard out, syslog or a file. Fluentd will then collect all these logs, filter and then forward to configured locations.
+On Kubernetes, we deploy Fluentd as a DaemonSet to ensure that all Nodes run a copy of the fluentd Pod. And any new node getting added to the cluster will automatically get a fluentd pod. This enables Fluentd to easily collect the logs from the node it runs on. Let's take a look at how the logging flow works on kubernetes with fluentd.
+
+## Logging flow
+The containerized applications write to stdout and stderr, handled and redirected to a logging driver, which is configured in Kubernetes to write to a file in json format. Symlinks to these log files are created at `/var/log/containers/*.log`
+The fluentd input plugin has responsibility for reading in data from these log sources, and generating a Fluentd event against it. We use the `in_tail` Input plugin which allows Fluentd to read events from the tail of text files. This position from where fluentd has read a particular log file is recorded in a position file. And next time fluentd will pick up reading from this position in the file. The input is parsed, based on the configuration provided to the input plugin. 
+The fluentd event contains information such as where an event comes from, the time of the event, and the actual log content. These events are matched to an Output plugin type in the Fluentd configuration. The `out_elasticsearch` Output plugin forwards these records to Elasticsearch.

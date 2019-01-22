@@ -1,0 +1,7 @@
+# Services
+
+Services are Kubernetes objects that provide the reliable way to access applications running on the pods. Services are what makes pods consistently accessible. Services connect Pods together, or provide access outside of the cluster. Pods can now be created, destroyed or recreated, and have their IPs changed in the process but a service will maintain knowledge of these and anyone trying to access the application only needs to know about the service, and need not know about how many pods are running, or what any of their IP addresses are. Services will use a selector to identify which pods it needs to connect to. So in case a pod is recreated or the number of pods is scaled up and more pods are added, the service will connect to these pods as well as long as they have the relevant selector applied to them.
+
+When created, each Service is assigned a unique IP address (also called clusterIP). This address is tied to the lifespan of the Service, and will not change while the Service is alive. Pods are connected to Services using labels, and Services provide automatic load-balancing across these pods.
+
+When creating a service, a particular port and targetPort can also be passed. If not provided, a random the application will be exposed on a random port on the pod. The targetPort defaults to the port, but could be set to any value, including a string referring to a port on a backend Pod.
