@@ -2,7 +2,7 @@
 
 ## Workflow
 
-Let's support we want to create a group `carbook`, which will contain all our required projects. We need to create a manual group e.g `gitlab-bootstraper`, and inside it a manual project e.g `carbook-gitlab-config`. The manual project `carbook-gitlab-config` will be responsible for creating the group `carbook` and all the neeed projects via terraform. To add more projects in `carbook` group one should add terraform files in `carbook-gitlab-config`. `gitlab-bootstrap` group will be managed manually i.e, adding/udpating access of different users
+Let's suppose we want to create a group `carbook`, which will contain all our required projects. We need to create a manual group e.g `gitlab-bootstraper`, and inside it a manual project e.g `carbook-gitlab-config`. The manual project `carbook-gitlab-config` will be responsible for creating the group `carbook` and all the neeed projects via terraform. To add more projects in `carbook` group one should add terraform files in `carbook-gitlab-config`. `gitlab-bootstrap` group will be managed manually i.e, adding/udpating access of different users
 
 ## Configuration
 
