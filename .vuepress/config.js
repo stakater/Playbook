@@ -76,8 +76,13 @@ module.exports = {
                     '/stacks/release/restful-distributed-lock-manager/developer-documentation',
                     '/stacks/release/sonarqube/developer-documentation'
                 ]
+            },
+            {
+                title: 'Gitlab',
+                children: [
+                    '/content/gitlab/setup-gitlab-project-via-terraform',
+                ]
             }
-
         ],
         repo: 'stakater/playbook'
     }
