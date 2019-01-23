@@ -74,14 +74,14 @@ The method `setupGitlabProject` was added in pipeline library version `2.11.0`, 
 
 The following parameters are used in `setupGitlabProject` 
 
-    * `gitUserName` = Your GIT Username
+    * gitUserName = Your GIT Username
 
-    * `gitEmail` = Your GIT Email
+    * gitEmail = Your GIT Email
     
-    * `jobFolderName` = Name of the folder which will contain all pipelines of terraform projects specified in `carbook-gitlab-config` 
+    * jobFolderName = Name of the folder which will contain all pipelines of terraform projects specified in `carbook-gitlab-config` 
     
-    * `jobFolderDisplayName` = Name of the folder visible in Jenkins which will contain all pipelines of terraform projects specified in `carbook-gitlab-config` 
+    * jobFolderDisplayName = Name of the folder visible in Jenkins which will contain all pipelines of terraform projects specified in `carbook-gitlab-config` 
     
-    * `jobFolderDescription` = Description of the folder visible in Jenkins which will contain all pipelines of terraform projects specified in `carbook-gitlab-config` 
+    * jobFolderDescription = Description of the folder visible in Jenkins which will contain all pipelines of terraform projects specified in `carbook-gitlab-config` 
     
-    * `tfFilesPrefix` = Prefix of all the terraform files present in `carbook-gitlab-config` group responsible for creating new projects in `carbook` group. Note that the group terraform file in `carbook-gitlab-config` should not follow this prefix. 
+    * tfFilesPrefix = Prefix of all the terraform files present in `carbook-gitlab-config` group responsible for creating new projects in `carbook` group. Note that the group terraform file in `carbook-gitlab-config` should not follow this prefix. 
