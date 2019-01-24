@@ -3,4 +3,4 @@ While DNS entries can be manually entered into the DNS provider such as AWS Rout
 
 At Stakater we use the ExternalDNS project. This nifty tool automates DNS entries for our application deployments. ExternalDNS looks at the resources (Services, Ingresses, etc.) being exposed and determines the list of DNS records to be configured. It is DNS provider-agnostic and can be used with popular DNS providers such as AWS Route53. The tool keeps the DNS entries in sync with the cluster, which means not only does it add DNS entries for a new exposed app, but it also cleans up the entries when the app is removed from the cluster.
 
-More on this tool (here)[https://playbook.stakater.com/tools/global/external-dns]
+More on this tool [here](/content/tools/global/external-dns/developer-documentation.md)
