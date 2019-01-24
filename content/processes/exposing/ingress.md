@@ -12,9 +12,9 @@
    
    With two ingress controllers in this configuration, we can run both public and private applications within a single cluster. But more importantly this serves a security purpose while helping us in automation of our deployment processes. While the public applications and load balancer should indeed be accessible from anywhere in the world, the private applications and load balancer should have restricted access as much as possible, and this is where security groups and IP whitelisting plays a role. These rules can be constantly applied to the private load balancer, and any private application that is being deployed in the cluster, need only be annotated with the internal ingress class. The service when deployed automatically becomes accessible online while still following security rules defined as per organization policy. Now, depending on the organization and policies, this idea can indeed be extended to even more ingress controllers and load balancers. In case there are multiple sub-organizations that must maintain some access boundaries, multiple ingress controllers and load balancers can be deployed with a meaningful ingress class. And all relevant ingresses will be accessible only from within the sub-organization’s origin network, while filtering out requests from any other network.
    
-   ![Nginx Ingress Controllers](image/nginx-ingress-controller.png)
+   ![Nginx Ingress Controllers](./image/nginx-ingress-controller.png)
    
    Using Ingress controllers and Load balancers we can indeed expose our apps externally, but they will still be accessible by the load balancer’s dns name, which can be quite clunky and not at all easy to remember or write down. A custom DNS name is of course used for this purpose which can point to the load balancer instead. A DNS service such as Route53 in AWS can be used. Here is where another tool comes into play.
 
 
-More on this tool (here)[https://playbook.stakater.com/tools/global/nginx-ingress]
+More on this tool [here](/content/tools/global/nginx-ingress/developer-documentation.md)

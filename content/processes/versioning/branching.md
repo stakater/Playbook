@@ -17,7 +17,7 @@ Changes can be requested by the PR author, and once the changes are made to sati
  and if the pipeline runs successfully, the second check on the PR is satisfied.
  
 These checks are visible on the Pull Request as seen in the following screenshot: 
-![Github branch protection config](image/github-pr.png)
+![Github branch protection config](./image/github-pr.png)
 
 
 With the CI pipeline for the PR successful, a snapshot of the build artifact as well as docker image,
