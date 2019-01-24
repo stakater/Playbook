@@ -1,12 +1,42 @@
 # Setup gitlab project via terraform
 
-## Workflow
+So you have created a new Gitlab account, and now you want to create a group and a couple of projects. We will use terraform to setup everything from scratch
 
-Let's suppose we want to create a group `carbook`, which will contain all our required projects. We need to create a manual group e.g `gitlab-bootstraper`, and inside it a manual project e.g `carbook-gitlab-config`. The manual project `carbook-gitlab-config` will be responsible for creating the group `carbook` and all the neeed projects via terraform. To add more projects in `carbook` group one should add terraform files in `carbook-gitlab-config`. `gitlab-bootstrap` group will be managed manually i.e, adding/udpating access of different users
+## Why terraform
 
-## Configuration
+Terraform enables us to safely create, change, and improve infrastructure as code. We can get the following benefits by using Terraform 
 
-Continuing the previous example, we need to first add `group.tf` file in our project `carbook-gitlab-config`. A sample `group.tf` can be like this:
+  1. We can manage everething via code, and can save ourself from manual configurations
+  2. We can use code to create our groups, and projects
+  3. We can use code to manage users, and their access for our groups and projects
+  4. We can add webhooks for our projects easily and can keep track of them via code which is much simpler than manual management
+  5. We can easily re-create our infracstructure if let's say we want to move everything to a new group etc
+
+## Getting started
+
+We need to follow the following steps to setup our infrastructure via terraform
+
+### Creat a Group
+
+First of all create a manual group from UI for setting up our terraform repo. Let's call this group `carbook-bootstraper`.
+
+### Create a Project
+
+Now create a project manually from UI which will contain all our required terraform code. Let's call this project `carbook-gitlab-config`
+
+### Adding terraform scripts
+
+Now clone the manually created project `carbook-gitlab-config`. We need to add 3 things to this project
+
+  1. Single terraform script for creating our group. (Let's call it `cabook`)
+  2. Multiple terraform scripts for creating projects inside the above group (Let's suppose all these script files are named with a prefix `project-`)
+  3. A Jenkinsfile for automatically creating pipelines for all the project terraform scripts mentioned above
+
+Let's start by adding a terraform script for creating our group
+
+### Adding a terraform group script
+
+Inside our project `carbook-gitlab-config` create a new file let's say `carbook-group.tf`. This file will be responsible for creating `carbook` group, and managing users, and their access. Following is an example file:
 
 ```
 module "group_carbook" {
@@ -36,25 +66,39 @@ module "group_carbook" {
 }
 ```
 
-Next we have to add our projects via terraform. A sample project terraform file can be like this: 
+In the above file we are specifying our group `name`, `path`, `access-level`, and a set of users which have access to this group. We can add as many users as we want, and can assign them a specific access level.
+
+### Adding a terraform project script
+
+Let's create a new file now `project-search-service`. This file will be responsible for creating a new project inside the above created group. Following is an example file: 
 
 ```
-module "project_carbook_project_1" {
+module "project_search_service" {
   source = "github.com/stakater/terraform-module-gitlab.git//modules/project?ref=0.0.5"
-  name = "carbook-project-1"
+  name = "search-service"
   visibility = "private"
   enable_branch_protection = true
   description = "My project description"
   group_id = "${module.group_carbook.group_id}"
   default_branch = "master"
+  webhooks = [
+    {
+      url = "webhook-url",
+      merge_requests_events = true
+    },
+    {
+      url = "webhook-url",
+      push_events = true
+    } 
+  ]
 }
 ```
 
-In this way we can add as much project files we want, and they will be added in our group `carbook`.
+This file will create the project in the specified group. Here, we are telling it to create this project in the following group `${module.group_carbook.group_id}` which in our case is the above `carbook` group we created. We can change all the above properties, add or remove webhooks etc according to our requirements. We can add multiple project files to create as many projects we want inside our group.
 
-## Setting up Jenkins file
+### Adding a Jenkinsfile
 
-In `carbook-gitlab-config` we can add the following Jenkins file to create pipelines of all the projects we created via terraform in `carbook` group. 
+Let's now add a Jenkinsfile which will the create our infrastructure including pipelines for all the projects file. Create a new file in project `carbook-gitlab-config` with name `Jenkinsfile`, and add the following content: 
 
 ```
 #!/usr/bin/groovy
@@ -85,3 +129,7 @@ The following parameters are used in `setupGitlabProject`
     * jobFolderDescription = Description of the folder visible in Jenkins which will contain all pipelines of terraform projects specified in `carbook-gitlab-config` 
     
     * tfFilesPrefix = Prefix of all the terraform files present in `carbook-gitlab-config` group responsible for creating new projects in `carbook` group. Note that the group terraform file in `carbook-gitlab-config` should not follow this prefix. 
+
+### Creating a manual pipeline for terraform project
+
+Now we need to create a pipline for `carbook-gitlab-config` which will use the Jenkinsfile we created above. As the pipeline will run our new group, users, and projects will be created. Also a new folder in our Jenkins with all the pipelines for projects will also be created. 
