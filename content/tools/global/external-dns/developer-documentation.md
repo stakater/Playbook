@@ -1,4 +1,4 @@
-# External-DNS
+# ExternalDNS
 
 ## Introduction
 
