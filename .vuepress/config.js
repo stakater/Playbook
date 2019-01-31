@@ -14,7 +14,8 @@ module.exports = {
                     '/content/processes/versioning/branching',
                     '/content/processes/versioning/versioning',
                     '/content/processes/versioning/github-configuration',
-                    '/content/processes/versioning/repository-structure'
+                    '/content/processes/versioning/repository-structure',
+                    '/content/processes/versioning/setup-gitlab-project-via-terraform'
                 ]
             },
             {
@@ -75,12 +76,6 @@ module.exports = {
                     '/stacks/release/nexus/developer-documentation',
                     '/stacks/release/restful-distributed-lock-manager/developer-documentation',
                     '/stacks/release/sonarqube/developer-documentation'
-                ]
-            },
-            {
-                title: 'Gitlab',
-                children: [
-                    '/content/gitlab/setup-gitlab-project-via-terraform',
                 ]
             }
         ],
