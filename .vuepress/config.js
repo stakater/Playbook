@@ -8,7 +8,7 @@ module.exports = {
     themeConfig: {
         sidebar: [
             {
-                title: 'Versioning',
+                title: 'Processes: Versioning',
                 children: [
                     '/content/processes/versioning/introduction',
                     '/content/processes/versioning/branching',
@@ -19,63 +19,61 @@ module.exports = {
                 ]
             },
             {
-                title: 'Exposing apps',
+                title: 'Processes: Exposing apps',
                 children: [
                     '/content/processes/exposing/introduction',
                     '/content/processes/exposing/services',
                     '/content/processes/exposing/service-types',
                     '/content/processes/exposing/ingress',
-                    '/content/processes/exposing/dns'
+                    '/content/processes/exposing/dns',
+                    '/content/processes/exposing/securing-connection',
+                    '/content/processes/exposing/xposer',
+                    '/content/processes/exposing/birds-eye-view'
                 ]
             },
             {
-                title: 'Logging',
+                title: 'Processes: Logging',
                 children: [
                     '/content/processes/logging/introduction',
                     '/content/processes/logging/fluentd'
                 ]
             },
             {
-                title: 'Tools',
+                title: 'Tools: Global Stack',
                 children: [
-                    '/content/tools/konfigurator/fluentd'
-                ]
-            }, 
-            {
-                title: 'Global Stack',
-                children: [
-                    '/stacks/global/external-dns/developer-documentation',
-                    '/stacks/global/gitwebhookproxy/developer-documentation',
-                    '/stacks/global/keycloak/developer-documentation',
-                    '/stacks/global/kubernetes-dashboard/developer-documentation',
-                    '/stacks/global/nginx-ingress/developer-documentation',
-                    '/stacks/global/configmap/developer-documentation',
-                    '/stacks/global/secrets/developer-documentation',
-                    '/stacks/global/storage/developer-documentation',
-                    '/stacks/global/rbac/developer-documentation'
+                    '/content/tools/global/external-dns/developer-documentation',
+                    '/content/tools/global/gitwebhookproxy/developer-documentation',
+                    '/content/tools/global/keycloak/developer-documentation',
+                    '/content/tools/global/kubernetes-dashboard/developer-documentation',
+                    '/content/tools/global/nginx-ingress/developer-documentation',
+                    '/content/tools/global/configmap/developer-documentation',
+                    '/content/tools/global/secrets/developer-documentation',
+                    '/content/tools/global/storage/developer-documentation',
+                    '/content/tools/global/rbac/developer-documentation'
                 ]
             },
             {
-                title: 'Logging Stack',
+                title: 'Tools: Logging Stack',
                 children: [
-                    '/stacks/logging/cerebro/developer-documentation',
-                    '/stacks/logging/elasticsearch/developer-documentation',
-                    '/stacks/logging/elasticsearch-curator/developer-documentation',
-                    '/stacks/logging/elasticsearch-operator/developer-documentation',
-                    '/stacks/logging/fluentd/developer-documentation',
-                    '/stacks/logging/kibana/developer-documentation',
-                    '/stacks/logging/konfigurator/developer-documentation',
-                    '/stacks/logging/logrotate/developer-documentation'
+                    '/content/tools/logging/cerebro/developer-documentation',
+                    '/content/tools/logging/elasticsearch/developer-documentation',
+                    '/content/tools/logging/elasticsearch-curator/developer-documentation',
+                    '/content/tools/logging/elasticsearch-operator/developer-documentation',
+                    '/content/tools/logging/fluentd/developer-documentation',
+                    '/content/tools/logging/kibana/developer-documentation',
+                    '/content/tools/logging/konfigurator/developer-documentation',
+                    ['/content/tools/logging/konfigurator/fluentd','Konfigurator with Fluentd'],
+                    '/content/tools/logging/logrotate/developer-documentation'
                 ]
             },
             {
-                title: 'Release Stack',
+                title: 'Tools: Release Stack',
                 children: [
-                    '/stacks/release/chartmuseum/developer-documentation',
-                    '/stacks/release/jenkins/developer-documentation',
-                    '/stacks/release/nexus/developer-documentation',
-                    '/stacks/release/restful-distributed-lock-manager/developer-documentation',
-                    '/stacks/release/sonarqube/developer-documentation'
+                    '/content/tools/release/chartmuseum/developer-documentation',
+                    '/content/tools/release/jenkins/developer-documentation',
+                    '/content/tools/release/nexus/developer-documentation',
+                    '/content/tools/release/restful-distributed-lock-manager/developer-documentation',
+                    '/content/tools/release/sonarqube/developer-documentation'
                 ]
             }
         ],
