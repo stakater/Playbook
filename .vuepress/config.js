@@ -14,7 +14,8 @@ module.exports = {
                     '/content/processes/versioning/branching',
                     '/content/processes/versioning/versioning',
                     '/content/processes/versioning/github-configuration',
-                    '/content/processes/versioning/repository-structure'
+                    '/content/processes/versioning/repository-structure',
+                    '/content/processes/versioning/setup-gitlab-project-via-terraform'
                 ]
             },
             {
@@ -75,7 +76,6 @@ module.exports = {
                     '/content/tools/release/sonarqube/developer-documentation'
                 ]
             }
-
         ],
         repo: 'stakater/playbook'
     }
