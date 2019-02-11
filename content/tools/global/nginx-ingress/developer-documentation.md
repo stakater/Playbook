@@ -1,4 +1,4 @@
-# nginx-ingress
+# Nginx-ingress
 
 ## Introduction
 
@@ -34,7 +34,7 @@ Most of the times nginx-ingress will be deployed from pipeline of [this](https:/
 
 nginx-ingress is not dependant on any other tool
 
-### Char Info (external-ingress)
+### Chart Info (external-ingress)
 
 ```yaml
 name: nginx-ingress

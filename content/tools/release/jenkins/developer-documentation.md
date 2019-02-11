@@ -18,7 +18,7 @@ Yes, Depends Only on keycloak for SSO
 
 ### Single Sign-on
 
-Yes, our jenkins setup supports SSO
+Yes, our jenkins setup supports SSO. We use jenkins open id connect to achieve this. 
 
 ## Installation
 

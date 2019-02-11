@@ -18,7 +18,7 @@ Yes
 
 ### Single Sign-on
 
-Yes
+Yes, we use Open id connect plugin for sonarqube to achieve this.
 
 ## Installation
 

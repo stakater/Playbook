@@ -19,7 +19,7 @@ Yes
 
 ### Single Sign-on
 
-Yes
+Yes. We use proxyinjector for achieving single sign on. Please refer to its documentation [here](https://playbook.stakater.com/content/tools/global/proxyinjector/developer-documentation.html)
 
 ## Installation
 
