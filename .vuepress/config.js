@@ -49,7 +49,9 @@ module.exports = {
                     '/content/tools/global/configmap/developer-documentation',
                     '/content/tools/global/secrets/developer-documentation',
                     '/content/tools/global/storage/developer-documentation',
-                    '/content/tools/global/rbac/developer-documentation'
+                    '/content/tools/global/rbac/developer-documentation',
+                    '/content/tools/global/forecastle/developer-documentation',
+                    '/content/tools/global/proxyinjector/developer-documentation'
                 ]
             },
             {
@@ -63,7 +65,7 @@ module.exports = {
                     '/content/tools/logging/kibana/developer-documentation',
                     '/content/tools/logging/konfigurator/developer-documentation',
                     ['/content/tools/logging/konfigurator/fluentd','Konfigurator with Fluentd'],
-                    '/content/tools/logging/logrotate/developer-documentation'
+                    '/content/tools/logging/logrotate/developer-documentation',
                 ]
             },
             {
