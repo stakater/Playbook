@@ -1,4 +1,6 @@
-# storage
+# Storage
+
+This chart will be deprecated soon. We used it initially because public helm charts had limited functionality, and to achieve our desired workflow we used it temporarily
 
 ## Introduction
 
