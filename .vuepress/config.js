@@ -39,6 +39,12 @@ module.exports = {
                 ]
             },
             {
+                title: 'Processes: Bootstrapping',
+                children: [
+                    '/content/processes/bootstrapping/maven-apps'
+                ]
+            },
+            {
                 title: 'Tools: Global Stack',
                 children: [
                     '/content/tools/global/external-dns/developer-documentation',
