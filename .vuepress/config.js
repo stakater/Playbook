@@ -35,7 +35,18 @@ module.exports = {
                 title: 'Processes: Logging',
                 children: [
                     '/content/processes/logging/introduction',
-                    '/content/processes/logging/fluentd'
+                    '/content/processes/logging/log-generation',
+                    '/content/processes/logging/logging-flow',
+                    '/content/processes/logging/birds-eye-view',
+                ]
+            },
+            {
+                title: 'Processes: GitOps',
+                children: [
+                    '/content/processes/gitops/introduction',
+                    '/content/processes/gitops/principles',
+                    '/content/processes/gitops/gitops-with-jenkins',
+                    '/content/processes/gitops/birds-eye-view'
                 ]
             },
             {
