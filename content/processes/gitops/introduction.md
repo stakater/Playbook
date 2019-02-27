@@ -1,0 +1,3 @@
+# Introduction
+While GitOps outlines several principles, it is possible due to certain constraints of time or resource you may not be able to follow all of them. As with everything, you can choose to prioritize to fulfill the essence, or core principles first and then later down the road complete a full implementation. In this blog we’ll first take a quick look at the what and why of GitOps, how to implement it into your DevOps processes, and finally an approach to implement GitOps in a light manner. There are tools such as ArgoCD and Weave Flux, that are purpose built for GitOps. We also have Jenkins-x, while technically purpose built for CI/CD on Kubernetes, but also has the ability for implementation of GitOps processes.
+
