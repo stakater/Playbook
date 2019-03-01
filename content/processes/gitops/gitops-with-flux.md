@@ -4,112 +4,15 @@ Flux is a tool that automatically ensures that the state of a cluster matches th
 
 ## Get started with Flux & Helm
 
-We will be installing helm and flux to deploy our apps in demo namespace. 
+In this article, we will be deploying helm in `kube-system` namespace and flux in `flux` namespace and our helm chart in `demo` namespace thats why giving them relative RBAC access, so if you want to change it you would need to modify the roles.
 
 ### Helm with Limited RBAC
 
-As we want flux & helm to have restrictive access so we will be giving tiller access to only `demo`, `flux` and `kube-system` namespace. 
+As we want flux & helm to have restrictive access so we will be giving tiller(helm part running on kubernetes cluster) access to only `demo`, `flux` and `kube-system` namespace.
 
-#### Installing Helm
+#### Cluster Admin Related Tasks
 
-If you dont have helm installed in your cluster, first install it by applying the following manifest
-
-```yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: tiller
-  namespace: kube-system
----
-# Role & Rolebinding for flux namespace to deploy flux
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: tiller-flux-binding
-  namespace: flux
-subjects:
-- kind: ServiceAccount
-  name: tiller
-  namespace: kube-system
-roleRef:
-  kind: Role
-  name: tiller-flux-role
-  apiGroup: rbac.authorization.k8s.io
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: tiller-flux-role
-  namespace: flux
-rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["*"]
----
-# Role & Rolebinding for demo namespace where it will be deploying applications
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: tiller-demo-binding
-  namespace: demo
-subjects:
-- kind: ServiceAccount
-  name: tiller
-  namespace: kube-system
-roleRef:
-  kind: Role
-  name: tiller-demo-role
-  apiGroup: rbac.authorization.k8s.io
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: tiller-demo-role
-  namespace: demo
-rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["*"]
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: tiller-system-binding
-  namespace: kube-system
-subjects:
-- kind: ServiceAccount
-  name: tiller
-  namespace: kube-system
-roleRef:
-  kind: Role
-  name: tiller-system-role
-  apiGroup: rbac.authorization.k8s.io
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: tiller-system-role
-  namespace: kube-system
-rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["*"]
-```
-
-This can be deployed through following commands:
-
-```sh
-kubectl apply -f tiller.yaml            # above file
-helm init --service-account tiller      # by default namespace is kube-system, you can specify it by passing a flag --tiller-namespace
-```
-
-The above commands will install helm with limited access.
-
-#### Installing Flux
-
-The default chart of flux requires cluster-admin clusterrole, and we want limited access so we are not using the rbac provided by the chart but will be deploying the rbac separately.
-
-As our helm also has limited access, so we cannot create CRDs from helm chart as well, we will be needing them to be created manually first. Deploy following manifests.
+As our helm also has limited access, so we cannot create CRDs from helm chart or even a user cant create them as they need to be applied from a user with cluster admin access, we will be needing them to be created manually first. Cluster admins have to deploy following manifests.
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1beta1
@@ -249,6 +152,108 @@ The above manifest will create 2 crds
 
 which check for helm releases and deploy them automatically.
 
+CRDs are a cluster-wide resource that can only be created by cluster-admins and the whole cluster has access on them.
+
+#### Installing Helm
+
+If you dont have helm installed in your cluster, first install it by applying the following manifest. Through the following manifest, we are deploying helm in `kube-system` namespace
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tiller
+  namespace: kube-system
+---
+# Role & Rolebinding for flux namespace to deploy flux
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: tiller-flux-binding
+  namespace: flux
+subjects:
+- kind: ServiceAccount
+  name: tiller
+  namespace: kube-system
+roleRef:
+  kind: Role
+  name: tiller-flux-role
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: tiller-flux-role
+  namespace: flux
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+---
+# Role & Rolebinding for demo namespace where it will be deploying applications
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: tiller-demo-binding
+  namespace: demo
+subjects:
+- kind: ServiceAccount
+  name: tiller
+  namespace: kube-system
+roleRef:
+  kind: Role
+  name: tiller-demo-role
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: tiller-demo-role
+  namespace: demo
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+---
+# Role & Rolebinding for kube-system namespace for handling the configmaps.
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: tiller-system-binding
+  namespace: kube-system
+subjects:
+- kind: ServiceAccount
+  name: tiller
+  namespace: kube-system
+roleRef:
+  kind: Role
+  name: tiller-system-role
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: tiller-system-role
+  namespace: kube-system
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+```
+
+This can be deployed through following commands:
+
+```sh
+kubectl apply -f tiller.yaml            # above file
+helm init --service-account tiller      # by default namespace is kube-system, you can specify it by passing a flag --tiller-namespace
+```
+
+The above commands will install tiller(helm) with limited access in `kube-system` namespace.
+
+#### Installing Flux
+
+The default chart of flux requires cluster-admin clusterrole, and we want limited access so we are not using the rbac provided by the chart but will be deploying the rbac separately.
+
 Now, we will deploy the rbac required for flux instance.
 
 ```yaml
@@ -307,9 +312,6 @@ rules:
 - apiGroups: ["*"]
   resources: ["*"]
   verbs: ["*"]
-- apiGroups: ["*"]
-  resources: ["fluxhelmreleases","helmreleases"]
-  verbs: ["*"]
 ---
 # Role & RoleBinding for kube-system namespace so helm operator can talk to tiller.
 kind: RoleBinding
@@ -337,51 +339,38 @@ rules:
   verbs: ["get","list","watch"]
 
 ---
-# ClusterRoles required to flux as it looks for namespaces and helm operator needs to look into helmReleases at the cluster level
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: flux-clusterrolebinding
-subjects:
-- kind: ServiceAccount
-  name: flux
-  namespace: flux
-roleRef:
-  kind: ClusterRole
-  name: flux-clusterrole
-  apiGroup: rbac.authorization.k8s.io
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: flux-clusterrole
-rules:
-- apiGroups: ["*"]
-  resources: ["namespaces"]
-  verbs: ["get","list","watch"]
-- apiGroups: ["*"]
-  resources: ["fluxhelmreleases","helmreleases"]
-  verbs: ["*"]
 ```
 
-The above manifest will create a service account named flux and will give it complete permission over the `demo` and `flux` namespaces. 
+The above manifest will create a service account named flux and will give it complete permission over the `demo` and `flux` namespaces.
 
-Now to deploy flux using helm, run the following command: 
+Now to deploy flux using helm, create a values file i.e. `values.yaml` with following content:
+
+```yaml
+rbac:
+  create: false
+serviceAccount:
+  create: false
+  name: flux
+helmOperator:
+  create: true
+  createCRD: false
+  updateChartDeps: false
+git:
+  url: ssh://git@github.com/stakater/flux-helm-test
+  pollInterval: "10s"
+registry:
+  pollInterval: "200m"
+  excludeImage: "*"
+additionalArgs:
+  - --k8s-namespace-whitelist=demo
+```
+
+You can modify any value you want, in the above file we are setting the git url to `git@github.com/stakater/flux-helm-test` and to include only demo namespace.
+
+Now run the following command:
 
 ```sh
-helm install --name flux \
---set rbac.create=false \
---set serviceAccount.create=false \
---set serviceAccount.name=flux \
---set helmOperator.create=true \
---set helmOperator.createCRD=false \
---set helmOperator.updateChartDeps=false \
---set git.url=ssh://git@github.com/stakater/flux-helm-test \
---set git.pollInterval=5s \
---set registry.pollInterval=200m \
---set registry.excludeImage=* \
---namespace flux \
-weaveworks/flux
+helm install --name flux --namespace flux weaveworks/flux -f values.yaml
 ```
 
 The above command will deploy flux which will be looking into `stakater/flux-helm-test` 
@@ -389,4 +378,4 @@ repo, you can change that to your repo.
 
 After this command, run `kubectl -n flux logs deployment/flux | grep identity.pub | cut -d '"' -f2` to get the ssh key and add that in the repo's deploy keys by going to Settings -> Deploy Keys -> Add Deploy Key. Give Write access to the key. Now flux will be able to read and write to your git repo.
 
-Deploying above flux instance will deploy chart present in `stakater/flux-helm-test`, currently it has a umbrella chart that deploys Xposer(a utility developed to create/update/delete Ingresses directly from Services). So xposer will be deployed in demo namespace.
+Deploying above flux instance will deploy helm chart present in `stakater/flux-helm-test`, currently it has a umbrella chart that deploys Xposer(a utility developed to create/update/delete Ingresses directly from Services). So xposer will be deployed in demo namespace.
