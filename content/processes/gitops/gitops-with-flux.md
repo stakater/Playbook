@@ -12,7 +12,7 @@ As we want flux & helm to have restrictive access so we will be giving tiller(he
 
 #### Cluster Admin Related Tasks
 
-As our helm also has limited access, so we cannot create CRDs from helm chart or even a user cant create them as they need to be applied from a user with cluster admin access, we will be needing them to be created manually first. Cluster admins have to deploy following manifests.
+As our helm also has limited access, so we cannot create CRDs from helm chart or even a user cant create them as they need to be applied from a user with cluster admin access, we will be needing them to be created manually first. Cluster admins have to deploy following manifests by creating a file lets say `crd.yaml` and copy the following manifest. And then run `oc apply -f crd.yaml`
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1beta1
