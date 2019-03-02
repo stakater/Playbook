@@ -4,9 +4,9 @@ This guide is for managing k8s cluster on AWS with kops
 
 To figure out:
 
-Q1: How to create the S3 bucket to store terraform state?
-Q2: How to create Jenkins job for `{git-provider}-as-code` repo? And configure webhook?
-Q3: How to securely manage the ssh private key for the bastian host?
+- Q1: How to create the S3 bucket to store terraform state?
+- Q2: How to create Jenkins job for `{git-provider}-as-code` repo? And configure webhook?
+- Q3: How to securely manage the ssh private key for the bastian host?
 
 ## Step 1: Create a repo to hold git provider config
 
