@@ -132,4 +132,4 @@ The following parameters are used in `setupGitlabProject`
 
 ## Creating a manual pipeline for terraform project
 
-Now we need to create a pipline for `carbook-gitlab-config` which will use the Jenkinsfile we created above. As the pipeline will run our new group, users, and projects will be created. Also a new folder in our Jenkins with all the pipelines for projects will also be created. 
+Now we need to create a pipline for `carbook-gitlab-config` which will use the Jenkinsfile we created above. As the pipeline will run our new group, users, and projects will be created. Also a new folder in our Jenkins with all the pipelines for projects will also be created. For setting up Gitlab pipeline in Jenkins see [Gitlab Configuration](https://playbook.stakater.com/content/tools/release/jenkins/developer-documentation.html#gitlab-configurations)
