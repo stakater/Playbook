@@ -14,8 +14,7 @@ module.exports = {
                     '/content/processes/versioning/branching',
                     '/content/processes/versioning/versioning',
                     '/content/processes/versioning/github-configuration',
-                    '/content/processes/versioning/repository-structure',
-                    '/content/processes/versioning/setup-gitlab-project-via-terraform'
+                    '/content/processes/versioning/repository-structure'
                 ]
             },
             {
@@ -53,7 +52,8 @@ module.exports = {
             {
                 title: 'Processes: Bootstrapping',
                 children: [
-                    '/content/processes/bootstrapping/maven-apps'
+                    '/content/processes/bootstrapping/maven-apps',
+                    '/content/processes/bootstrapping/gitlab-project-via-terraform'
                 ]
             },
             {
