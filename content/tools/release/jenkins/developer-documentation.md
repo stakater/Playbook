@@ -34,7 +34,11 @@ Yes, our jenkins setup supports SSO. We use jenkins open id connect to achieve t
 
 ### Post-Installation-Configurations
 
-Configuration is divided into three parts. Jenkins own configuration, github configuration and gitlab configuration.
+Configuration is divided into three parts:
+
+- Jenkins own configuration, 
+- Github configuration and 
+- Gitlab configuration.
 
 #### Jenkins Configurations
 
