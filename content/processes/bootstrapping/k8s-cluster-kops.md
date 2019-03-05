@@ -96,7 +96,7 @@ To create the repo, follow these steps.
     }
     ```
 
-    Do replace YOUR_JENKINS_WEBHOOK_URL to enable automatic pipeline triggering. The webhooks block can also be removed in case you want to trigger pipelines manually.
+    Do replace `YOUR_JENKINS_WEBHOOK_URL` to enable automatic pipeline triggering. The webhooks block can also be removed in case you want to trigger pipelines manually.
 
 - If your webhook works then the pipeline should get triggered automatically and create the repo in your organization.
 
@@ -151,3 +151,18 @@ module "stackator_s3_kops_state" {
   name = "stackator-kops-state"  
 }
 ```
+
+### II) Create route 53 hosted zone to be used by kops
+
+In order to build a Kubernetes cluster with `kops`, we need to prepare somewhere to build the required DNS records. In AWS, DNS records are managed by `Route53` hosted zones.
+To create a simple Route53 hosted zone, let's create a file `route53-zone-stackator.tf` with following content
+
+```terraform
+module "stackator_route53_zone" {
+  source = "github.com/stakater/blueprint-utilities-aws.git//modules/route53/public?ref=v0.3.0"
+  public_domain = "${var.public_domain}"
+  force_destroy = "${var.force_destroy}"
+}
+```
+
+For different scenarios like assigning a sub domain hosted zone to kops etc, read the detailed `kops` documentation [here](https://github.com/kubernetes/kops/blob/master/docs/aws.md#configure-dns)
