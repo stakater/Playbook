@@ -46,7 +46,8 @@ module.exports = {
                     '/content/processes/gitops/principles',
                     '/content/processes/gitops/gitops-with-jenkins',
                     '/content/processes/gitops/gitops-with-flux',
-                    '/content/processes/gitops/birds-eye-view'
+                    '/content/processes/gitops/birds-eye-view-jenkins',
+                    '/content/processes/gitops/birds-eye-view-flux'
                 ]
             },
             {
