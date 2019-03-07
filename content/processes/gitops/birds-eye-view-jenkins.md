@@ -1,6 +1,6 @@
 # Bird’s eye view: GitOps with Jenkins
 
-![GitOps with Jenkins](image/gitops-jenkins-overview.png)
+![GitOps with Jenkins](./image/gitops-jenkins-overview.png)
 
 1. **Merge Request:** The developer merges code into the Code repository.
 2. **webhook:** A webhook configured in Jenkins automatically triggers the Jenkins pipeline.
