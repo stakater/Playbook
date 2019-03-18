@@ -196,6 +196,20 @@ Once this repo is created, create the follwing lines in the created repo
     #!/usr/bin/groovy
     @Library('github.com/stakater/stakater-pipeline-library@master')
 
+    String auth_method_arn = "arn"
+    String auth_method_access_key = "access_key"
+    String aws_auth_method = ""
+
+    try {
+        aws_auth_method = AWS_AUTH_METHOD
+    } catch (Throwable e) {
+        throw e
+    }
+
+    if ( ! (aws_auth_method in [auth_method_arn, auth_method_access_key]) ) {
+        error("AWS_AUTH_METHOD must either be 'arn' or 'access_key'")
+    }
+
     String aws_role_arn = ""
     try {
         aws_role_arn = AWS_ROLE_ARN
@@ -203,8 +217,26 @@ Once this repo is created, create the follwing lines in the created repo
         throw e
     }
 
-    if (aws_role_arn == "") {
-        error("AWS_ROLE_ARN must be specified") 
+    if (aws_role_arn == "" && aws_auth_method == auth_method_arn) {
+        error("AWS_ROLE_ARN must be specified when auth method is $auth_method_arn") 
+    }
+
+    String aws_access_key_id = ""
+    try {
+        aws_access_key_id = AWS_ACCESS_KEY
+    } catch (Throwable ignored) {
+        aws_access_key_id = ""
+    }
+
+    String aws_secret_access_key = ""
+    try {
+        aws_secret_access_key = AWS_ACCESS_KEY_SECRET
+    } catch (Throwable ignored) {
+        aws_secret_access_key = ""
+    }
+
+    if ( (aws_access_key_id == "" || aws_secret_access_key == "") && aws_auth_method == auth_method_access_key ) {
+        error("AWS_ACCESS_KEY and AWS_ACCESS_KEY_SECRET must be specified when auth method is $auth_method_access_key")
     }
 
     String kopsStateStore = ""
@@ -259,13 +291,17 @@ Once this repo is created, create the follwing lines in the created repo
 
     numberOfNodesIncludingMaster="4"
     MOUNT_PATH = '/home/jenkins/.ssh'
-    awsSudoCommand = "awssudo -u ${aws_role_arn}"
+    awsSudoCommand = ""
+    if (aws_auth_method == auth_method_arn) {
+        awsSudoCommand = "awssudo -u ${aws_role_arn}"
+    }
     dryRunFlag = isDryRun ? "" : "--yes"
 
         clientsK8sNode(clientsImage: 'stakater/pipeline-tools:v2.0.4') {
 
             def amazon = new io.stakater.cloud.Amazon()
             def common = new io.stakater.Common()
+
             stage('Checkout Code') {
 
                 checkout scm
@@ -277,6 +313,9 @@ Once this repo is created, create the follwing lines in the created repo
             }
 
             container('clients') {
+                if (aws_auth_method == auth_method_access_key) {
+                    amazon.persistAwsKeys(aws_access_key_id, aws_secret_access_key)
+                }
 
                 if (action.equals('deploy')) {
 
@@ -385,8 +424,8 @@ In Jenkins create a simple pipeline that should execute the above Jenkinsfile. F
     |CLUSTER_CONFIG_FILE|string|cluster.yaml|The kops config file i.e inside the `stackator-kops-cluster` repo|
     |AWS_AUTH_METHOD|string-options|arn|Auth method to use (either arn or access_key)|
     |AWS_ROLE_ARN|string||AWS Role ARN that should be assumed (must be specified if `AWS_AUTH_METHOD` is `arn`)|
-    |AWS_ACCESS_KEY_ID|string||Id of access key to use. (must be specified if `AWS_AUTH_METHOD` is `access_key`)|
-    |AWS_SECRET_ACCESS_KEY|string||Secret of access key to use. (must be specified if `AWS_AUTH_METHOD` is `access_key`)|
+    |AWS_ACCESS_KEY|string||Id of access key to use. (must be specified if `AWS_AUTH_METHOD` is `access_key`)|
+    |AWS_ACCESS_KEY_SECRET|string||Secret of access key to use. (must be specified if `AWS_AUTH_METHOD` is `access_key`)|
     |SSH_PUB_KEY|string||Pub key to be used by kops for ssh|
     |ACTION|string-options|deploy|The action to perform (either deploy or teardown)
     |IS_DRY_RUN|Boolean|true|set to true to dry run or false to actually apply the change|
