@@ -273,11 +273,11 @@ Once this repo is created, create the follwing lines in the created repo
                     mkdir -p ${MOUNT_PATH}
                     echo "${sshPubKey}" > ${MOUNT_PATH}/stakater_id_rsa.pub
                 """
-                
+
             }
 
             container('clients') {
-                
+
                 if (action.equals('deploy')) {
 
                     stage('Configure Cluster') {
@@ -296,9 +296,9 @@ Once this repo is created, create the follwing lines in the created repo
                                 ${awsSudoCommand} kops export kubecfg --name ${clusterName} --state ${kopsStateStore}
                             """
                         }
-                        
+
                     }
-                    
+
                     stage('Verify Cluster') {
                         if (!isDryRun) {
                             String count = "0"
@@ -317,7 +317,7 @@ Once this repo is created, create the follwing lines in the created repo
                         sh """
                             ${awsSudoCommand} kops rolling-update cluster --name ${clusterName} --state ${kopsStateStore} ${dryRunFlag}
                         """
-                        
+
                         if (!isDryRun) {
                             sh """
                                 echo '***************KUBE CONFIG**************'
@@ -331,173 +331,36 @@ Once this repo is created, create the follwing lines in the created repo
                 } else if (action.equals('teardown')) {
 
                     stage('Cluster Teardown') {
-                        sh """ 
+                        sh """
                             ${awsSudoCommand} kops delete cluster --name ${clusterName} --state ${kopsStateStore} ${dryRunFlag}
-                        """                    
+                        """
                     }
                 }
             }
         }
     ```
 
-- Next create a file named `cluster.yaml` with the following content
-
-    ```yaml
-    apiVersion: kops/v1alpha2
-    kind: Cluster
-    metadata:
-      name: test.stackator.com
-    spec:
-      docker:
-        ipMasq: true
-        ipTables: true
-      fileAssets:
-      - name: kubernetes-audit
-        path: /srv/kubernetes/audit.yaml
-        # which type of instances to appy the file
-        roles: [Master]
-        content: |
-          apiVersion: audit.k8s.io/v1beta1
-          kind: Policy
-          omitStages:
-            - RequestReceived
-          rules:
-            - level: Metadata
-        kubeAPIServer:
-          auditLogPath: /var/log/kube-apiserver-audit.log
-          auditLogMaxAge: 10 # num days
-          auditLogMaxBackups: 1 # the num of audit logs to retain
-          auditLogMaxSize: 100 # the max size in MB to retain
-          auditPolicyFile: /srv/kubernetes/audit.yaml
-          api:
-            dns: {}
-          authorization:
-            rbac: {}
-          channel: stable
-          cloudProvider: aws
-          configBase: s3://stackator-kops-state/test.stackator.com
-          dnsZone: test.stackator.com
-          etcdClusters:
-          - etcdMembers:
-            - encryptedVolume: true
-                instanceGroup: master-eu-west-1a
-                name: a
-              name: main
-          - etcdMembers:
-            - encryptedVolume: true
-                instanceGroup: master-eu-west-1a
-                name: a
-              name: events
-          kubernetesApiAccess:
-          - 0.0.0.0/0
-          kubernetesVersion: 1.10.8
-          masterPublicName: api.test.stackator.com
-          networkCIDR: 182.20.0.0/16
-          networking:
-            weave:
-              mtu: 8912
-          nonMasqueradeCIDR: 200.64.0.0/10
-          sshAccess:
-          - 125.209.127.26/32
-          subnets:
-          - cidr: 182.20.32.0/19
-            name: eu-west-1a
-            type: Public
-            zone: eu-west-1a
-          - cidr: 182.20.64.0/19
-            name: eu-west-1b
-            type: Public
-            zone: eu-west-1b
-          - cidr: 182.20.96.0/19
-            name: eu-west-1c
-            type: Public
-            zone: eu-west-1c
-          topology:
-            dns:
-              type: Public
-            masters: public
-            nodes: public
-    ---
-    apiVersion: kops/v1alpha2
-    kind: InstanceGroup
-    metadata:
-      creationTimestamp: 2019-03-05T13:40:14Z
-      labels:
-        kops.k8s.io/cluster: test.stackator.com
-      name: master-eu-west-1a
-    spec:
-      image: ami-099b2d1bdd27b4649
-      machineType: t2.medium
-      maxSize: 1
-      minSize: 1
-      role: Master
-      rootVolumeSize: 50
-      subnets:
-      - eu-west-1a
-      hooks:
-      - name: disable-automatic-updates.service
-        before:
-        - update-engine.service
-        manifest: |
-          Type=oneshot
-          ExecStartPre=/usr/bin/systemctl mask --now update-engine.service
-          ExecStartPre=/usr/bin/systemctl mask --now locksmithd.service
-          ExecStart=/usr/bin/systemctl reset-failed update-engine.service
-    ---
-    apiVersion: kops/v1alpha2
-    kind: InstanceGroup
-    metadata:
-      creationTimestamp: 2019-03-05T13:40:14Z
-      labels:
-        kops.k8s.io/cluster: test.stackator.com
-    name: nodes
-    spec:
-      associatePublicIp: true
-      image: ami-099b2d1bdd27b4649
-      machineType: m4.large
-      maxPrice: "0.1"
-      maxSize: 3
-      minSize: 3
-      nodeLabels:
-        kops.k8s.io/instancegroup: nodes
-      role: Node
-      rootVolumeSize: 50
-      subnets:
-      - eu-west-1a
-      - eu-west-1b
-      - eu-west-1c
-      kubelet:
-        kubeReserved:
-          cpu: "400m"
-          memory: "1Gi"
-        systemReserved:
-          cpu: "400m"
-          memory: "1Gi"
-        enforceNodeAllocatable: "pods"
-      hooks:
-      - name: disable-automatic-updates.service
-        before:
-        - update-engine.service
-        manifest: |
-          Type=oneshot
-          ExecStartPre=/usr/bin/systemctl mask --now update-engine.service
-          ExecStartPre=/usr/bin/systemctl mask --now locksmithd.service
-          ExecStart=/usr/bin/systemctl reset-failed update-engine.service
-    ```
-
-    Replace `test.stackator.com`, `stackator-kops-state` and `api.test.stackator.com` in the above file according to the names that you have choosen while following this guide.
+- Next use [stakater kops templates](https://github.com/stakater/kops-cluster-templates) to generate your own kops cluster template and copy it to this repo and name it `cluster.yaml`
 
 ### IV) Prepare IAM Role for cluster creation
 
-We will need an aws role to create the cluster. The role should have administrator access i.e 
+We will need an aws role to create the cluster. The role should have administrator access i.e
 
 ```json
 {
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "Statement1",
             "Effect": "Allow",
-            "Action": "*",
+            "Action": [
+                "iam:*",
+                "cloudfront:*",
+                "s3:*",
+                "route53:*",
+                "ec2:*",
+                "autoscaling:*"
+            ],
             "Resource": "*"
         }
     ]
