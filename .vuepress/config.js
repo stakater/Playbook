@@ -40,6 +40,19 @@ module.exports = {
                 ]
             },
             {
+                title: 'Processes: Security',
+                children: [
+                    '/content/processes/security/introduction',
+                    '/content/processes/security/micro-segmentation',
+                    '/content/processes/security/ip-whitelisting',
+                    '/content/processes/security/secrets-management',
+                    '/content/processes/security/rbac',
+                    '/content/processes/security/keycloak',
+                    '/content/processes/security/keycloak-gatekeeper',
+                    '/content/processes/security/proxy-injector'
+                ]
+            },
+            {
                 title: 'Processes: GitOps',
                 children: [
                     '/content/processes/gitops/introduction',
