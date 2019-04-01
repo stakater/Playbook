@@ -40,6 +40,13 @@ module.exports = {
                 ]
             },
             {
+                title: 'Processes: Alerting',
+                children: [
+                    '/content/processes/alerting/introduction',
+                    '/content/processes/alerting/chowkidar',
+                ]
+            },
+            {
                 title: 'Processes: Security',
                 children: [
                     '/content/processes/security/introduction',
