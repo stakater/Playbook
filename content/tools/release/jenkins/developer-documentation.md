@@ -10,7 +10,7 @@ We use public helm charts to deploy jenkins on our cluster. [Here](https://githu
 
 ### Image
 
-Currently we are using this `jenkins/jenkins:lts` public image for jenkins in stakater.
+Currently we are using this `jenkins/jenkins:2.159` public image for jenkins in stakater.
 
 ### Cherry Pickable
 
