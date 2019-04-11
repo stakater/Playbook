@@ -44,6 +44,8 @@ module.exports = {
                 children: [
                     '/content/processes/alerting/introduction',
                     '/content/processes/alerting/chowkidar',
+                    '/content/processes/alerting/prometheus',
+                    '/content/processes/alerting/uptime-checkers',
                 ]
             },
             {

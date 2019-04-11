@@ -1,0 +1,5 @@
+# Uptime checker alerts
+
+Apart from Prometheus which provides us monitoring from within our kubernetes cluster, we also employ third party cloud services for uptime monitoring such as Uptime Robot. Such a service allows monitoring of application connection from multiple locations across the globe, and additionally alert in case the application is not reachable. Services like Uptime Robot also provide alerts using multiple notification channels such as slack, email, etc.
+
+For the purpose of easy automation of configuring monitors and alerts with the Uptime checker, we have developed an open-source Kubernetes controller, IngressMonitorController. The IngressMonitorController automatically adds/removes monitors and alerts against ingresses in the uptime checker such as UptimeRobot, Pingdom, Statuscake, etc.
