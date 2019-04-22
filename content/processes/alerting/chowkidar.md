@@ -196,4 +196,4 @@ subjects:
     namespace: default
 ```
 
-More information on Xposer can be found [here](https://github.com/stakater/Chowkidar/)
+More information on Chowkidar can be found [here](https://github.com/stakater/Chowkidar/)
