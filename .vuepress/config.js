@@ -80,6 +80,13 @@ module.exports = {
                 ]
             },
             {
+                title: 'Processes: Deployment',
+                children: [
+                    '/content/processes/deployment/introduction',
+                    '/content/processes/deployment/forecastle'
+                ]
+            },
+            {
                 title: 'Tools: Global Stack',
                 children: [
                     '/content/tools/global/external-dns/developer-documentation',
