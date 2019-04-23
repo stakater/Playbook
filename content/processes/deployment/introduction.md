@@ -1,0 +1,3 @@
+# Deployment
+
+In an environment where we have multiple tools and applications including micro-frontends, it may get a little tedious to keep track of the URLs of all of the services. It can get additionally confusing if there are multiple instances of the same tools deployed on different environments or kubernetes namespaces. Keeping track of these URLs and sharing them within a team or other group of consumers can become tiresome. We would like to have a central place where we can easily look for and access our applications running on Kubernetes. We would also like to have our apps on kubernetes to be dynamically discovered.
