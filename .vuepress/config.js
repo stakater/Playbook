@@ -83,7 +83,8 @@ module.exports = {
                 title: 'Processes: Deployment',
                 children: [
                     '/content/processes/deployment/introduction',
-                    '/content/processes/deployment/forecastle'
+                    '/content/processes/deployment/forecastle',
+                    '/content/processes/deployment/resources-cleanup'
                 ]
             },
             {
