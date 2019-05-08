@@ -9,19 +9,35 @@ It is an opensource monitoring solution for metrics and alerting.
 Prometheus-operator public helm [chart's](https://github.com/helm/charts/tree/master/stable/prometheus-operator) version `5.0.13` is being used to deploy grafana on cluster. [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository is being used for deployment.
 
 ### Image Issue
-None
+None.
+
+Image specifications:
+```yaml
+repository: quay.io/prometheus/prometheus
+tag: v2.7.2
+```
 
 ### Cherry Pickable
-Not applicable
+No, becuase it is being deployed with `Prometheus-Operator` helm charts. Although it can be deployed using its own helm chart.
+
 
 ### Single Sign On
-Applicable
+Not applicable.
 
 ## Installation
 It will be deployed by the pipeline of [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository.
 
 ### Dependencies
 It requires helm operator running in cluster.
+
+### Chart Infromation
+It is part of prometheus-operator chart.
+
+```yaml
+repository: https://kubernetes-charts.storage.googleapis.com
+name: prometheus-operator
+version: 5.0.13
+```
 
 ### Hard-coded-values
 Hard coded values for Prometheus is given below:

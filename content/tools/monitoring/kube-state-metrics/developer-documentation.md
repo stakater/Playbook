@@ -7,10 +7,14 @@ It is a service that generates metrics about kubernetes objects by using Kubeber
 Prometheus-operator public helm [chart's](https://github.com/helm/charts/tree/master/stable/prometheus-operator) version `5.0.13` is being used to deploy kube state metrics on our cluster. [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository is being used for deployment.
 
 ### Image Issue
-None
+None. Image specifications are given below:
+```yaml
+repository: k8s.gcr.io/kube-state-metrics
+  tag: v1.5.0
+```
 
 ### Cherry Pickable
-No
+No, becuase it is being deployed with `Prometheus-Operator` helm charts. Although it can be deployed using its own helm chart.
 
 ### Single Sign On
 Not applicable.
@@ -22,6 +26,7 @@ It will be deployed by the pipeline of [StakaterKubeHelmMonitoring](https://gith
 It requires helm operator running in cluster.
 
 ### Chart Information
+Chart information is given below:
 
 ```yaml
 name: kube-state-metrics

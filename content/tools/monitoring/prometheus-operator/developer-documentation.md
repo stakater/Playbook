@@ -7,10 +7,14 @@ It provides an easy way to define monitoring definitions for kubernetes deployme
 It public helm [chart's](https://github.com/helm/charts/tree/master/stable/prometheus-operator) version `5.0.13` is being used to deploy monitoring definitions on cluster. [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository is being used for deployment.
 
 ### Image Issue
-None
+None. Image specifications are given below:
+```yaml
+image: "quay.io/coreos/prometheus-operator"
+tag: "v0.29.0"
+```
 
 ### Cherry Pickable
-None
+Yes
 
 ### Single Sign On
 Not applicable
@@ -22,6 +26,7 @@ It is will be installed using the Helm Operator manifest.
 It requires helm operator running in the cluster.
 
 ### Char Information
+Chart information is given below:
 ```yaml
 repository: https://kubernetes-charts.storage.googleapis.com
 name: prometheus-operator
