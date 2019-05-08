@@ -130,13 +130,13 @@ module.exports = {
             {
                 title: 'Tools: Monitoring Stack',
                 children: [
-                    '/content/tools/monitoring/prometheus-operator/developer-documentation'
+                    '/content/tools/monitoring/prometheus-operator/developer-documentation',
                     '/content/tools/monitoring/prometheus/developer-documentation',
                     '/content/tools/monitoring/grafana/developer-documentation',
                     '/content/tools/monitoring/kube-state-metrics/developer-documentation',
                     '/content/tools/monitoring/node-exporter/developer-documentation',
                     '/content/tools/monitoring/alert-manager/developer-documentation',
-                    '/content/tools/monitoring/kube-state-metrics/developer-documentation',
+                    '/content/tools/monitoring/kube-state-metrics/developer-documentation'
                 ]
             }
         ],
