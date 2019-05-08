@@ -10,7 +10,7 @@ Prometheus-operator public helm [chart's](https://github.com/helm/charts/tree/ma
 None. Image specifications are given below:
 ```yaml
 repository: k8s.gcr.io/kube-state-metrics
-  tag: v1.5.0
+tag: v1.5.0
 ```
 
 ### Cherry Pickable
@@ -23,7 +23,7 @@ Not applicable.
 It will be deployed by the pipeline of [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository.
 
 ### Dependencies
-It requires helm operator running in cluster.
+It requires helm operator to be running in cluster.
 
 ### Chart Information
 Chart information is given below:

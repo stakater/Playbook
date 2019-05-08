@@ -7,7 +7,7 @@ Grafana is an open source metric analytics & visualization suite with support fo
 Prometheus-operator public helm [chart's](https://github.com/helm/charts/tree/master/stable/prometheus-operator) version `5.0.13` is being used to deploy grafana on cluster. [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository is being used for deployment.
 
 ### Image Issue
-None. Image specifications:
+None. Image specifications are given below:
 ```yaml
 repository: grafana/grafana
 tag: 6.1.3
@@ -23,7 +23,7 @@ Not applicable.
 It will be deployed by the pipeline of [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository.
 
 ### Dependencies
-It requires helm operator running in cluster.
+It requires helm operator to be running in cluster.
 
 ### Chart Information
 Chart information is given below:
@@ -37,7 +37,7 @@ condition: grafana.enabled
 
 ### Hard-coded-values
 
-Hard coded values for grafana is given below:
+Hard coded values for grafana are given below:
 
 Parameters given below will enable grafana sidecar dashboard, so that additional dashboard can be added in grafana.
 ```yaml
