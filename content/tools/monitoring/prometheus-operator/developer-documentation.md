@@ -1,0 +1,39 @@
+# Prometheus Operator
+
+## Introduction
+It provides an easy way to define monitoring definitions for kubernetes deployments, services and managment of Prometheus instances.  
+
+### Chart
+It public helm [chart's](https://github.com/helm/charts/tree/master/stable/prometheus-operator) version `5.0.13` is being used to deploy monitoring definitions on cluster. [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository is being used for deployment.
+
+### Image Issue
+None
+
+### Cherry Pickable
+None
+
+### Single Sign On
+Not applicable
+
+## Installation
+It is will be installed using the Helm Operator manifest.
+
+### Dependencies
+It requires helm operator running in the cluster.
+
+### Char Information
+```yaml
+repository: https://kubernetes-charts.storage.googleapis.com
+name: prometheus-operator
+version: 5.0.13
+```
+
+### Hard-coded-values
+Hard coded values for prometheus Operator is given below:
+```yaml
+prometheusOperator:
+  serviceAccount:
+    name: stakater-monitoring
+  kubeletService:
+    enabled: true
+```

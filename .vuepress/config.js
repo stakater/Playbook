@@ -126,6 +126,16 @@ module.exports = {
                     '/content/tools/release/restful-distributed-lock-manager/developer-documentation',
                     '/content/tools/release/sonarqube/developer-documentation'
                 ]
+            },
+            {
+                title: 'Tools: Monitoring Stack',
+                children: [
+                    '/content/tools/monitoring/alert-manager/developer-documentation',
+                    '/content/tools/monitoring/grafana/developer-documentation',
+                    '/content/tools/monitoring/kube-state-metrics/developer-documentation',
+                    '/content/tools/monitoring/prometheus/developer-documentation',
+                    '/content/tools/monitoring/prometheus-operator/developer-documentation'
+                ]
             }
         ],
         repo: 'stakater/playbook'
