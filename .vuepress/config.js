@@ -84,6 +84,7 @@ module.exports = {
                 children: [
                     '/content/processes/deployment/introduction',
                     '/content/processes/deployment/forecastle',
+                    '/content/processes/deployment/Helm-operator',
                     '/content/processes/deployment/resources-cleanup'
                 ]
             },
