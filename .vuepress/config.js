@@ -55,6 +55,7 @@ module.exports = {
                     '/content/processes/security/micro-segmentation',
                     '/content/processes/security/ip-whitelisting',
                     '/content/processes/security/secrets-management',
+                    '/content/processes/security/sealed-secrets',
                     '/content/processes/security/rbac',
                     '/content/processes/security/keycloak',
                     '/content/processes/security/keycloak-gatekeeper',
