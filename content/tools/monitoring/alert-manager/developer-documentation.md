@@ -18,7 +18,7 @@ tag: v0.16.2
 No, becuase it is being deployed with `Prometheus-Operator` helm charts. Although it can be deployed using its own helm chart.
 
 ### Single Sign On
-Not applicable.
+Applicable but not supported.
 
 ## Installation
 It will be deployed by the pipeline of [StakaterKubeHelmMonitoring](https://github.com/stakater/StakaterKubeHelmMonitoring) repository. 
