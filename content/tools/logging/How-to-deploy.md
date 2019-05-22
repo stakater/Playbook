@@ -19,9 +19,9 @@ cd manifests
 ```
 kubectl apply -f . -n logging
 ```
-6. After this command is executed successfully switch directory to `aws-elasticsearch` if you want to deploy on Aamazon Web Services (AWS) or `azure-elasricsearch` if you want to deploy on Microsoft Azure Cloud Platform.
+6. After this command is executed successfully switch directory to `aws` if you want to deploy on Aamazon Web Services (AWS) or `azure` if you want to deploy on Microsoft Azure Cloud Platform.
 ```
-cd [aws|azure]-elasticsearch/
+cd [aws|azure]/
 ```
 7. Run the following command
 ```
