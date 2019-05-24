@@ -29,6 +29,7 @@ module.exports = {
                     '/content/processes/exposing/xposer',
                     '/content/processes/exposing/birds-eye-view',
                     '/content/processes/exposing/tls-using-cert-manager'
+                    '/content/processes/exposing/azure-cluster-with-aws-subdomain'
                 ]
             },
             {
@@ -56,6 +57,7 @@ module.exports = {
                     '/content/processes/security/micro-segmentation',
                     '/content/processes/security/ip-whitelisting',
                     '/content/processes/security/secrets-management',
+                    '/content/processes/security/sealed-secrets',
                     '/content/processes/security/rbac',
                     '/content/processes/security/keycloak',
                     '/content/processes/security/keycloak-gatekeeper',
@@ -87,6 +89,17 @@ module.exports = {
                     '/content/processes/deployment/forecastle',
                     '/content/processes/deployment/Helm-operator',
                     '/content/processes/deployment/resources-cleanup'
+                ]
+            },
+            {
+                title: 'Processes: Monitoring',
+                children: [
+                    '/content/processes/monitoring/prometheus-operator-in-openshift',
+                    '/content/processes/monitoring/prometheus-in-openshift',
+                    '/content/processes/monitoring/alert-manager-in-openshift',
+                    '/content/processes/monitoring/grafana-in-openshift',
+                    '/content/processes/monitoring/monitoring-buisness-apps',
+                    '/content/processes/monitoring/creating-hooks-slack'
                 ]
             },
             {
