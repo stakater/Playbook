@@ -27,7 +27,8 @@ module.exports = {
                     '/content/processes/exposing/dns',
                     '/content/processes/exposing/securing-connection',
                     '/content/processes/exposing/xposer',
-                    '/content/processes/exposing/birds-eye-view'
+                    '/content/processes/exposing/birds-eye-view',
+                    '/content/processes/exposing/tls-using-cert-manager'
                 ]
             },
             {
