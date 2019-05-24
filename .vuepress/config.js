@@ -91,6 +91,13 @@ module.exports = {
                 ]
             },
             {
+                title: 'Processes: Monitoring',
+                children: [
+                    '/content/processes/monitoring/monitoring-buisness-apps',
+                    '/content/processes/monitoring/creating-hooks-slack'
+                ]
+            },
+            {
                 title: 'Tools: Global Stack',
                 children: [
                     '/content/tools/global/external-dns/developer-documentation',
