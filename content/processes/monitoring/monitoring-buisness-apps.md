@@ -80,8 +80,8 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    app: {SERVICE_NAME}-monitor
-  name: {SERVICE_NAME}-monitor
+    app: {APP_NAME}-monitor
+  name: {APP_NAME}-monitor
   namespace: {NAMESPACE}
 spec:
   endpoints:
@@ -93,7 +93,41 @@ spec:
       - "{TARGET_NAMESPACE}"
   selector:
     matchLabels:
-      app: {SERVICE_NAME}
+      app: {APP_NAME}
 ```
 
-Apply this to create service monitor.
+Replace `{APP_NAME}`, `{NAMESPACE}` and `{TARGET_NAMESPACE}` with correct values in the above file. Here `{NAMESPACE}` is the namespace in which prometheus is running and `{TARGET_NAMESPACE}` is the namespace in which your app is running. Also, your pods should have a label `app: {APP_NAME}`. If it doesn't have it then update the selector in the above file according to your scenario.
+
+Apply the above manifest to create service monitor using the command below:
+
+```bash
+oc apply -f service-monitor.yaml
+```
+
+## Adding Prometheus Rule
+
+Prometheus can be configured to trigger alerts based on metrics using Prometheus rule. To create alerts for your app create a file named `prometheus-rule.yaml` with following content
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: k8s
+    role: prometheus-rulefiles
+  name: prometheus-rules-{NAMESPACE}
+  namespace: {NAMESPACE}
+spec:
+  groups:
+  - name: application.rules
+    rules:
+    - alert: HighEmailUsage
+      annotations:
+        message: 'Email usage is greater than 10.'
+      expr: count_requests_total > 10
+      for: 10s
+      labels:
+        severity: warning
+```
+
+Replace `{NAMESPACE}` with the name of namespace in which prometheus is deployed. This sample config generates an alert when your buisness application metric `count_requests_total` meets the criteria `count_requests_total > 10`. This can be changed based on your scenario and more alerts can be added as new array elements.
