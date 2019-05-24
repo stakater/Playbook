@@ -91,6 +91,17 @@ module.exports = {
                 ]
             },
             {
+                title: 'Processes: Monitoring',
+                children: [
+                    '/content/processes/monitoring/prometheus-operator-in-openshift',
+                    '/content/processes/monitoring/prometheus-in-openshift',
+                    '/content/processes/monitoring/alert-manager-in-openshift',
+                    '/content/processes/monitoring/grafana-in-openshift',
+                    '/content/processes/monitoring/monitoring-buisness-apps',
+                    '/content/processes/monitoring/creating-hooks-slack'
+                ]
+            },
+            {
                 title: 'Tools: Global Stack',
                 children: [
                     '/content/tools/global/external-dns/developer-documentation',
