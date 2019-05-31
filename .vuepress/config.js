@@ -29,7 +29,8 @@ module.exports = {
                     '/content/processes/exposing/xposer',
                     '/content/processes/exposing/birds-eye-view',
                     '/content/processes/exposing/tls-using-cert-manager'
-                    '/content/processes/exposing/azure-cluster-with-aws-subdomain'
+                    '/content/processes/exposing/azure-cluster-with-aws-subdomain',
+                    '/content/processes/exposing/using-tls-custom-cert'
                 ]
             },
             {
