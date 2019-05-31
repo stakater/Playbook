@@ -130,8 +130,7 @@ module.exports = {
                     '/content/tools/logging/kibana/developer-documentation',
                     '/content/tools/logging/konfigurator/developer-documentation',
                     ['/content/tools/logging/konfigurator/fluentd','Konfigurator with Fluentd'],
-                    '/content/tools/logging/logrotate/developer-documentation',
-                    ['/content/tools/logging/How-to-deploy','Deployment Guide']
+                    '/content/tools/logging/logrotate/developer-documentation'
                 ]
             },
             {
