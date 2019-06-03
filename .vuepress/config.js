@@ -28,6 +28,7 @@ module.exports = {
                     '/content/processes/exposing/securing-connection',
                     '/content/processes/exposing/xposer',
                     '/content/processes/exposing/birds-eye-view',
+                    '/content/processes/exposing/tls-using-cert-manager',
                     '/content/processes/exposing/azure-cluster-with-aws-subdomain',
                     '/content/processes/exposing/using-tls-custom-cert'
                 ]
@@ -129,7 +130,7 @@ module.exports = {
                     '/content/tools/logging/kibana/developer-documentation',
                     '/content/tools/logging/konfigurator/developer-documentation',
                     ['/content/tools/logging/konfigurator/fluentd','Konfigurator with Fluentd'],
-                    '/content/tools/logging/logrotate/developer-documentation',
+                    '/content/tools/logging/logrotate/developer-documentation'
                 ]
             },
             {
