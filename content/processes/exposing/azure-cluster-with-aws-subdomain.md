@@ -43,6 +43,10 @@ The Azure DNS provider expects, by default, that the configuration file is at /e
 
 ### Create Service Principal
 
+**Pre-Reqs**
+
+For this step, you need Owner access to the Subscription or ask an Owner to create this Service Principal for you.
+
 ```sh
 az ad sp create-for-rbac -n ExternalDnsServicePrincipal
 ```
