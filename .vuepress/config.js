@@ -27,7 +27,10 @@ module.exports = {
                     '/content/processes/exposing/dns',
                     '/content/processes/exposing/securing-connection',
                     '/content/processes/exposing/xposer',
-                    '/content/processes/exposing/birds-eye-view'
+                    '/content/processes/exposing/birds-eye-view',
+                    '/content/processes/exposing/tls-using-cert-manager',
+                    '/content/processes/exposing/azure-cluster-with-aws-subdomain',
+                    '/content/processes/exposing/using-tls-custom-cert'
                 ]
             },
             {
@@ -90,6 +93,17 @@ module.exports = {
                 ]
             },
             {
+                title: 'Processes: Monitoring',
+                children: [
+                    '/content/processes/monitoring/prometheus-operator-in-openshift',
+                    '/content/processes/monitoring/prometheus-in-openshift',
+                    '/content/processes/monitoring/alert-manager-in-openshift',
+                    '/content/processes/monitoring/grafana-in-openshift',
+                    '/content/processes/monitoring/monitoring-buisness-apps',
+                    '/content/processes/monitoring/creating-hooks-slack'
+                ]
+            },
+            {
                 title: 'Tools: Global Stack',
                 children: [
                     '/content/tools/global/external-dns/developer-documentation',
@@ -116,7 +130,7 @@ module.exports = {
                     '/content/tools/logging/kibana/developer-documentation',
                     '/content/tools/logging/konfigurator/developer-documentation',
                     ['/content/tools/logging/konfigurator/fluentd','Konfigurator with Fluentd'],
-                    '/content/tools/logging/logrotate/developer-documentation',
+                    '/content/tools/logging/logrotate/developer-documentation'
                 ]
             },
             {
