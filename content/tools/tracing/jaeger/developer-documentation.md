@@ -1,19 +1,25 @@
-# Istio
+# Jaeger
 
 ## Introduction
-Istio is an open platform for providing a uniform way to integrate microservices, manage traffic flow across microservices, enforce policies and aggregate telemetry data.
+Jaeger is an open source end-to-end distributed tracing system. 
 
 ### Chart
-Istio public helm [chart](https://github.com/istio/istio/tree/master/install/kubernetes/helm/istio) version `1.1.0` is being used to deploy istio on cluster. [StakaterKubeHelmTracing](https://github.com/stakater/StakaterKubeHelmTracing) repository is being used for deployment.
+Istio public helm [chart](https://github.com/istio/istio/tree/master/install/kubernetes/helm/istio) version `1.1.0` is being used to deploy jaeger on cluster. [StakaterKubeHelmTracing](https://github.com/stakater/StakaterKubeHelmTracing) repository is being used for deployment.
 
 ### Image Issue
-None.
+None. Image specifications are given below:
+
+```yaml
+name: tracing
+version: 1.1.0
+condition: tracing.enabled
+```
 
 ### Cherry Pickable
-No.
+Yes.
 
 ### Single Sign On
-Not applicable.
+Applicable but not supported.
 
 ## Installation
 It will be deployed by the pipeline of [StakaterKubeHelmTracing](https://github.com/stakater/StakaterKubeHelmTracing) repository. 
@@ -31,7 +37,7 @@ version: 1.1.0
 ```
 
 ### Hard-coded-values
-Hard coded values for istio is given below:
+Hard coded values for jaeger is given below:
 
 ```yaml
 global:
@@ -40,6 +46,4 @@ tracing:
   enabled: true
 pilot:
   traceSampling: 100
-prometheus:
-  enabled: false
 ```
