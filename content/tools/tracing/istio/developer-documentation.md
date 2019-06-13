@@ -6,19 +6,21 @@ Istio is an open platform for providing a uniform way to integrate microservices
 Istio components can be divided in two parts;
 
 * Data Plane
+
 The data plane intercepts all inbound (ingress) and outbound (egress) network traffic. Applications business logic, microservice is blissfully unaware of this fact. Istio's control plane components comprises two concepts:
 
 * Envoy (sidecar container).
 
-### Chart
-Istio public helm [chart](https://github.com/istio/istio/tree/master/install/kubernetes/helm/istio) version `1.1.0` is being used to deploy istio on cluster. [StakaterKubeHelmTracing](https://github.com/stakater/StakaterKubeHelmTracing) repository is being used for deployment.
-
 * Control Plane
+
 The control plane is responsible for being the authoritative source for configuration and policy and making the data plane usable in a cluster. Istio’s control plane comprises three primary Istio services:
 
 * Pilot
 * Mixer
 * Citadel (Authorization).
+
+### Chart
+Istio public helm [chart](https://github.com/istio/istio/tree/master/install/kubernetes/helm/istio) version `1.1.0` is being used to deploy istio on cluster. [StakaterKubeHelmTracing](https://github.com/stakater/StakaterKubeHelmTracing) repository is being used for deployment.
 
 ### Image Issue
 None.
