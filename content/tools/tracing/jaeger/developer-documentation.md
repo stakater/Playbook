@@ -7,13 +7,7 @@ Jaeger is an open source end-to-end distributed tracing system.
 Istio public helm [chart](https://github.com/istio/istio/tree/master/install/kubernetes/helm/istio) version `1.1.0` is being used to deploy jaeger on cluster. [StakaterKubeHelmTracing](https://github.com/stakater/StakaterKubeHelmTracing) repository is being used for deployment.
 
 ### Image Issue
-None. Image specifications are given below:
-
-```yaml
-name: tracing
-version: 1.1.0
-condition: tracing.enabled
-```
+None.
 
 ### Cherry Pickable
 Yes.
