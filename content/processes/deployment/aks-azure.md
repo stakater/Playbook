@@ -167,13 +167,21 @@ You receive a sign in prompt to authenticate using Azure AD credentials using a 
 
 2. Go to your Azure AD instance, select *App Registrations* on the left panel and click *Endpoints* on the top panel displayed. Copy values for *OAuth 2.0 authorization  endpoint (v2)* and *OAuth 2.0 token endpoint (v2)* values. these will be used in the Keycloak configurations.
 
-3. Go to your Azure AD instance, select *App Registrations* on the left panel and Select Azure AD Client Application created when Azure Active directory was created. Copy the *Application (client) ID*. Click *Certificates and Secrets* from the left panel and click *New Client Secret* button and create a new secret. Copy the value of the secret.
+![Diagram](endpoints.png)
 
-4. After the users are created open Keycloak administrative console and Select Identity Providers in the left panel.
+3. Go to your Azure AD instance, select *App Registrations* on the left panel and Select Azure AD Client Application created when Azure Active directory was created. Copy the *Application (client) ID*.
 
-5. Click on the Add Provider drop down and select OpenID Connect v1.0 
+![Diagram](client_id.png)
 
-6. Fill in the Options as below:
+4. Click *Certificates and Secrets* from the left panel and click *New Client Secret* button and create a new secret. Copy the value of the secret.
+
+![Diagram](client_secrets.png)
+
+5. After the users are created open Keycloak administrative console and Select Identity Providers in the left panel.
+
+6. Click on the Add Provider drop down and select OpenID Connect v1.0 
+
+7. Fill in the Options as below:
   
     * alias: azure-ad
     * Display Name: Microsoft Azure AD
@@ -184,13 +192,14 @@ You receive a sign in prompt to authenticate using Azure AD credentials using a 
     * Client secret: client secret from step 3
     * Prompt: unspecified
 
-7. Click Save to create the OIDC type Identity Provider.
+8. Click Save to create the OIDC type Identity Provider. Final configurations:
+![Diagram](identity_provider_azureAD.png)
 
-8. Copy the Redirect URI form the created Identity Provider. In Azure AD instance go to App Registration, Select AD Client application, select Authentication, and paste this URI in Redirect URI field and type Web and click the add button to add.
+9. Copy the Redirect URI form the created Identity Provider. In Azure AD instance go to App Registration, Select AD Client application, select Authentication, and paste this URI in Redirect URI field and type Web and click the add button to add.
 
 ![Diagram](redirect-URI.png)
 
-9. Open any application that uses KeyCloak in browser to test Keycloak is working fine with Azure AD.
+10. Open any application that uses KeyCloak in browser to test Keycloak is working fine with Azure AD.
 
 ## Access Control using RBAC
 
