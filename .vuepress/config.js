@@ -159,6 +159,7 @@ module.exports = {
                 title: 'Tools: Tracing Stack',
                 children: [
                     '/content/tools/tracing/istio/developer-documentation',
+                    '/content/tools/tracing/pilot/developer-documentation',
                     '/content/tools/tracing/jaeger/developer-documentation'
                 ]
             }
