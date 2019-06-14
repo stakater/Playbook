@@ -90,7 +90,8 @@ module.exports = {
                     '/content/processes/deployment/introduction',
                     '/content/processes/deployment/forecastle',
                     '/content/processes/deployment/Helm-operator',
-                    '/content/processes/deployment/resources-cleanup'
+                    '/content/processes/deployment/resources-cleanup',
+                    '/content/processes/deployment/aks-azure'
                 ]
             },
             {
