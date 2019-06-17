@@ -1,6 +1,6 @@
-# Deploying Stackater Stacks on Azure
+# Deploying Stakater Stacks
 
-To deploy Stakater Stacks on Azure, Create pipeline for each stack with following values:
+To deploy Stakater Stacks, Create pipeline for each stack with following values:
 
 - Select checkbox `GitHub Project` and enter link to stack repo in the field below.
 - Select the checkbox `This project is parameterized` and add the following parameters
