@@ -160,6 +160,7 @@ module.exports = {
             {
                 title: 'Tools: Tracing Stack',
                 children: [
+                    '/content/tools/tracing/index',
                     '/content/tools/tracing/istio/developer-documentation',
                     '/content/tools/tracing/envoy/developer-documentation',
                     '/content/tools/tracing/pilot/developer-documentation',
