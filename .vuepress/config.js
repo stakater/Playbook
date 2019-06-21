@@ -153,14 +153,12 @@ module.exports = {
                     '/content/tools/monitoring/grafana/developer-documentation',
                     '/content/tools/monitoring/kube-state-metrics/developer-documentation',
                     '/content/tools/monitoring/node-exporter/developer-documentation',
-                    '/content/tools/monitoring/alert-manager/developer-documentation',
-                    '/content/tools/monitoring/kube-state-metrics/developer-documentation'
+                    '/content/tools/monitoring/alert-manager/developer-documentation'
                 ]
             },
             {
                 title: 'Tools: Tracing Stack',
                 children: [
-                    '/content/tools/tracing/index',
                     '/content/tools/tracing/istio/developer-documentation',
                     '/content/tools/tracing/envoy/developer-documentation',
                     '/content/tools/tracing/pilot/developer-documentation',
