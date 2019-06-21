@@ -6,5 +6,3 @@
 ![Kube State Metrics](./kube-state-metrics/developer-documentation.md)
 ![Node Exporter](./node-exporter/developer-documentation.md)
 ![Alert Manager](./alert-manager/developer-documentation.md)
-![Restful Distributed Lock Manager](./mixer/developer-documentation.md)
-![Sonarqube](./sonarqube/developer-documentation.md)
