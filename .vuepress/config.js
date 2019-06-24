@@ -79,9 +79,16 @@ module.exports = {
             {
                 title: 'Processes: Bootstrapping',
                 children: [
+                    '/content/processes/bootstrapping/cluster-aws',
+                    '/content/processes/bootstrapping/cluster-azure',
                     '/content/processes/bootstrapping/maven-apps',
                     '/content/processes/bootstrapping/gitlab-project-via-terraform',
-                    '/content/processes/bootstrapping/deploying-stakater-stacks'
+                    '/content/processes/bootstrapping/deploying-stakater-stacks',
+                    '/content/processes/bootstrapping/stack-global',
+                    '/content/processes/bootstrapping/stack-release',
+                    '/content/processes/bootstrapping/stack-logging',
+                    '/content/processes/bootstrapping/stack-monitoring',
+                    '/content/processes/bootstrapping/stack-tracing'
                 ]
             },
             {
