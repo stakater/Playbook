@@ -18,13 +18,13 @@ This section provides high level overview of configuration:
 
 ## Deployment
 
-* Create a repository on Gitlab.
+* Create a repository on Gitlab and configure its [pipeline](/content/processes/bootstrapping/gitlab-pipeline-configuration.html).
 
 * Gitlab CI/CD pipeline requires some environment variables, their description is given below:
 
 | Gitlab CI/CD Environment Variables | Description |
 |---|---|
-| KUBE_CONFIG_AWS  | Kubernetes configuration file. It must be provided as base64 encoded string. Guideline on how to encode and decode kube config can be found on this [link](https://github.com/stakater/til/blob/master/gitlab/gitlab-ci-pipeline-integration-with-kubernetes.md#using-gitlab-cicd-environment-variables) |
+| KUBE_CONFIG_AWS  | Kubernetes configuration file. It must be provided as base64 encoded string. |
 | NAMESPACE  | Deployment namespace. |
 | PROVIDER  | Cloud provider's name. Currently, we support AWS and Azure. Its value can be provided as `aws` for AWS and `azure` for Azure. |
 | REPO_URL  | URL of the stack repository that need to be deployed. From each repository URL only the part after this section `https://` is required. Like from `https://github.com/stakater/til.git` URL we require only the `github.com/stakater/til.git` part |
