@@ -37,40 +37,42 @@ This section provides high level overview of configuration:
 * Once environment variables are configured create a `.gitlab-ci.yml` file and paste the configuration given below in it:
 
 ```yaml
-image:
-  name: stakater/gitlab:0.0.2
+  image:
+    name: stakater/gitlab:0.0.2
 
-before_script:
+  before_script:
 
-  # configuration kubernetes access in pipeline
-  - mkdir ~/.kube/
-  - echo $KUBE_CONFIG_AWS | base64 -d > config
-  - mv config ~/.kube/
+      # configuration kubernetes access in pipeline
+    - mkdir ~/.kube/
+    - echo $KUBE_CONFIG_AWS | base64 -d > config
+    - mv config ~/.kube/
 
-  # cloning repo
-  - echo "git clone https://$GITHUB_TOKEN@$REPO_URL" > script.sh
-  - chmod +x script.sh
+      # cloning repo
+    - echo "git clone https://$GITHUB_TOKEN@$REPO_URL" > script.sh
+    - chmod +x script.sh
 
-  # extracting repo name from the URL
-  - BASE_NAME=$(basename $REPO_URL)
-  - REPO_NAME=${BASE_NAME%.*}
+      # extracting repo name from the URL
+    - BASE_NAME=$(basename $REPO_URL)
+    - REPO_NAME=${BASE_NAME%.*}
 
-stages:
-  - deploy
+  stages:
+    - deploy
 
-deploy:
-  stage: deploy
-  script:
+  deploy:
+    stage: deploy
+    script:
 
-    # moving inside cloned repository directory
-    - ./script.sh
-    - cd $REPO_NAME
+      # cloning repository
+      - ./script.sh > /dev/null
 
-    # checkout to the branch that user wants to deploy.
-    - git checkout $BRANCH
+      # moving inside cloned repository directory
+      - cd $REPO_NAME
 
-    # intalling stack on kubernetes cluster
-    - make $TARGET NAMESPACE=$NAMESPACE PROVIDER_NAME=$PROVIDER
+      # checkout to the branch that user wants to deploy.
+      - git checkout $BRANCH
+
+      # deploying stack on kubernetes cluster.
+      - if [ -z "$NAMESPACE" ]; then       make $TARGET PROVIDER_NAME=$PROVIDER; else       make $TARGET NAMESPACE=$NAMESPACE PROVIDER_NAME=$PROVIDER; fi
 ```
 
 * Once configuration is done, run the Gitlab pipeline for deployment.
