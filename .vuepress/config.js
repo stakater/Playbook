@@ -79,8 +79,6 @@ module.exports = {
             {
                 title: 'Processes: Bootstrapping',
                 children: [
-                    '/content/processes/bootstrapping/cluster-aws',
-                    '/content/processes/bootstrapping/cluster-azure',
                     '/content/processes/bootstrapping/maven-apps',
                     '/content/processes/bootstrapping/gitlab-project-via-terraform',
                     '/content/processes/bootstrapping/deploying-stakater-stacks',
