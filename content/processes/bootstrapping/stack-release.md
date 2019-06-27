@@ -12,7 +12,7 @@ This section provides high level overview of configuration:
 
 * Release stack [repository](https://github.com/stakater/StakaterKubeHelmRelease) resides on Github.
 
-* Release stack can be deployed by Stakater's stack but in a new deployment when the stack is not available, we need some online service like Bitbucket or Gitlab CI/CD pipeline. Currently, we are only supporting Gitlab.
+* Release stack can be deployed by Jenkins but in a new deployment when jenkins is not available, we need some online service like Bitbucket or Gitlab CI/CD pipeline. Currently, we are only supporting Gitlab.
 
 * Github Personal Access Token will be used to pull stack repository.
 
@@ -24,7 +24,7 @@ This section provides high level overview of configuration:
 
 | Gitlab CI/CD Environment Variables | Description |
 |---|---|
-| KUBE_CONFIG_AWS  | Kubernetes configuration file. It must be provided as base64 encoded string. |
+| KUBE_CONFIG  | Kubernetes configuration file. It must be provided as base64 encoded string. |
 | NAMESPACE  | Deployment namespace. |
 | PROVIDER  | Cloud provider's name. Currently, we support AWS and Azure. Its value can be provided as `aws` for AWS and `azure` for Azure. |
 | REPO_URL  | URL of the stack repository that need to be deployed. From each repository URL only the part after this section `https://` is required. Like from `https://github.com/stakater/til.git` URL we require only the `github.com/stakater/til.git` part |
