@@ -26,7 +26,7 @@ This section provides details about the Gitlab pipeline.
 
 * Workaround of above issue is to redirect the command location to other location. Example is provided below:
   ```bash
-  $ <command>  /dev/null
+  $ <command> > /dev/null
   ```
 
 * Create a [`.gitlab-ci.yml`](https://docs.gitlab.com/ee/ci/yaml/) file in the project root directory that contains pipeline execution commands.
