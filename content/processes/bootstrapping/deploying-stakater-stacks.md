@@ -31,8 +31,8 @@ To deploy Stakater Stacks using Jenkins CI/CD, create pipeline for stack with fo
 - There are two ways to add the pipeline script:
 
     1- Add the script given below in Pipeline Script of pipeline configuration.
-    
-    2- Enable the `Pipeline script from SCM` feature, configure it and a `Jenkinsfile` in each stack repository. Paste the pipeline script in it. 
+
+    2- Enable the `Pipeline script from SCM` feature, configure it and add a `Jenkinsfile` in each stack repository with the following content. 
 
   ```groovy
     #!/usr/bin/env groovy
@@ -174,8 +174,7 @@ This section provides guidelines on deploying Stakater Stacks on kubernetes clus
     | INSTALL_PVC  | String | Flag to install PVC or not. Its value can be either `true` or `false`. | Config file |
     | REPO_URL  | String | URL of the stack repository that need to be deployed. From each repository URL only the part after this section `https://` is required. Like from `https://github.com/stakater/til.git` URL we require only the `github.com/stakater/til.git` part | Config file |
     | BRANCH  | String | Branch name that will be deployed. | Config file |
-    | TARGET  | String | Makefile target's name that will be executed. Makefile exists in Tracing stack Github repository. |
-    | INSTALL_PVC  | String | Flag to install PVC or not. Its value can be either `true` or `false`. |
+    | TARGET  | String | Makefile target's name that will be executed. Makefile exists in Tracing stack Github repository. | Config file |
 
 * `Gitlab CI/CD environment variables` can be configured from the dashboard `Gitlab Project Setting -> CI/CD -> Variables`.
 
