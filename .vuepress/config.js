@@ -81,7 +81,13 @@ module.exports = {
                 children: [
                     '/content/processes/bootstrapping/maven-apps',
                     '/content/processes/bootstrapping/gitlab-project-via-terraform',
-                    '/content/processes/bootstrapping/deploying-stakater-stacks'
+                    '/content/processes/bootstrapping/deploying-stakater-stacks',
+                    '/content/processes/bootstrapping/stack-global',
+                    '/content/processes/bootstrapping/stack-release',
+                    '/content/processes/bootstrapping/stack-logging',
+                    '/content/processes/bootstrapping/stack-monitoring',
+                    '/content/processes/bootstrapping/stack-tracing',
+                    '/content/processes/bootstrapping/gitlab-pipeline-configuration'
                 ]
             },
             {
@@ -153,8 +159,7 @@ module.exports = {
                     '/content/tools/monitoring/grafana/developer-documentation',
                     '/content/tools/monitoring/kube-state-metrics/developer-documentation',
                     '/content/tools/monitoring/node-exporter/developer-documentation',
-                    '/content/tools/monitoring/alert-manager/developer-documentation',
-                    '/content/tools/monitoring/kube-state-metrics/developer-documentation'
+                    '/content/tools/monitoring/alert-manager/developer-documentation'
                 ]
             },
             {

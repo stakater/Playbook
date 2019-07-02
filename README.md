@@ -1,2 +1,2 @@
 # Stakater Playbook
-Stakater playbook and documentation!
+Stakater playbook and documentation.
