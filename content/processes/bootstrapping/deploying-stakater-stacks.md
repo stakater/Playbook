@@ -31,7 +31,7 @@ To deploy Stakater Stacks using Jenkins CI/CD, create pipeline for stack with fo
 - There are two ways to add the pipeline script:
 
     1- Add the script given below in Pipeline Script of pipeline configuration.
-    2- Enable the `Pipeline script from SCM` feature, configure it and a `Jenkinsfile` in each stack repository. Paste the pipeline script given below in that file. 
+    2- Enable the `Pipeline script from SCM` feature, configure it and a `Jenkinsfile` in each stack repository. Paste the pipeline script in it. 
 
   ```groovy
     #!/usr/bin/env groovy
