@@ -28,8 +28,11 @@ To deploy Stakater Stacks using Jenkins CI/CD, create pipeline for stack with fo
   | KUBE_CONFIG    | None | Multi line String | Kube Config of Kubernetes stack in which it should deploy the stack |
   | INSTALL_PVC  | None | String | Flag to install PVC or not. Its value can be either `true` or `false`. |
 
-- Add the script given below in Pipeline Script or create a `Jenkinsfile` in the stack repository:
-  
+- There are two ways to add the pipeline script:
+
+    1- Add the script given below in Pipeline Script of pipeline configuration.
+    2- Enable the `Pipeline script from SCM` feature, configure it and a `Jenkinsfile` in each stack repository. Paste the pipeline script given below in that file. 
+
   ```groovy
     #!/usr/bin/env groovy
     @Library('github.com/stakater/stakater-pipeline-library@v2.15.0') _
@@ -150,7 +153,7 @@ To deploy Stakater Stacks using Jenkins CI/CD, create pipeline for stack with fo
 
 ## Gitlab CI/CD Pipeline
 
-This section provides guidelines on deploying Stakater Stacks on kubernetes cluster.
+This section provides guidelines on deploying Stakater Stacks on kubernetes cluster using Gitlab CI/CD pipeline.
 
 ### Configuration
 
