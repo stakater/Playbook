@@ -163,19 +163,19 @@ You receive a sign in prompt to authenticate using Azure AD credentials using a 
 
 1. Create Users in Azure using the Administrator account using the [this](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). The new Users will be shown as source *Azure Active Directory* as below
 
-![Diagram](add-users-ad.png)
+![Diagram](./image/add-users-ad.png)
 
 2. Go to your Azure AD instance, select *App Registrations* on the left panel and click *Endpoints* on the top panel displayed. Copy values for *OAuth 2.0 authorization  endpoint (v2)* and *OAuth 2.0 token endpoint (v2)* values. these will be used in the Keycloak configurations.
 
-![Diagram](endpoints.png)
+![Diagram](./image/endpoints.png)
 
 3. Go to your Azure AD instance, select *App Registrations* on the left panel and Select Azure AD Client Application created when Azure Active directory was created. Copy the *Application (client) ID*.
 
-![Diagram](client_id.png)
+![Diagram](./image/client_id.png)
 
 4. Click *Certificates and Secrets* from the left panel and click *New Client Secret* button and create a new secret. Copy the value of the secret.
 
-![Diagram](client_secrets.png)
+![Diagram](./image/client_secrets.png)
 
 5. After the users are created open Keycloak administrative console and Select Identity Providers in the left panel.
 
@@ -193,11 +193,11 @@ You receive a sign in prompt to authenticate using Azure AD credentials using a 
     * Prompt: unspecified
 
 8. Click Save to create the OIDC type Identity Provider. Final configurations:
-![Diagram](identity_provider_azureAD.png)
+![Diagram](./image/identity_provider_azureAD.png)
 
 9. Copy the Redirect URI form the created Identity Provider. In Azure AD instance go to App Registration, Select AD Client application, select Authentication, and paste this URI in Redirect URI field and type Web and click the add button to add.
 
-![Diagram](redirect-URI.png)
+![Diagram](./image/redirect-URI.png)
 
 10. Open any application that uses KeyCloak in browser to test Keycloak is working fine with Azure AD.
 
