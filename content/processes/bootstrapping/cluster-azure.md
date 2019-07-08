@@ -30,13 +30,13 @@ provided in the `config` file. Set the following parameters in order to create t
 Azure Kuberbetes Service with Azure Active Directory requires following steps:
 
 1. Configure the `config` file
-2. Make sure all three files are executable
+2. Make sure all three .sh files are executable
 ```bash
 chmod 744 <file>
 ```
 3. Run by using the following command to start the deployment
 ```bash
-bash ./config
+bash ./deploy.sh
 ```
 
 4. After a while terminal will display this message
