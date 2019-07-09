@@ -13,7 +13,20 @@ This guide provides guideline regarding kubernetes cluster creation on AWS with 
 
 Kubernetes cluster deployment on AWS by using the following steps:
 
-### 1. Pre-requisites OR AWS Resource Creation
+### 1. Pre-requisites
+
+Cluster deployment requires following resources:
+
+  * S3 Bucket
+  
+  * Domain
+
+If following resources are already available then continue `step 3` cluster creation otherwise follow steps provided to create resource in `step 2`.
+
+
+### 2. AWS Resource Creation
+
+* In this section we will try to create `S3 bucket` and `domain` using `terraform`.
 
 * Create a folder `aws-resources-manifest` to store AWS resources manifest and add the following manifests:
   
@@ -126,6 +139,17 @@ Kubernetes cluster deployment on AWS by using the following steps:
       
       # applying the manifests
       terraform apply -auto-approve
+      ```
+
+      * Add the terrafrom manifests using the directory structure given below:
+      ```bash
+        .
+        ├── aws-resources-manifest/
+        │   └── configuration_vars.tfvars
+        │   └── variables.tf
+        │   └── provider.tf
+        │   └── route53-zone.tf
+        │   └── stackator-s3-kops-state.tf
 
     * **`By using Jenkins pipeline`**. Create a Jenkins pipeline file and add the following content:
       ```groovy
@@ -181,11 +205,35 @@ Kubernetes cluster deployment on AWS by using the following steps:
       | IS_DRY_RUN | Pipeline execution mode. Valid values are `true` or `false`. `true` to only show changes, `false` to actually execute steps | string | 
       | BRANCH | Name of git branch | string |
 
-      * Create a Repository and configure it with Jenkins pipeline. 
+      * Add the terrafrom manifests using the directory structure given below:
+      ```bash
+        .
+        ├── aws-resources-manifest/
+        │   └── configuration_vars.tfvars
+        │   └── variables.tf
+        │   └── provider.tf
+        │   └── route53-zone.tf
+        │   └── stackator-s3-kops-state.tf
+        ├── Jenkinsfile
+      ```
+      * Create a Repository, add the manifest in the structure given above and configure it with Jenkins a pipeline. 
 
     * **`Using Gitlab CI/CD Pipeline`**
       
       * Create a repository on Gitlab and configure its CI/CD pipeline following this [guideline](/content/processes/bootstrapping/gitlab-pipeline-configuration.md).
+      
+      * Add the terrafrom manifests using the directory structure given below:
+      ```bash
+        .
+        ├── aws-resources-manifest/
+        │   └── configuration_vars.tfvars
+        │   └── variables.tf
+        │   └── provider.tf
+        │   └── route53-zone.tf
+        │   └── stackator-s3-kops-state.tf
+        ├── .gitlab-ci.yml
+      ```
+
       * Configure following Gitlab CI/CD environemnt variables:
 
       | Environment Variable | Description | Type |
@@ -228,9 +276,9 @@ Kubernetes cluster deployment on AWS by using the following steps:
       ```
 <hr/>
 
-### 2. Cluster Creation
+### 3. Cluster Creation
 
-* Create a new folder `cluster-manifests`. 
+* Make sure that all pre-requisite requirements specified in `step 1` are complete.
 
 * Create a `cluster.yaml` file by using [stakater kops cluster templates](https://github.com/stakater/kops-cluster-templates). Fill the template placeholders with valid values.
 
@@ -239,54 +287,77 @@ Kubernetes cluster deployment on AWS by using the following steps:
   1. **`By Using CLI`**
       ```bash
       # moving inside manifests folder
-      $ cd cluster-manifests/
+      cd cluster-manifests/
       
       # configuring SSH_PUBLIC_KEY
-      $ echo $SSH_PUB_KEY > ~/.ssh/id_rsa.pub
+      echo $SSH_PUB_KEY > ~/.ssh/id_rsa.pub
 
       # persisting AWS keys
-      $ cd $HOME
-      $ mkdir -p .aws/
-      $ echo "[default]\naws_access_key_id = $AWS_ACCESS_KEY\naws_secret_access_key = $AWS_ACCESS_KEY" > .aws/credentials
-      $ echo "[default]\nregion = $REGION" > .aws/config
-
+      cd $HOME
+      mkdir -p .aws/
+      echo "[default]\naws_access_key_id = $AWS_ACCESS_KEY\naws_secret_access_key = $AWS_ACCESS_KEY" > .aws/credentials
+      echo "[default]\nregion = $REGION" > .aws/config
+       
       # configure cluster
-      $ kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force
-      $ kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub
+      kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force
+      kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub
 
-      # create cluster
-      $ kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME IS_DRY_RUN
-      $ kops export kubecfg --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME
-      
-      # verify cluster creation
-      # Move the script given below in a bash file
-      $ if [ ! -z "$IS_DRY_RUN" ]
-      $ then 
-      $         echo "Verying cluster creation"
-      $         count=0
-      $         tryLimit=100
-      $         tryCount=0
-      $         nodeCount=7
 
-                # loop to validate nodes are created
-      $         while [ $tryCount -lt $tryLimit ] && [ $count -lt $nodeCount ] ; do
+      if [ $IS_DRY_RUN == "true" ]; then \
+              export DRY_RUN=""; \
+      else \
+          export DRY_RUN="--yes";
+      fi
 
-                        # storing the result of command to check whether command contains True or not
-      $                 result="$(kops validate --state $KOPS_STATE_STORE_NAME cluster $CLUSTER_NAME | grep 'True' | wc -l)"
+      # execute deploy action
+      if [ $ACTION == "deploy" ]; then \ 
+              # configure cluster
+              kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force; \
+              kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub; \
 
-      $                 if (( $result == 1 )) ; then
-      $                         count=$((count + 1)) 
-      $                 fi
+              # create cluster
+              kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN; \
+              kops export kubecfg --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME; \
 
-      $                 echo 'Sleeping for 15 seconds ...' && sleep 15s
-      $                 echo "Try Limits remaining:" + $tryLimit
+              echo "Verying cluster creation" \
+              count=0 \
+              tryLimit=100 \
+              tryCount=0 \
+              nodeCount=7 \
+                
+              # loop to validate nodes are created
+              while [ $tryCount -lt $tryLimit ] && [ $count -lt $nodeCount ] ; do \
 
-      $                 tryCount=$((tryCount + 1))
-      $         done
-      $ fi
+                      # storing the result of command to check whether command contains True or not
+                      result="$(kops validate --state $KOPS_STATE_STORE_NAME cluster $CLUSTER_NAME | grep 'True' | wc -l)" \         
+                      if (( $result == 1 )) ; then \
+                              count=$((count + 1)) \
+                      fi \
 
-      # rolling update
-      $ kops rolling-update cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $IS_DRY_RUN
+                      echo 'Sleeping for 15 seconds ...' && sleep 15s \
+                      echo "Try Limits remaining:" + $tryLimit \
+
+                      tryCount=$((tryCount + 1)) \
+              done \
+
+              # rollign update cluster
+              kops rolling-update cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN \
+
+      # execute teardown action
+      elif [ $STACK == "teardown" ]; then \
+
+              kops delete cluster --name ${clusterName} --state ${kopsStateStore} ${dryRunFlag} \
+
+      else \
+              echo "Invalid action provided"; \
+              exit 1 \
+      fi \
+
+      ```
+      * Project should have the following structure:
+      ```bash
+        .
+        ├── cluster.yaml
       ```
 
   2. **`By Using Jenkins Pipeline`**. Create a simple `Jenkins pipeline` that should executes the `Jenkinsfile`. Follow these steps to configure the pipeline.
@@ -494,6 +565,12 @@ Kubernetes cluster deployment on AWS by using the following steps:
               }
           }
       ```
+      * Project should have the following structure:
+      ```bash
+        .
+        ├── cluster.yaml
+        ├── Jenkinsfile
+      ```
 
   3. **`By Using Gitlab CI/CD Pipeline`**
     
@@ -504,6 +581,13 @@ Kubernetes cluster deployment on AWS by using the following steps:
     ```yaml
     image:
       name: stakater/pipeline-tools:v2.0.4
+
+    before_script:
+      - if [ $IS_DRY_RUN == "true" ]; then \
+      -     export DRY_RUN=""; \
+      - else \
+      -     export DRY_RUN="--yes";
+      - fi \
 
     stages:
       - deploy
@@ -524,45 +608,51 @@ Kubernetes cluster deployment on AWS by using the following steps:
         echo "[default]\naws_access_key_id = $AWS_ACCESS_KEY\naws_secret_access_key = $AWS_ACCESS_KEY" > .aws/credentials
         echo "[default]\nregion = $REGION" > .aws/config
 
-        # configure cluster
-        - kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force
-        - kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub
+        # execute deploy action
+        - if [ $ACTION == "deploy" ]; then \ 
+            # configure cluster
+        -   kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force; \
+        -   kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub; \
 
-        # create cluster
-        - kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME IS_DRY_RUN
-        - kops export kubecfg --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME
+            # create cluster
+        -   kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN; \
+        -   kops export kubecfg --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME; \
         
-        # verify cluster creation
-        - if [ ! -z "$IS_DRY_RUN" ]
-        - then 
-        -         echo "Verying cluster creation"
-        -         count=0
-        -         tryLimit=100
-        -         tryCount=0
-        -         nodeCount=7
+            # verify cluster creation
+        -   echo "Verying cluster creation" \
+        -   count=0 \
+        -   tryLimit=100 \
+        -   tryCount=0 \
+        -   nodeCount=7 \
                   
-                  # loop to validate nodes are created
-        -         while [ $tryCount -lt $tryLimit ] && [ $count -lt $nodeCount ] ; do
+            # loop to validate nodes are created
+        -   while [ $tryCount -lt $tryLimit ] && [ $count -lt $nodeCount ] ; do \
 
-                          # storing the result of command to check whether command contains True or not
-        -                 result="$(kops validate --state $KOPS_STATE_STORE_NAME cluster $CLUSTER_NAME | grep 'True' | wc -l)"            
-        -                 if (( $result == 1 )) ; then
-        -                         count=$((count + 1)) 
-        -                 fi
+                    # storing the result of command to check whether command contains True or not
+        -           result="$(kops validate --state $KOPS_STATE_STORE_NAME cluster $CLUSTER_NAME | grep 'True' | wc -l)" \         
+        -           if (( $result == 1 )) ; then \
+        -                   count=$((count + 1)) \
+        -           fi \
 
-        -                 echo 'Sleeping for 15 seconds ...' && sleep 15s
-        -                 echo "Try Limits remaining:" + $tryLimit
+        -           echo 'Sleeping for 15 seconds ...' && sleep 15s \
+        -           echo "Try Limits remaining:" + $tryLimit \
 
-        -                 tryCount=$((tryCount + 1))
-        -         done
-        - fi
-        
+        -           tryCount=$((tryCount + 1)) \
+        -   done \
+            
+            # rollign update cluster
+        -   kops rolling-update cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN \
 
-        # rolling update
-        - kops rolling-update cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $IS_DRY_RUN
+          # execute teardown action
+        - elif [ $STACK == "teardown" ]; then \
+
+        -   kops delete cluster --name ${clusterName} --state ${kopsStateStore} ${dryRunFlag} \
+
+        - else \
+        -     echo "Invalid action provided"; \
+        -     exit 1 \
+        - fi \
     ```
-
-
 
     * Configure these environment variables:
 
@@ -578,5 +668,12 @@ Kubernetes cluster deployment on AWS by using the following steps:
     | ACTION | Pipeline action. Valid values are `deploy` or `teardown`. | string |
     | SSH_PUB_KEY | SSH public key required to pull repository. | multiline string ) |
     | IS_DRY_RUN | Check to run pipeline in dry run mode. Valid values are `true` or `false`. | string |
-    | REGION |  | string |
+    | REGION | Region to create the cluster | string |
+
+    * Project should have the following structure:
+      ```bash
+        .
+        ├── cluster.yaml
+        ├── .gitlab-ci.yml
+      ```
 
