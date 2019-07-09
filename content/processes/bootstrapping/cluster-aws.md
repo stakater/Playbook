@@ -176,12 +176,26 @@ Kubernetes cluster deployment on AWS by using the following steps:
       }
 
       ```
+      | Environment Variable | Description | Type |
+      |---|---|---|
+      | IS_DRY_RUN | Pipeline execution mode. Valid values are `true` or `false`. `true` to only show changes, `false` to actually execute steps | string | 
+      | BRANCH | Name of git branch | string |
+      | RESOURCE |  |
+      | ACCESS_KEY | AWS user's access key | string |
+      | ACCESS_SECRET | AWS user's access key secret | string |
+      | REGION |  |
+      |  |  |
 
       * Create a Repository and configure it with Jenkins pipeline. 
 
     * **`Using Gitlab CI/CD Pipeline`**
       
       * Create a repository on Gitlab and configure its CI/CD pipeline following this [guideline](/content/processes/bootstrapping/gitlab-pipeline-configuration.md).
+      * Configure following Gitlab CI/CD environemnt variables:
+
+      | Environment Variable | Description | Type |
+      |---|---|---|
+      | IS_DRY_RUN | Pipeline execution mode. Valid values are `true` or `false`. `true` to only show changes, `false` to actually execute steps | string |
 
       * Add the terraform manifest folder in the repository and insert the following content in `.gitlab-ci.yml` file.
       ```yaml
@@ -202,11 +216,20 @@ Kubernetes cluster deployment on AWS by using the following steps:
           - terraform init
           - terraform validate
 
-          # dry run to validate the manifests
-          - terraform plan
+          - if [ $IS_DRY_RUN == "true" ]; then \
 
-          # applying the manifests
-          - terraform apply -auto-approve
+          -     echo "Running pipeline as dry run mode"; \
+          -     terraform plan; \
+                    
+          - elif [ $IS_DRY_RUN == "false" ]; then \ 
+          -     echo "Creating resource"; \ 
+          -     terraform apply -auto-approve; \
+
+          - else \
+          -     echo "Invalid value for IS_DRY_RUN provided:" $IS_DRY_RUN;
+                # error exit code is 1
+          -     exit 1
+          - 
       ```
 <hr/>
 
