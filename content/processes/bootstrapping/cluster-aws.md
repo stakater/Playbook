@@ -19,12 +19,25 @@ Kubernetes cluster deployment on AWS by using the following steps:
   
   1. Create a file named `aws-resources-manifest/configuration_vars.tfvars` to store the variable values:
   ```tf
+  # Prefix for AWS resources
   resource_prefix=kops-
+
+  # Name of the region in which resource will be created
   region="<add-value-here>"
+  
+  # User account's access key
   aws_access_key=<add-value-here>
+
+  # User account's access key secret
   aws_secret_key=<add-value-here>
+
+  # Name of the domain
   public_domain=<add-value-here>
-  force_destroy=<false>  #boolean 
+
+  # Destroy the resource forcely, boolean variable
+  force_destroy=<false>  #boolean
+
+  # Name of the bucket to store the configuration
   kops_state_bucket_name=<add-bucket-name-here>
   ```
 
@@ -58,7 +71,7 @@ Kubernetes cluster deployment on AWS by using the following steps:
 
     variable "force_destroy" {
       default = false
-      description = "Destroy the resource forcely"
+      description = "Destroy the resource forcely, boolean variable"
     }
 
     variable "kops_state_bucket_name" {
@@ -161,13 +174,8 @@ Kubernetes cluster deployment on AWS by using the following steps:
             }
           }
       }
+
       ```
-      | Environment Variable | Description | Type |
-      |---|---|---|
-      | IS_DRY_RUN | Pipeline execution mode. Valid values are `true` or `false`. `true` to only show changes, `false` to actually execute steps | string | 
-      | BRANCH | Name of git branch | string |
-      | ACCESS_KEY | AWS user's access key | string |
-      | ACCESS_SECRET | AWS user's access key secret | string |
 
       * Create a Repository and configure it with Jenkins pipeline. 
 
