@@ -2,12 +2,12 @@
 
 ## Overview
 
-This guide provides guideline regarding kubernetes cluster creation on AWS with [Kops](https://github.com/kubernetes/kops) using CI/CD pipeline. Kops is a utility that helps you `create`, `destroy`, `upgrade` and `maintain` production-grade, highly available, Kubernetes clusters from CLI.
+This guide provides guideline regarding kubernetes cluster creation on AWS with [Kops](https://github.com/kubernetes/kops) using CI/CD pipeline. Kops is a utility that helps you `create`, `destroy`, `upgrade` and `maintain` production-grade, highly available, Kubernetes clusters.
 
 ## Configuration
 
 * Kops will be use for cluster deployment.
-* Cluster can be deployed by using CLi, Gitlab CI/CD or Jenkins pipeline.
+* Cluster can be deployed by using CLI, Gitlab CI/CD or Jenkins pipeline.
 
 ## Deployment
 
@@ -180,11 +180,6 @@ Kubernetes cluster deployment on AWS by using the following steps:
       |---|---|---|
       | IS_DRY_RUN | Pipeline execution mode. Valid values are `true` or `false`. `true` to only show changes, `false` to actually execute steps | string | 
       | BRANCH | Name of git branch | string |
-      | RESOURCE |  |
-      | ACCESS_KEY | AWS user's access key | string |
-      | ACCESS_SECRET | AWS user's access key secret | string |
-      | REGION |  |
-      |  |  |
 
       * Create a Repository and configure it with Jenkins pipeline. 
 
@@ -233,7 +228,7 @@ Kubernetes cluster deployment on AWS by using the following steps:
       ```
 <hr/>
 
-### Cluster Creation
+### 2. Cluster Creation
 
 * Create a new folder `cluster-manifests`. 
 
@@ -241,7 +236,7 @@ Kubernetes cluster deployment on AWS by using the following steps:
 
 * There are multiple ways to deloy cluster:
 
-  1. **`By Using ClI`**
+  1. **`By Using CLI`**
       ```bash
       # moving inside manifests folder
       $ cd cluster-manifests/
@@ -583,5 +578,5 @@ Kubernetes cluster deployment on AWS by using the following steps:
     | ACTION | Pipeline action. Valid values are `deploy` or `teardown`. | string |
     | SSH_PUB_KEY | SSH public key required to pull repository. | multiline string ) |
     | IS_DRY_RUN | Check to run pipeline in dry run mode. Valid values are `true` or `false`. | string |
-    | REGION | Check to run pipeline in dry run mode. Valid values are `true` or `false`. | string |
+    | REGION |  | string |
 
