@@ -1,14 +1,23 @@
-# Cluster: Azure
+# Cluster: Microsft Azure
+
+Azure Kubernetes Cluster can be created in two ways:
+1. Bash
+2. Terraform
+
+# Bash
 
 ## Overview
 
-This guide provides guideline regarding kubernetes cluster creation using Microsoft Azure with AKS ([Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)) with AAD (Azure Active Directory) using bash script automation.
+This guide provides guidelines regarding kubernetes cluster creation using Microsoft Azure with AKS ([Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)) with AAD (Azure Active Directory) using bash script automation.
 
 
 ## Pre-requisites
 
-* A Micorsoft Azure account with admin rights (needed to grant consent to server application)
 * A domain on AWS (currently we use AWS domain to forward it to Azure AKS) 
+* A Micorsoft Azure account with admin rights (needed to grant consent to server application)
+
+** Note: If admin account is not available and you need to request admin consent for application permission,
+comment out the line 50 and uncomment the line 48 in `bash/deploy-aks.sh`
 
 ## Configuration
 
@@ -29,37 +38,84 @@ provided in the `config` file. Set the following parameters in order to create t
 
 Azure Kuberbetes Service with Azure Active Directory requires following steps:
 
-1. Configure the `config` file
-2. Make sure all three .sh files are executable
+1. Move to the `bash` folder
+```bash
+cd bash/
+```
+2. Edit the `config` file to setup the variables
+
+3. Make sure all three .sh files are executable
 ```bash
 chmod 744 <file>
 ```
-3. Run by using the following command to start the deployment
+4. Run by using the following command to start the deployment
 ```bash
 bash ./deploy.sh
 ```
 
-4. After a while terminal will display this message
+5. After a while terminal will display this message. Note the Nameservers and add it to the hosted zone in AWS. Hit any key to continue deployment.
 ```
 Use the above Nameservers to add in the hosted zone...
 ```
-Note the Nameservers and add it to the hosted zone in AWS. Hit any key to continue deployment.
 
-5. After some time terminal will ask the user to login using a web browser with a token. Use the token to login via web browser.
+6. Following line will be displayed on the terminal to request the admin to consent to the permissions if the account being used is `not an admin account`. When the admin has consented to the permissions, Press any key to continue the deployment
+```
+Ask Administrator to consent on the Application Permissions
+```
+7. When the deployment is done, it will ask the user to login using a web browser with a token. Use the token to login via web browser.
 
-## Verification
+
+# Terraform
+
+## Overview
+
+This guide provides guideline regarding kubernetes cluster creation using [Terraform](https://www.terraform.io/)
+
+## Pre-requisites
+
+* Terraform [Install](https://www.terraform.io/downloads.html)
+* az-cli [Install](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+* A Micorsoft Azure account with admin rights (needed to grant consent to server application)
+
+** Note: If admin account is not available and you need to request admin consent for application permission,
+the command `terraform apply` will fail. When it fails. Request the admin to consent for the Server Application,
+and run `terraform apply` again to complete the deployment
+
+## Configuration
+
+All the configuration that is to be needed should be done in `variables.tf` file. Edit the `variables.tf` for the creation of desired cluster.
+
+## Deployment
+
+1. Move to terraform folder
+```bash
+cd terraform/
+```
+
+2. Edit `variables.tf` as per requirement.
+
+3. Initialize Terraform
+```bash
+terraform init
+```
+
+4. Plan Terraform deployment. Remove errors if it shows any errors
+```bash
+terraform plan
+```
+
+5. Apply the changes
+```bash
+terraform apply
+```
+
+# Verification
 
 1. When setup is complete. use the following command on the terminal
 ```bash
 kubectl proxy
 ```
-2. go to the following URL via web browser and verify if kubernetes cluster is running
+2. go to the following URL via web browser and verify if kubernetes cluster is running correctly.
 ```
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!
 ```
-
-## Next Steps
-1. Configure Access Control to give users permissions to use kubernetes services. Refer to the section "Create RBAC binding" in `processes:deployment -> Azure Active Directory with Azure Kubernetes Service`
-
-
-2. Configure KeyCloak Refer to the section "Configure KeyCloak with Microsoft Azure Active Directory" in `processes:deployment -> Azure Active Directory with Azure Kubernetes Service`
