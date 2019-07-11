@@ -286,72 +286,64 @@ If following resources are already available then continue `step 3` cluster crea
 
   1. **`By Using CLI`**
       ```bash
+
+      # configure these envrionment variables before using the command given below, description of these env vars are provided in the sections given below.
+      export AWS_ACCESS_KEY
+      export AWS_ACCESS_KEY_SECRET
+      export KOPS_STATE_STORE_NAME
+      export CLUSTER_NAME
+      export ACTION
+      export IS_DRY_RUN
+      export REGION
+      export SSH_PUB_KEY
+      export NO_OF_CLUSTER_NODES
+
       # moving inside manifests folder
-      cd cluster-manifests/
-      
+      cd cluster-manifests
+
       # configuring SSH_PUBLIC_KEY
-      echo $SSH_PUB_KEY > ~/.ssh/id_rsa.pub
+      echo $SSH_PUB_KEY | base64 -d > $HOME/.ssh/id_rsa_aws.pub
 
-      # persisting AWS keys
-      cd $HOME
-      mkdir -p .aws/
-      echo "[default]\naws_access_key_id = $AWS_ACCESS_KEY\naws_secret_access_key = $AWS_ACCESS_KEY" > .aws/credentials
-      echo "[default]\nregion = $REGION" > .aws/config
-       
-      # configure cluster
+      # configuring AWS credentials
+      mkdir -p $HOME/.aws/
+      
+      printf "[default]\naws_access_key_id = $AWS_ACCESS_KEY\naws_secret_access_key = $AWS_ACCESS_KEY_SECRET" > $HOME/.aws/credentials
+      
+      printf "[default]\nregion = $REGION" > $HOME/.aws/config
+
+      # creating cluster
       kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force
-      kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub
+      
+      kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa_aws.pub
 
+      # Creating cluster
+      kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN
+      kops export kubecfg --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME
 
-      if [ $IS_DRY_RUN == "true" ]; then \
-              export DRY_RUN=""; \
-      else \
-          export DRY_RUN="--yes";
-      fi
+      # Verying cluster creation
+      count=0; \
+      tryLimit=100; \
+      tryCount=0; \
+      nodeCount=$NO_OF_CLUSTER_NODES; \
 
-      # execute deploy action
-      if [ $ACTION == "deploy" ]; then \ 
-              # configure cluster
-              kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force; \
-              kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub; \
+      # loop to validate nodes are created
+      while [ $tryCount -lt $tryLimit ] && [ $count -lt $nodeCount ]; do \
 
-              # create cluster
-              kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN; \
-              kops export kubecfg --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME; \
+              # storing the result of command to check whether command contains True or not
+              count="$(kops validate cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME | grep -o 'True' | wc -l)"; \
 
-              echo "Verying cluster creation" \
-              count=0 \
-              tryLimit=100 \
-              tryCount=0 \
-              nodeCount=7 \
-                
-              # loop to validate nodes are created
-              while [ $tryCount -lt $tryLimit ] && [ $count -lt $nodeCount ] ; do \
+              echo 'Sleeping for 15 seconds ...' && sleep 15s; \
+              echo "Number of try:" + $tryCount; \
 
-                      # storing the result of command to check whether command contains True or not
-                      result="$(kops validate --state $KOPS_STATE_STORE_NAME cluster $CLUSTER_NAME | grep 'True' | wc -l)" \         
-                      if (( $result == 1 )) ; then \
-                              count=$((count + 1)) \
-                      fi \
+              tryCount=$((tryCount + 1)); \
+      done
 
-                      echo 'Sleeping for 15 seconds ...' && sleep 15s \
-                      echo "Try Limits remaining:" + $tryLimit \
+      
+      # for rolling update the cluster
+      kops rolling-update cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN
 
-                      tryCount=$((tryCount + 1)) \
-              done \
-
-              # rollign update cluster
-              kops rolling-update cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN \
-
-      # execute teardown action
-      elif [ $STACK == "teardown" ]; then \
-
-              kops delete cluster --name ${clusterName} --state ${kopsStateStore} ${dryRunFlag} \
-
-      else \
-              echo "Invalid action provided"; \
-              exit 1 \
-      fi \
+      # for tearing down the cluster
+      kops delete cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN
 
       ```
       * Project should have the following structure:
@@ -580,28 +572,39 @@ If following resources are already available then continue `step 3` cluster crea
 
     ```yaml
     image:
-      name: stakater/pipeline-tools:v2.0.5
-      entrypoint: ["/bin/bash", "-c"]
+    name: stakater/pipeline-tools:v2.0.5
+    entrypoint: ["/bin/bash", "-c"]
 
     before_script:
-      - if [ $IS_DRY_RUN == "true" ]; then \
-      -     export DRY_RUN=""; \
-      - else \
-      -     export DRY_RUN="--yes"; \
-      - fi \
+
+      # displaying current configuration
+    - echo $AWS_ACCESS_KEY
+    - echo $AWS_ACCESS_KEY_SECRET
+    - echo $KOPS_STATE_STORE_NAME
+    - echo $CLUSTER_NAME
+    - echo $ACTION
+    - echo $IS_DRY_RUN
+    - echo $REGION
+    - echo $SSH_PUB_KEY
+    - echo $NO_OF_CLUSTER_NODES
+
+      # check to decide either run the pipeline in dry run mode or run actual pipeline
+    - if [ $IS_DRY_RUN == "true" ]; then \
+    -     export DRY_RUN=""; \
+    - else \
+    -     export DRY_RUN="--yes"; \
+    - fi
 
     stages:
-      - deploy
+    - deploy
 
     deploy:
-      stage: deploy
-      script:
-        
-        # moving inside manifests folder
-        - cd cluster-manifests
+    stage: deploy
+    script:
         
         # configuring SSH_PUBLIC_KEY
-        - echo $SSH_PUB_KEY | base64 -d > $HOME/.ssh/id_rsa_aws.pub
+        - mkdir -p ~/.ssh/
+        - echo $SSH_PUB_KEY | base64 -d > $HOME/.ssh/id_rsa_stakater.pub
 
         # persisting AWS keys
         - mkdir -p $HOME/.aws/
@@ -611,66 +614,65 @@ If following resources are already available then continue `step 3` cluster crea
 
         # execute deploy action
         - if [ $ACTION == "deploy" ]; then \
-        -   echo "Deploy"; \
-            # configure cluster
-        -   kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force; \
-        -   kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub; \
+        -        echo "Deploy"; \
 
-            # create cluster
-        -   kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN; \
-        -   kops export kubecfg --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME; \
-        
-            # verify cluster creation
-        -   echo "Verying cluster creation" \
-        -   count=0 \
-        -   tryLimit=100 \
-        -   tryCount=0 \
-        -   nodeCount=7 \
-                  
-            # loop to validate nodes are created
-        -   while [ $tryCount -lt $tryLimit ] && [ $count -lt $nodeCount ] ; do \
+                # configuring cluster
+        -        kops replace -f cluster-manifests/cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force; \
+        -        kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME sshpublickey admin -i ~/.ssh/id_rsa_stakater.pub; \
 
-                    # storing the result of command to check whether command contains True or not
-        -           result="$(kops validate --state $KOPS_STATE_STORE_NAME cluster $CLUSTER_NAME | grep 'True' | wc -l)" \         
-        -           if (( $result == 1 )) ; then \
-        -                   count=$((count + 1)) \
-        -           fi \
+        #        # create cluster
+        -        echo "Creating cluster"; \
+        -        kops update cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN; \
+        -        kops export kubecfg --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME; \
 
-        -           echo 'Sleeping for 15 seconds ...' && sleep 15s \
-        -           echo "Try Limits remaining:" + $tryLimit \
+        -        if [ $IS_DRY_RUN != "true" ]; then \
+        -                echo "Verying cluster creation"; \
+        -                count=0; \
+        -                tryLimit=100; \
+        -                tryCount=0; \
+        -                nodeCount=$NO_OF_CLUSTER_NODES; \
+                        # loop to validate nodes are created
+        -                while [ $tryCount -lt $tryLimit ] && [ $count -lt $nodeCount ]; do \
 
-        -           tryCount=$((tryCount + 1)) \
-        -   done \
-            
-            # rollign update cluster
-        -   kops rolling-update cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN \
+                                # storing the result of command to check whether command contains True or not
+        -                        count="$(kops validate cluster $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME | grep -o 'True' | wc -l)"; \
 
-          # execute teardown action
-        - elif [ $STACK == "teardown" ]; then \
+        -                        echo 'Sleeping for 15 seconds ...' && sleep 15s; \
+        -                        echo "Number of try:" + $tryCount; \
 
-        -   kops delete cluster --name ${clusterName} --state ${kopsStateStore} ${dryRunFlag} \
+        -                        tryCount=$((tryCount + 1)); \
+        -                done
+        -        fi
+                # rolling update cluster
+        -        kops rolling-update cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN; \
+        -        cat /opt/app/.kube/config
+
+        # execute teardown action
+        - elif [ $ACTION == "teardown" ]; then \
+
+        -         echo "Teardown"; \
+        -         kops delete cluster --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $DRY_RUN; \
 
         - else \
         -     echo "Invalid action provided"; \
-        -     exit 1 \
-        - fi \
+        -     exit 1; \
+        - fi
+
     ```
 
     * Configure these environment variables:
 
     | Environment Variable | Description | Type |
     |---|---|---|
-    | AWS_AUTH_METHOD | User can use either `arn` or `access_key` method for authentication. Possible values are `arn` or `access_key` | string |
-    | AWS_ROLE_ARN | AWS role's arn | string |
     | AWS_ACCESS_KEY | AWS user's access key | string |
     | AWS_ACCESS_KEY_SECRET | AWS user's access key secret | string |
     | KOPS_STATE_STORE_NAME | [Kops store](https://github.com/kubernetes/kops/blob/master/docs/state.md) name for cluster states. | string |
     | CLUSTER_NAME | Name of the cluster. | string |
-    | CLUSTER_CONFIG_FILE | Name of cluster configuration file that was created in previous steps. | yaml |
     | ACTION | Pipeline action. Valid values are `deploy` or `teardown`. | string |
     | SSH_PUB_KEY | SSH public key required to pull repository. | multiline string ) |
     | IS_DRY_RUN | Check to run pipeline in dry run mode. Valid values are `true` or `false`. | string |
     | REGION | Region to create the cluster | string |
+    | NO_OF_CLUSTER_NODES | Number of nodes in cluster | number |
 
     * Project should have the following structure:
       ```bash
