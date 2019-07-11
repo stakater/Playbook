@@ -30,6 +30,8 @@ This section provides guideline regrading integration:
   * Enable [GitHub project integration](https://docs.gitlab.com/ee/user/project/integrations/github.html).
   * Create a web hook on GitHub to notify GitLab of new commits.
 
+* Gitlab pipeline provides `Git shallow clone` feature which can be used to pull x number of changes from repository. Its default value is `50`, but in this scenario all change are required so therefore `0` (means to pull all the changes) will be configured. Go to `Project -> Settings -> CI/CD -> General pipelines -> Git shallow clone` location and change its value.
+
 
 
 
