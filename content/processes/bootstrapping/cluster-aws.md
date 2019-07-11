@@ -580,13 +580,14 @@ If following resources are already available then continue `step 3` cluster crea
 
     ```yaml
     image:
-      name: stakater/pipeline-tools:v2.0.4
+      name: stakater/pipeline-tools:v2.0.5
+      entrypoint: ["/bin/bash", "-c"]
 
     before_script:
       - if [ $IS_DRY_RUN == "true" ]; then \
       -     export DRY_RUN=""; \
       - else \
-      -     export DRY_RUN="--yes";
+      -     export DRY_RUN="--yes"; \
       - fi \
 
     stages:
@@ -597,19 +598,20 @@ If following resources are already available then continue `step 3` cluster crea
       script:
         
         # moving inside manifests folder
-        - cd cluster-manifests/
+        - cd cluster-manifests
         
         # configuring SSH_PUBLIC_KEY
-        - echo $SSH_PUB_KEY > ~/.ssh/id_rsa.pub
+        - echo $SSH_PUB_KEY | base64 -d > $HOME/.ssh/id_rsa_aws.pub
 
         # persisting AWS keys
-        cd \$HOME
-        mkdir -p .aws/
-        echo "[default]\naws_access_key_id = $AWS_ACCESS_KEY\naws_secret_access_key = $AWS_ACCESS_KEY" > .aws/credentials
-        echo "[default]\nregion = $REGION" > .aws/config
+        - mkdir -p $HOME/.aws/
+
+        - printf "[default]\naws_access_key_id = $AWS_ACCESS_KEY\naws_secret_access_key = $AWS_ACCESS_KEY_SECRET" > $HOME/.aws/credentials
+        - printf "[default]\nregion = $REGION" > $HOME/.aws/config
 
         # execute deploy action
-        - if [ $ACTION == "deploy" ]; then \ 
+        - if [ $ACTION == "deploy" ]; then \
+        -   echo "Deploy"; \
             # configure cluster
         -   kops replace -f cluster.yaml --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME --force; \
         -   kops create secret --name $CLUSTER_NAME --state $KOPS_STATE_STORE_NAME $SSH_PUB_KEY admin -i ~/.ssh/id_rsa.pub; \
