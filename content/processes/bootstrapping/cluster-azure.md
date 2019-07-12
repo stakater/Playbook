@@ -4,14 +4,33 @@ Azure Kubernetes Cluster can be created in two ways:
 1. Bash
 2. Terraform
 
-# Bash
+GitHub Repository to deploy AKS cluster can be found [here](https://github.com/stakater/aks-cluster).
 
-## Overview
+Directory Strucutre is as follows:
+```bash
+        .
+        ├── terraform/
+        │   └── active_directory.tf
+        │   └── main.tf
+        │   └── outputs.tf
+        │   └── service_principal.tf
+        │   └── variables.tf
+        ├── bash/
+        │   └── config
+        │   └── deploy-aks.sh
+        │   └── deploy.sh
+        │   └── setup-domain.sh
+```
+
+
+## Bash
+
+### Overview
 
 This guide provides guidelines regarding kubernetes cluster creation using Microsoft Azure with AKS ([Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)) with AAD (Azure Active Directory) using bash script automation.
 
 
-## Pre-requisites
+### Pre-requisites
 
 * A domain on AWS (currently we use AWS domain to forward it to Azure AKS) 
 * A Micorsoft Azure account with admin rights (needed to grant consent to server application)
@@ -19,7 +38,7 @@ This guide provides guidelines regarding kubernetes cluster creation using Micro
 ** Note: If admin account is not available and you need to request admin consent for application permission,
 comment out the line 50 and uncomment the line 48 in `bash/deploy-aks.sh`
 
-## Configuration
+### Configuration
 
 AKS with AAD cluster creation is automated using bash scripts. These bash scripts run according to the configuration
 provided in the `config` file. Set the following parameters in order to create the desired cluster.
@@ -34,7 +53,7 @@ provided in the `config` file. Set the following parameters in order to create t
 * dnsResourceGroup        (ResourceGroup for externaldns service `externaldns` in our case)
 * dnsZoneName             (DNS entry for Domain e.g. `workshop.stakater.com`)
 
-## Deployment
+### Deployment
 
 Azure Kuberbetes Service with Azure Active Directory requires following steps:
 
@@ -65,13 +84,13 @@ Ask Administrator to consent on the Application Permissions
 7. When the deployment is done, it will ask the user to login using a web browser with a token. Use the token to login via web browser.
 
 
-# Terraform
+## Terraform
 
-## Overview
+### Overview
 
 This guide provides guideline regarding kubernetes cluster creation using [Terraform](https://www.terraform.io/)
 
-## Pre-requisites
+### Pre-requisites
 
 * Terraform [Install](https://www.terraform.io/downloads.html)
 * az-cli [Install](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
@@ -81,11 +100,11 @@ This guide provides guideline regarding kubernetes cluster creation using [Terra
 the command `terraform apply` will fail. When it fails. Request the admin to consent for the Server Application,
 and run `terraform apply` again to complete the deployment
 
-## Configuration
+### Configuration
 
 All the configuration that is to be needed should be done in `variables.tf` file. Edit the `variables.tf` for the creation of desired cluster.
 
-## Deployment
+### Deployment
 
 1. Move to terraform folder
 ```bash
@@ -109,7 +128,7 @@ terraform plan
 terraform apply
 ```
 
-# Verification
+## Verification
 
 1. When setup is complete. use the following command on the terminal
 ```bash
