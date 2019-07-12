@@ -88,7 +88,8 @@ module.exports = {
                     '/content/processes/bootstrapping/stack-logging',
                     '/content/processes/bootstrapping/stack-monitoring',
                     '/content/processes/bootstrapping/stack-tracing',
-                    '/content/processes/bootstrapping/gitlab-pipeline-configuration'
+                    '/content/processes/bootstrapping/gitlab-pipeline-configuration',
+                    'content/processes/bootstrapping/github-integration-with-gitlab-pipeline'
                 ]
             },
             {
