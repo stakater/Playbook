@@ -13,6 +13,7 @@ playbook:
         forecastle.stakater.com/appName: Playbook
         forecastle.stakater.com/expose: true
         forecastle.stakater.com/icon: https://raw.githubusercontent.com/stakater/ForecastleIcons/master/playbook.png
+        monitor.stakater.com/enabled: true
       config.xposer.stakater.com/IngressURLTemplate: "{{ `{{.Service}}.{{.Domain}}` }}"
       config.xposer.stakater.com/Domain: stakater.com
       config.xposer.stakater.com/TLS: "true"
