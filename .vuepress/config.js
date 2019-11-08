@@ -175,6 +175,12 @@ module.exports = {
                     '/content/tools/tracing/citadel/developer-documentation',
                     '/content/tools/tracing/jaeger/developer-documentation'
                 ]
+            },
+            {
+                title: 'Workshop: Openshift',
+                children: [
+                    '/content/workshop/openshift'
+                ]
             }
         ],
         repo: 'stakater/playbook'
