@@ -179,7 +179,8 @@ module.exports = {
             {
                 title: 'Workshop: Openshift',
                 children: [
-                    '/content/workshop/openshift'
+                    '/content/workshop/openshift',
+                    '/content/workshop/add-new-service.md'
                 ]
             }
         ],
