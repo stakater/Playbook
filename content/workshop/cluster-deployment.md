@@ -1,6 +1,5 @@
 # Openshift Container Platform Cluster deployment on Azure
 
-
 ## Introduction
 This document contains the guideline to deploy `Openshift Container Platform Cluster` on Azure.
 

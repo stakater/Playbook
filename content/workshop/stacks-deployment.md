@@ -25,4 +25,10 @@ Follow the steps to deploy the Stakater platform:
     1. Stakater user
     2. Github token api.
 
-10. The routes for the services are available in this [link](/content/workshop/openshift).
+8. Following secrets are required my Jenkins so they must be added in the `delivery` project:
+
+    1. jenkins-maven-settings
+    2. jenkins-hub-api-token
+    3. slack-notification-hook
+
+9. The routes for the services are available in this [link](/content/workshop/openshift).
