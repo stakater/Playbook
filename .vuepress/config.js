@@ -181,7 +181,7 @@ module.exports = {
                 children: [
                     '/content/workshop/cluster-deployment',
                     '/content/workshop/stacks-deployment',
-                    '/content/workshop/openshift-routes'
+                    '/content/workshop/openshift'
                 ]
             }
         ],
