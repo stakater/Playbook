@@ -6,6 +6,8 @@ This document contains the guideline to deploy `Openshift Container Platform Clu
 
 ## Cluster Deployment Guidelines
 
+Follow the steps to deploy the cluster:
+
 1. Create a cluster using the `Red Hat OpenShift Container Platform Self-Managed` from the Azure Marketplace.
 
 2. Provide the cluster configuration in deployment wizard and deploy the cluster. List  of required parameters are given below:
@@ -49,4 +51,4 @@ This document contains the guideline to deploy `Openshift Container Platform Clu
 
 4. Add an wildcard entry in the Route53 for the cluster infra load balancer ip.
 
-5. Resize the infra nodes to `DS2_v2` because default DS2_v3 only allows 4 disk to be attached to a node but more disks are required.
+5. Resize the infra nodes to `DS2_v2` because default DS2_v3 only allows 4 disk to be attached to a node but more disks are required. `DS2_v2` allows 8 disks to be attached. 
