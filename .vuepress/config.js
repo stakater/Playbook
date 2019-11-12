@@ -180,7 +180,11 @@ module.exports = {
                 title: 'Workshop: Openshift',
                 children: [
                     '/content/workshop/openshift',
-                    '/content/workshop/add-new-service.md'
+                    '/content/workshop/add-new-service.md',
+                    '/content/workshop/aad-in-openshift',
+                    '/content/workshop/cluster-deployment',
+                    '/content/workshop/stacks-deployment',
+                    '/content/workshop/application-deployment'
                 ]
             }
         ],
