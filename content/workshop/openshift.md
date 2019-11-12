@@ -1,6 +1,4 @@
-# Links
-
-## Infrastructure Routes
+# Infrastructure Routes
 
 ### Control
 
