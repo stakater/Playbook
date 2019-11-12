@@ -179,6 +179,9 @@ module.exports = {
             {
                 title: 'Workshop: Openshift',
                 children: [
+                    '/content/workshop/cluster-deployment',
+                    '/content/workshop/stacks-deployment',
+                    '/content/workshop/application-deployment',
                     '/content/workshop/openshift'
                 ]
             }
