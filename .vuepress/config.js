@@ -183,7 +183,7 @@ module.exports = {
                     '/content/workshop/add-new-service.md',
                     '/content/workshop/aad-in-openshift',
                     '/content/workshop/stacks-deployment',
-                    '/content/workshop/application-deployment'
+                    '/content/workshop/application-deployment',
                     '/content/workshop/openshift'
                 ]
             }
