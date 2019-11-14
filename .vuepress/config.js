@@ -184,7 +184,8 @@ module.exports = {
                     '/content/workshop/aad-in-openshift',
                     '/content/workshop/stacks-deployment',
                     '/content/workshop/application-deployment',
-                    '/content/workshop/openshift'
+                    '/content/workshop/openshift',
+                    '/content/workshop/reuse-sealedsecret'
                 ]
             }
         ],
