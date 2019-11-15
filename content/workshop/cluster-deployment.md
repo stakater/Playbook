@@ -39,7 +39,7 @@ Follow the steps to deploy the cluster:
 
 **NOTE**: `NIL` means that the paramter doesn't require any description because parameter name is self-explanatory. Details can be found on Azure offical documentation.
 
-3. Once cluster is deployed, the cluster can be access by two methods:
+3. Once cluster is deployed, the cluster can be accessed by these two methods:
 
     1. `Kube config`: It is available on the bastion node. Bastion node can be accessed using the public key provided at the time of cluster deployment. Get the public ip of bastion node from the Azure portal `Cluster Resource Group -> Bastion public IP`. Use the command given below to access the bastion node.
     ```bash
@@ -48,6 +48,6 @@ Follow the steps to deploy the cluster:
 
     2. `Cluster Dashboard`: Cluster console URL is available at this location `Cluster Resource Group ->  Deployments -> redhat.openshift-container-platform-XXXXX -> Outputs -> OpenshiftConsoleURL`.
 
-4. Add an wildcard entry in the Route53 for the cluster infra load balancer ip.
+4. Add an wildcard entry in the Route53 for the cluster infra load balancer's ip address.
 
 5. Resize the infra nodes to `DS2_v2` because default DS2_v3 only allows 4 disk to be attached to a node but more disks are required. `DS2_v2` allows 8 disks to be attached. 
