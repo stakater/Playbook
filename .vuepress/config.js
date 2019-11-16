@@ -115,23 +115,36 @@ module.exports = {
                 ]
             },
             {
-                title: 'Tools: Global Stack',
+                title: 'Stack: Control',
                 children: [
-                    '/content/tools/global/external-dns/developer-documentation',
-                    '/content/tools/global/gitwebhookproxy/developer-documentation',
-                    '/content/tools/global/keycloak/developer-documentation',
-                    '/content/tools/global/kubernetes-dashboard/developer-documentation',
-                    '/content/tools/global/nginx-ingress/developer-documentation',
-                    '/content/tools/global/configmap/developer-documentation',
-                    '/content/tools/global/secrets/developer-documentation',
-                    '/content/tools/global/storage/developer-documentation',
-                    '/content/tools/global/rbac/developer-documentation',
-                    '/content/tools/global/forecastle/developer-documentation',
-                    '/content/tools/global/proxyinjector/developer-documentation'
+                    '/content/tools/control/external-dns/developer-documentation',
+                    '/content/tools/control/gitwebhookproxy/developer-documentation',
+                    '/content/tools/control/kubernetes-dashboard/developer-documentation',
+                    '/content/tools/control/nginx-ingress/developer-documentation',
+                    '/content/tools/control/configmap/developer-documentation',
+                    '/content/tools/control/secrets/developer-documentation',
+                    '/content/tools/control/storage/developer-documentation',
+                    '/content/tools/control/rbac/developer-documentation',
+                    '/content/tools/control/forecastle/developer-documentation',
                 ]
             },
             {
-                title: 'Tools: Logging Stack',
+                title: 'Stack: Delivery',
+                children: [
+                    '/content/tools/delivery/jenkins/developer-documentation',
+                    '/content/tools/delivery/nexus/developer-documentation',
+                    '/content/tools/delivery/restful-distributed-lock-manager/developer-documentation',
+                ]
+            },
+            {
+                title: 'Stack: Security',
+                children: [
+                    '/content/tools/control/keycloak/developer-documentation',
+                    '/content/tools/control/proxyinjector/developer-documentation',
+                ]
+            },            
+            {
+                title: 'Stack: Logging ',
                 children: [
                     '/content/tools/logging/cerebro/developer-documentation',
                     '/content/tools/logging/elasticsearch/developer-documentation',
@@ -145,17 +158,7 @@ module.exports = {
                 ]
             },
             {
-                title: 'Tools: Release Stack',
-                children: [
-                    '/content/tools/release/chartmuseum/developer-documentation',
-                    '/content/tools/release/jenkins/developer-documentation',
-                    '/content/tools/release/nexus/developer-documentation',
-                    '/content/tools/release/restful-distributed-lock-manager/developer-documentation',
-                    '/content/tools/release/sonarqube/developer-documentation'
-                ]
-            },
-            {
-                title: 'Tools: Monitoring Stack',
+                title: 'Stack: Monitoring',
                 children: [
                     '/content/tools/monitoring/prometheus-operator/developer-documentation',
                     '/content/tools/monitoring/prometheus/developer-documentation',
@@ -166,7 +169,7 @@ module.exports = {
                 ]
             },
             {
-                title: 'Tools: Tracing Stack',
+                title: 'Stack: Tracing',
                 children: [
                     '/content/tools/tracing/istio/developer-documentation',
                     '/content/tools/tracing/envoy/developer-documentation',
