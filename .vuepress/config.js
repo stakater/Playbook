@@ -191,8 +191,11 @@ module.exports = {
             {
                 title: 'Stakater Platform',
                 children: [
-                    '/content/stacks/control/control.md',
-                    '/content/stacks/delivery/delivery.md'
+                    '/content/stacks/control.md',
+                    '/content/stacks/delivery.md',
+                    '/content/stacks/logging.md',
+                    '/content/stacks/monitoring.md',
+                    '/content/stacks/security.md'
                 ]
             },
         ],

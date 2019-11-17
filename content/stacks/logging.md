@@ -14,4 +14,4 @@ Logging Stack Introduction.............
 | Cerebro               | [Public](https://github.com/helm/charts/tree/master/stable/cerebro)              |       No       | Yes |    KeyCloak, Elasticsearch    |
 | Elasticsearch Curator | [Public](https://github.com/helm/charts/tree/master/stable/elasticsearch-curator)|       No       | N/A |      Elasticsearch      |
 | Logrotate             | [Stakater](https://github.com/stakater-charts/logrotate)                         |      Yes       | N/A |      None      |
-| Konfigurator          | [Stakater](https://github.com/stakater-charts/konfigurator)                      |       No       | N/A |      Fluentd      |
+| [Konfigurator](https://github.com/stakater/Konfigurator)          | [Stakater](https://github.com/stakater-charts/konfigurator)                      |       No       | N/A |      Fluentd      |
