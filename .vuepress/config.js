@@ -188,64 +188,13 @@ module.exports = {
                     '/content/workshop/reuse-sealedsecret'
                 ]
             },
-
-
-
-
-
             {
-                title: 'Stacks: Control',
+                title: 'Stakater Platform',
                 children: [
-                    '/content/stacks/control/control.md'
+                    '/content/stacks/control/control.md',
+                    '/content/stacks/delivery/delivery.md'
                 ]
             },
-
-            {
-                title: 'Stacks: Delivery',
-                children: [
-                    // change files location
-                    '/content/stacks/delivery/jenkins/developer-documentation',
-                    '/content/stacks/delivery/nexus/developer-documentation',
-                    '/content/stacks/delivery/restful-distributed-lock-manager/developer-documentation',
-                ]
-            },
-
-            {
-                title: 'Stacks: Monitoring',
-                children: [
-                    '/content/stacks/monitoring/prometheus-operator/developer-documentation',
-                    '/content/stacks/monitoring/prometheus/developer-documentation',
-                    '/content/stacks/monitoring/grafana/developer-documentation',
-                    '/content/stacks/monitoring/kube-state-metrics/developer-documentation',
-                    '/content/stacks/monitoring/node-exporter/developer-documentation',
-                    '/content/stacks/monitoring/alert-manager/developer-documentation'
-                ]
-            },
-
-            {
-                title: 'Stacks: Logging',
-                children: [
-                    '/content/stacks/logging/cerebro/developer-documentation',
-                    '/content/stacks/logging/elasticsearch/developer-documentation',
-                    '/content/stacks/logging/elasticsearch-curator/developer-documentation',
-                    '/content/stacks/logging/elasticsearch-operator/developer-documentation',
-                    '/content/stacks/logging/fluentd/developer-documentation',
-                    '/content/stacks/logging/kibana/developer-documentation',
-                    '/content/stacks/logging/konfigurator/developer-documentation',
-                    ['/content/stacks/logging/konfigurator/fluentd','Konfigurator with Fluentd'],
-                    '/content/stacks/logging/logrotate/developer-documentation'
-                ]
-            },
-
-            {
-                title: 'Stacks: Security',
-                children: [
-                    '/content/stacks/security/keycloak/developer-documentation',
-                    '/content/stacks/security/proxyinjector/developer-documentation'
-                ]
-            },
-
-            
         ],
         repo: 'stakater/playbook'
     }

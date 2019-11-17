@@ -1,69 +1,18 @@
 # Control Stack
 
-## Dashboard
+This stack provides tools that control's the components of Stakater Platform.
 
-### Introduction
+## Tools Matrix
 
-This component installs kubernetes dashboard for the Cluster.
+|       Tool        | Chart Repository  |   Cherry Pickable |    SSO        | Pre-Requisites |
+| :---------------: | :---------------: | :----------------:| :------------:| :-------------:|
+| [K8s Dashboard](https://github.com/kubernetes/dashboard) | [Public](https://github.com/helm/charts/tree/master/stable/jenkins) | Yes | Maybe |  None |
 
-## Ingress Moniter Controller
+| [Reloader](https://github.com/stakater/Reloader) | [Stakater](https://github.com/stakater/stakater-charts/tree/master/docs) | Yes | N.A |  None |
 
-### Introduction
+| [IMC](https://github.com/stakater/IngressMonitorController) | [Stakater](https://github.com/stakater/stakater-charts/tree/master/docs) | Yes | N.A |  None |
 
-[Ingress Moniter Controller](https://github.com/stakater/IngressMonitorController) is a kubernetes controller to watch ingresses/routes and create liveness alerts for your apps/microservices in Uptime checkers.
+| [Forecastle](https://github.com/stakater/forecastle) | [Stakater](https://github.com/stakater/stakater-charts/tree/master/docs) | Yes | Yes |  Keycloak |
 
-### Chart
 
-We use public stakater chart to deploy IMC in our cluster. [Here](https://github.com/stakater/stakater-charts/tree/master/docs) is the repository for stakater public charts.
-
-### Cherry Pickable
-
-Yes
-
-### Single Sign-on
-
-Not applicable.
-
-### Dependencies
-
-IMC is not dependant on any other tool.
-
-## Forecastle
-
-### Introduction
-
-[Forecastle](https://github.com/stakater/forecastle) is a control panel which dynamically discovers and provides a launchpad to access applications deployed on Kubernetes
-
-### Chart
-
-We use public stakater chart to deploy forecastle in our cluster. [Here](https://github.com/stakater/stakater-charts/tree/master/docs) is the repository for stakater public charts.
-
-### Cherry Pickable
-
-Yes.
-
-### Single Sign-on
-
-Yes. We use proxyinjector for achieving single sign on. Please refer to its documentation [here](https://playbook.stakater.com/content/tools/global/proxyinjector/developer-documentation.html).
-
-### Dependencies
-
-Forecastle is not dependant on any other tool
-
-## Gitwebhookproxy
-
-### Introduction
-
-[Gitwebhookproxy](https://github.com/stakater/GitWebhookProxy) is a proxy to let webhooks to reach a Jenkins instance running behind a firewall. Jenkins is awesome and matchless tool for both CI & CD; but unfortunately its a gold mine if left in wild with wide open access; so, we always want to put it behind a firewall. But when we put it behind firewall then webhooks don't work anymore, so we at stakater use gitwebhookproxy to bypass the firewall and trigger pipelines in jenkins.
-
-### Chart
-
-We use stakater helm charts to deploy gitwebhookproxy on our cluster. [Here](https://github.com/stakater/GitWebhookProxy/tree/master/deployments/kubernetes/chart/gitwebhookproxy) is the stakater chart that we use. 
-
-### Cherry Pickable
-
-Yes
-
-### Single Sign-on
-
-Not applicable.
+| [Gitwebhookproxy](https://github.com/stakater/GitWebhookProxy) | [Stakater](https://github.com/stakater/stakater-charts/tree/master/docs) | Yes | N.A |  None |
