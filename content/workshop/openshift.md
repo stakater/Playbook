@@ -2,52 +2,52 @@
 
 ### Control
 
-`Forecastle`: [https://forecastle-control.workshop.stakater.com](https://forecastle-control.workshop.stakater.com)
+`Forecastle`: [https://forecastle-control.cp-stakater.com](https://forecastle-control.cp-stakater.com)
 
-`Kubernetes Dashboard`: [https://dashboard-control.workshop.stakater.com](https://dashboard-control.workshop.stakater.com)
+`Kubernetes Dashboard`: [https://dashboard-control.cp-stakater.com](https://dashboard-control.cp-stakater.com)
 
 
 ### Delivery
-`Nexus`: [https://nexus-delivery.workshop.stakater.com](https://nexus-delivery.workshop.stakater.com)
+`Nexus`: [https://nexus-delivery.cp-stakater.com](https://nexus-delivery.cp-stakater.com)
 
-`Jenkins`: [https://jenkins-delivery.workshop.stakater.com](https://jenkins-delivery.workshop.stakater.com)
+`Jenkins`: [https://jenkins-delivery.cp-stakater.com](https://jenkins-delivery.cp-stakater.com)
 
-`Docker`: [https://docker-delivery.workshop.stakater.com](https://docker-delivery.workshop.stakater.com)
+`Docker`: [https://docker-delivery.cp-stakater.com](https://docker-delivery.cp-stakater.com)
 
 ### Security
 
-`KeyCloak`: [https://keycloak-security.workshop.stakater.com](https://keycloak-security.workshop.stakater.com) 
+`KeyCloak`: [https://keycloak-security.cp-stakater.com](https://keycloak-security.cp-stakater.com) 
 
 ### Tracing
 
-`Jaeger`: [https://jaeger-tracing.workshop.stakater.com](https://jaeger-tracing.workshop.stakater.com)
+`Jaeger`: [https://jaeger-tracing.cp-stakater.com](https://jaeger-tracing.cp-stakater.com)
 
 ### Logging
 
-`Kibana`: [https://kibana-logging.workshop.stakater.com](https://kibana-logging.workshop.stakater.com)
+`Kibana`: [https://kibana-logging.cp-stakater.com](https://kibana-logging.cp-stakater.com)
 
-`Cerebro`: [https://cerebro-logging.workshop.stakater.com](https://cerebro-logging.workshop.stakater.com)
+`Cerebro`: [https://cerebro-logging.cp-stakater.com](https://cerebro-logging.cp-stakater.com)
 
-`ElasticSearch`: [https://elasticsearch-logging.workshop.stakater.com](https://elasticsearch-logging.workshop.stakater.com)
+`ElasticSearch`: [https://elasticsearch-logging.cp-stakater.com](https://elasticsearch-logging.cp-stakater.com)
 
 ### Monitoring
 
-`Prometheus`: [https://prometheus-monitoring.workshop.stakater.com](https://prometheus-monitoring.workshop.stakater.com)
+`Prometheus`: [https://prometheus-monitoring.cp-stakater.com](https://prometheus-monitoring.cp-stakater.com)
 
-`Grafana`: [https://grafana-monitoring.workshop.stakater.com](https://grafana-monitoring.workshop.stakater.com)
+`Grafana`: [https://grafana-monitoring.cp-stakater.com](https://grafana-monitoring.cp-stakater.com)
 
-`AlertManager`: [https://alertmanager-monitoring.workshop.stakater.com](https://alertmanager-monitoring.workshop.stakater.com)
+`AlertManager`: [https://alertmanager-monitoring.cp-stakater.com](https://alertmanager-monitoring.cp-stakater.com)
 
 ## NordMart Routes
 
 ### Dev
 
-`Web`: [https://web-dev.workshop.stakater.com](https://web-dev.workshop.stakater.com)
+`Web`: [https://web-dev.cp-stakater.com](https://web-dev.cp-stakater.com)
 
-`Gateway`: [https://gateway-dev.workshop.stakater.com](https://gateway-dev.workshop.stakater.com)
+`Gateway`: [https://gateway-dev.cp-stakater.com](https://gateway-dev.cp-stakater.com)
 
 ### Prod
 
-`Web`: [https://web-prod.workshop.stakater.com](https://web-prod.workshop.stakater.com)
+`Web`: [https://web-prod.cp-stakater.com](https://web-prod.cp-stakater.com)
 
-`Gateway`: [https://gateway-prod.workshop.stakater.com](https://gateway-prod.workshop.stakater.com)
+`Gateway`: [https://gateway-prod.cp-stakater.com](https://gateway-prod.cp-stakater.com)
