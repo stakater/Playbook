@@ -196,12 +196,7 @@ module.exports = {
             {
                 title: 'Stacks: Control',
                 children: [
-                    '/content/stacks/control/stackintroduction/introduction',
-                    '/content/stacks/control/dashboard/developer-documentation',
-                    '/content/stacks/control/forecastle/developer-documentation',
-                    '/content/stacks/control/gitwebhookproxy/developer-documentation',
-                    '/content/stacks/control/ingressmonitorcontroller/developer-documentation',
-                    '/content/stacks/control/reloader/developer-documentation'
+                    '/content/stacks/control/control.md'
                 ]
             },
 

@@ -24,12 +24,6 @@ Yes
 
 Not applicable.
 
-## Installation
-
-### Installation Steps
-
-Most of the times IMC will be deployed from pipeline of [this](https://github.com/stakater/StakaterInfrastructurel) repository. It can also be installed manually (not recommended). To install IMC manually, clone [this](https://github.com/stakater/IngressMonitorController) repo and follow the guideline provided in the README.md.
-
 ### Dependencies
 
 IMC is not dependant on any other tool.
@@ -46,7 +40,7 @@ We use public stakater chart to deploy forecastle in our cluster. [Here](https:/
 
 ### Cherry Pickable
 
-Yes, Forecastle can be deployed independently as well.
+Yes.
 
 ### Single Sign-on
 
