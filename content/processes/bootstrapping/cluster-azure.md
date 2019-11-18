@@ -35,8 +35,7 @@ This guide provides guidelines regarding kubernetes cluster creation using Micro
 * A domain on AWS (currently we use AWS domain to forward it to Azure AKS) 
 * A Micorsoft Azure account with admin rights (needed to grant consent to server application)
 
-** Note: If admin account is not available and you need to request admin consent for application permission,
-comment out the line 50 and uncomment the line 48 in `bash/deploy-aks.sh`
+**Note: If admin account is not available and you need to request admin consent for application permission, comment out the line 50 and uncomment the line 48 in `bash/deploy-aks.sh`**
 
 ### Configuration
 
@@ -96,9 +95,7 @@ This guide provides guideline regarding kubernetes cluster creation using [Terra
 * az-cli [Install](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * A Micorsoft Azure account with admin rights (needed to grant consent to server application)
 
-** Note: If admin account is not available and you need to request admin consent for application permission,
-the command `terraform apply` will fail. When it fails. Request the admin to consent for the Server Application,
-and run `terraform apply` again to complete the deployment
+**Note: If admin account is not available and you need to request admin consent for application permission, the command `terraform apply` will fail. When it fails. Request the admin to consent for the Server Application, and run `terraform apply` again to complete the deployment**
 
 ### Configuration
 
