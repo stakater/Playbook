@@ -1,9 +1,26 @@
 # Openshift Container Platform Cluster deployment on Azure
 
 ## Introduction
-This document contains the guideline to deploy `Openshift Container Platform Cluster` on Azure.
 
-## Cluster Deployment Guidelines
+This document contains the guideline to deploy `Openshift Container Platform Cluster` on Azure. There are many ways to create an OCP cluster on Azure and also it supports Azure Openshift offering which is completely managed, but we encourage to create cluster on our own to have full control.
+
+## Method 1: Deploy using Terraform
+
+We encourage to create all the Infrastructure and deploy OCP on it using Terraform & Ansible scripts. We are working on OpenSourcing it in near future, and soon we will opensource it. Today's cluster has been deployed using terraform.
+
+## Method 2: Using Azure's Red Hat OpenShift Container Platform Self-Managed
+
+It is a simple method to bring up an Openshift cluster, you just have to pass configuration to it and it will create a cluster,
+
+### Issues Faced
+
+- You cannot manage it completely e.g. it will create self signed certs for the console url, which browsers does not support so it will be Not Secure.
+
+- You cannot change the count of master and infra nodes.
+
+- There are very little Azure VM Families, you can chose from the portal, and the default VM doesn't support attaching more than 4 disks per node.
+
+### Deployment
 
 Follow the steps to deploy the cluster:
 
@@ -48,6 +65,6 @@ Follow the steps to deploy the cluster:
 
     2. `Cluster Dashboard`: Cluster console URL is available at this location `Cluster Resource Group ->  Deployments -> redhat.openshift-container-platform-XXXXX -> Outputs -> OpenshiftConsoleURL`.
 
-4. Add an wildcard entry in the Route53 for the cluster infra load balancer's ip address.
+4. Add an wildcard entry in the Route53/DNS record for the cluster infra load balancer's ip address.
 
-5. Resize the infra nodes to `DS2_v2` because default DS2_v3 only allows 4 disk to be attached to a node but more disks are required. `DS2_v2` allows 8 disks to be attached. 
+5. Resize the infra nodes to `DS2_v2` because default DS2_v3 only allows 4 disk to be attached to a node but more disks are required. `DS2_v2` allows 8 disks to be attached.
