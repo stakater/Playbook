@@ -181,6 +181,7 @@ module.exports = {
                 children: [
                     '/content/workshop/routes',
                     '/content/workshop/cluster-deployment',
+                    '/content/workshop/nordmart-intro',
                     '/content/workshop/application-deployment',
                     '/content/workshop/add-new-service.md',
                     '/content/workshop/aad-in-openshift',
