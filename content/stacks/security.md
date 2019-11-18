@@ -1,7 +1,5 @@
 # Security Stack
 
-## Introduction
-
 Security Stack includes applications related to providing authentication on your applications.
 
 ## Tools Matrix
