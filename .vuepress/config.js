@@ -179,9 +179,8 @@ module.exports = {
             {
                 title: 'Workshop: Openshift',
                 children: [
-                    '/content/workshop/openshift',
+                    '/content/workshop/routes',
                     '/content/workshop/cluster-deployment',
-                    '/content/workshop/stacks-deployment',
                     '/content/workshop/application-deployment',
                     '/content/workshop/add-new-service.md',
                     '/content/workshop/aad-in-openshift',
@@ -191,11 +190,12 @@ module.exports = {
             {
                 title: 'Stakater Platform',
                 children: [
-                    '/content/stacks/control.md',
-                    '/content/stacks/delivery.md',
-                    '/content/stacks/logging.md',
-                    '/content/stacks/monitoring.md',
-                    '/content/stacks/security.md'
+                    '/content/stacks/control',
+                    '/content/stacks/delivery',
+                    '/content/stacks/logging',
+                    '/content/stacks/monitoring',
+                    '/content/stacks/security',
+                    '/content/stacks/deploy'
                 ]
             },
         ],
