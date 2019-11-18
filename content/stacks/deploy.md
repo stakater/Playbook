@@ -32,4 +32,4 @@ Follow the steps to deploy the Stakater platform:
     2. jenkins-hub-api-token.
     3. slack-notification-hook.
 
-9. The routes for the services are available in this [link](/content/workshop/openshift).
+9. The routes for the services are available in this [link](/content/workshop/routes).

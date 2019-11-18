@@ -1,8 +1,6 @@
 # Delivery Stack
 
-## Introduction
-
-Delivery Stack Introduction.............
+Delivery Stack is responsible for CI/CD and respective saving artifacts of the pipelines.
 
 ## Tools Matrix
 

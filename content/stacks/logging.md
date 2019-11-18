@@ -1,8 +1,6 @@
 # Logging Stack
 
-## Introduction
-
-Logging Stack Introduction.............
+Logging Stack contains all tools required to collect and store logs of your pods.
 
 ## Tools Matrix
 

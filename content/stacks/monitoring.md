@@ -1,8 +1,6 @@
 # Monitoring Stack
 
-## Introduction
-
-Monitoring Stack Introduction.............
+Monitoring Stack inlcudes all tools related to monitoring your application as well as the infrastructure.
 
 ## Tools Matrix
 
