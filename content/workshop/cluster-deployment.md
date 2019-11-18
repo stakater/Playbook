@@ -6,7 +6,55 @@ This document contains the guideline to deploy `Openshift Container Platform Clu
 
 ## Method 1: Deploy using Terraform
 
-We encourage to create all the Infrastructure and deploy OCP on it using Terraform & Ansible scripts. We are working on OpenSourcing it in near future, and soon we will opensource it. Today's cluster has been deployed using terraform.
+We encourage to create all the Infrastructure and deploy OCP on it using Terraform & Ansible scripts. You can clone [stakater/terraform-azure-openshift](https://github.com/stakater/terraform-azure-openshift) repo and create an Openshift cluster on Azure by following the steps.
+
+**1. Generate Certificate**
+
+To generate certificate to be used by the openshift cluster, use the certs module. Configure the cert.tfvars in certs/ folder as needed.
+
+To generate the certificate using ACME, do:
+
+```bash
+cd certs
+terraform apply -var-file=cert.tfvars
+```
+
+To get the certificate values, do:
+
+```bash
+terraform output public_certificate_pem
+terraform output public_certificate_key
+terraform output public_certificate_intermediate_pem
+```
+
+Once the certificate is generated, you can use these certificates in either terraform-ocp.tfvars or terraform-okd.tfvars files according to your needs
+
+**2. Create service principal**
+
+Create a service principal which will allow terraform to create resources on your behalf on azure
+
+```bash
+az ad sp create-for-rbac -n {PRINCIPAL_NAME} --password {PASSWORD} --role contributor --scopes /subscriptions/{subscription-id}
+```
+**3. Create resources**
+
+You can tweak the `openshift/provision/template-inventory.yaml`. Its rendered, copied and executed on the server using openshift/inventory.tf.
+
+To configure OKD, modify the variables in `openshift/terraform-okd.tfvars`, leave the empty variables and replace the variables filled with capital letters with your variables and apply:
+
+```bash
+cd openshift
+terraform apply -var-file=terraform-okd.tfvars
+```
+
+To configure OCP, modify the variables in `openshift/terraform-ocp.tfvars`, replace the variables in capital letters and apply:
+
+```bash
+cd openshift
+terraform apply -var-file=terraform-ocp.tfvars
+```
+
+And your cluster will be ready. Today's cluster has been deployed using terraform.
 
 ## Method 2: Using Azure's Red Hat OpenShift Container Platform Self-Managed
 
