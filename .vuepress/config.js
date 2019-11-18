@@ -195,6 +195,7 @@ module.exports = {
                     '/content/stacks/logging',
                     '/content/stacks/monitoring',
                     '/content/stacks/security',
+                    '/content/stacks/alerting',
                     '/content/stacks/deploy'
                 ]
             },
