@@ -2,6 +2,8 @@
 
 Logging Stack contains all tools required to collect and store logs of your pods.
 
+![Logging](./image/logging.png)
+
 ## Tools Matrix
 
 |          Tool         |                            Chart Repository                                      | Cherry Pickable | SSO | Pre-Requisites |

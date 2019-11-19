@@ -5,6 +5,12 @@ module.exports = {
         ['link', { rel: 'icon', href: '/favicon.png' }]
     ],
 
+    plugins: [
+        [
+            'vuepress-plugin-medium-zoom',
+        ],
+    ],
+
     themeConfig: {
         sidebar: [
             {
