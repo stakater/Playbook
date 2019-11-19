@@ -2,6 +2,8 @@
 
 Security Stack includes applications related to providing authentication on your applications.
 
+![Security](./image/security.png)
+
 ## Tools Matrix
 
 |       Tool        | Chart Repository                                                     | Cherry Pickable | SSO | Pre-Requisites |

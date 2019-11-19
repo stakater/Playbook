@@ -2,6 +2,8 @@
 
 This stack provides tools that control's the components of Stakater Platform.
 
+![Control](./image/control.png)
+
 ## Tools Matrix
 
 |       Tool        | Chart Repository  |   Cherry Pickable |    SSO        | Pre-Requisites |
