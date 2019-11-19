@@ -2,6 +2,8 @@
 
 Delivery Stack is responsible for CI/CD and respective saving artifacts of the pipelines.
 
+![Delivery](./image/delivery.png)
+
 ## Tools Matrix
 
 |       Tool        | Chart Repository                                                     | Cherry Pickable | SSO | Pre-Requisites |
