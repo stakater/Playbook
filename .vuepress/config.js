@@ -197,7 +197,8 @@ module.exports = {
                     '/content/stacks/monitoring',
                     '/content/stacks/security',
                     '/content/stacks/alerting',
-                    '/content/stacks/deploy'
+                    '/content/stacks/deploy',
+                    '/content/stacks/tracing'
                 ]
             },
         ],
