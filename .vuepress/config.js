@@ -180,7 +180,7 @@ module.exports = {
                 title: 'Workshop: Setting Up',
                 children: [
                     '/content/workshop/cluster-deployment',
-                    '/content/stacks/deploy',
+                    //'/content/stacks/deploy',
                     '/content/workshop/aad-in-openshift',
                     '/content/workshop/application-deployment'
                 ]
@@ -191,6 +191,7 @@ module.exports = {
                     '/content/workshop/routes',
                     '/content/workshop/nordmart-intro',
                     '/content/workshop/nordmart-ci-cd',
+                    '/content/workshop/nordmart-scenario',
                     '/content/workshop/add-new-service.md'
                 ]
             },

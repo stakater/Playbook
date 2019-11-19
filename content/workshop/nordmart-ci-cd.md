@@ -13,6 +13,6 @@ For Deployment of Dev Environment, currently we have scaled down Flux to 0, and 
 Go to Openshift Console -> Select Project nordmart-dev-apps -> Scale Flux's Deployment to 1.
 
 
-**1. Prod:** We use CIOps for Prod Environment and we use Jenkins for CIOps. `Nordmart-Prod-Apps` will contain all the HelmReleases required for setting up Nordmart microservices, So when a PR is approved and merged, master pipeline is run, it will generate an image in semantic version, so you can update that in the `nordmart-prod-apps` repo and its corresponding pipeline will run which will update the image in the cluster.
+**2. Prod:** We use CIOps for Prod Environment and we use Jenkins for CIOps. `Nordmart-Prod-Apps` will contain all the HelmReleases required for setting up Nordmart microservices, So when a PR is approved and merged, master pipeline is run, it will generate an image in semantic version, so you can update that in the `nordmart-prod-apps` repo and its corresponding pipeline will run which will update the image in the cluster.
 
 Prod environment is already deployed in the cluster.
