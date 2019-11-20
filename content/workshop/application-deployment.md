@@ -1,8 +1,8 @@
-# Nordmart Application deployment in Openshfit Container Platform
+# Nordmart Application deployment in OpenShift Container Platform
 
 ## Introduction
 
-This document contains the guideline to deploy Nordmart applicaton in the Openshift cluster.
+This document contains the guideline to deploy Nordmart applicaton in the OpenShift cluster.
 
 ## Nordmart Application Deployment Guideline
 
