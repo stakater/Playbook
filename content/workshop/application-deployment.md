@@ -1,4 +1,4 @@
-# Nordmart Application deployment in OpenShift Container Platform
+# Nordmart Application deployment on OpenShift Container Platform
 
 ## Introduction
 
