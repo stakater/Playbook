@@ -6,42 +6,51 @@ In this document, we will follow a scenario in which we want to deploy a MySQL i
 
 ## Scenario Guidelines
 
-1. Deploy the Sealed Secret server side controller using the helm manifest given below:
+1. There are two ways to install the SealedSecret server side controller:
+    
+    1. Using Kubernetes manifest:
+    ```bash
 
-```yaml
-apiVersion: helm.fluxcd.io/v1
-kind: HelmRelease
-metadata:
-  name: stakater-sealed-secret
-  namespace: sealed-secret-namespace
-spec:
-  releaseName: stakater-sealed-secret
-  chart:
-    repository: https://kubernetes-charts.storage.googleapis.com
-    name: sealed-secrets
-    version: 1.6.0
-  values:
+    kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.9.5/controller.yaml
+    ```
+    It will create a CRD and install the SealedSecret controller in the `kube-system` namespace.
+ 
+    2. Using helm manifest:
 
-    image:
-      repository: quay.io/bitnami/sealed-secrets-controller
-      tag: v0.9.5
-      pullPolicy: IfNotPresent
+    ```yaml
+    apiVersion: helm.fluxcd.io/v1
+    kind: HelmRelease
+    metadata:
+    name: stakater-sealed-secret
+    namespace: sealed-secret-namespace
+    spec:
+    releaseName: stakater-sealed-secret
+    chart:
+        repository: https://kubernetes-charts.storage.googleapis.com
+        name: sealed-secrets
+        version: 1.6.0
+    values:
 
-    controller:
-      create: true
+        image:
+        repository: quay.io/bitnami/sealed-secrets-controller
+        tag: v0.9.5
+        pullPolicy: IfNotPresent
 
-    crd:
-      create: false
+        controller:
+        create: true
 
-    rbac:
-      create: true
+        crd:
+        create: false
 
-    secretName: "sealed-secrets-key"
+        rbac:
+        create: true
 
-    serviceAccount:
-      create: true
-      name: "stakater-sealed-secret-sa"
-```
+        secretName: "sealed-secrets-key"
+
+        serviceAccount:
+        create: true
+        name: "stakater-sealed-secret-sa"
+    ```
 
 2. Install the Sealed Secret Client side tools using the steps given below:
 
