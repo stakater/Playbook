@@ -212,6 +212,14 @@ module.exports = {
                     '/content/stacks/alerting',
                     '/content/stacks/tracing'
                 ]
+            },
+            {
+                title: 'Workshop - Sealed Secrets',
+                children: [
+                    '/content/workshop/sealed-secrets/introduction',
+                    '/content/workshop/sealed-secrets/permissions',
+                    '/content/workshop/sealed-secrets/workshop'
+                ]
             }
         ],
         repo: 'stakater/playbook'
