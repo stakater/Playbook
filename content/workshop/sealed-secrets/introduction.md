@@ -1,4 +1,4 @@
-# Sealed Secret 
+# Introduction
 
 [![SealedSecret Architecture Diagram](../image/sealed-secret.png)](https://engineering.bitnami.com/articles/sealed-secrets.html)
 
@@ -77,5 +77,3 @@ spec:
     mysql_password: AyBQ@XZOSAK@+A@DZAASDasd21@6.....
     mysql_database: Raz+1@2ZQzia921@ea21@a21az23.......
 ```
-
-

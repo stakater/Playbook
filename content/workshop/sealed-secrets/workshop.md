@@ -1,6 +1,7 @@
 # Scenario
 
 ## Overview
+
 In this document, we will follow a scenario in which we want to deploy a MySQL instance for the Nordmart Catalog microservice.
 
 
@@ -156,7 +157,7 @@ spec:
     metadata:
       labels:
         app: mysql
-    spec:   
+    spec:
 
       initContainers:
       - image: busybox
@@ -181,7 +182,7 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: mysql-pvc
-        resources: {}          
+        resources: {}
   volumeClaimTemplates:
   - metadata:
       name: mysql-pvc
@@ -215,7 +216,23 @@ spec:
   template: metadata:
 ```
 
-## How it works in Jenkins or GitOps strategy:
+## SealedSecret Decryption
+SealedSecret can be decrypted online using the steps given below:
+
+1. Get the secret key
+
+```bash
+sudo  kubectl get secret -n <namespace> -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > <master-key.yaml>
+```
+
+2. Use the command given below to decrypt the SealedSecret:
+
+```bash
+kubeseal --controller-name=<stakater-sealed-secret-sealed-secrets > --controller-namespace=<namespace> < <sealed>.yaml --recovery-unseal --recovery-private-key secret-key
+```
+
+
+## SealedSecret usage in Jenkins or GitOps strategy:
 
 SealedSecret can be stored anywhere. The user just need to use the command given below to apply the changes:
 
