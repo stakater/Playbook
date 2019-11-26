@@ -1,4 +1,4 @@
-# Sealed Secret Permission
+# SealedSecrets Permission
 
 ## Overview
 
