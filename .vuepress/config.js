@@ -218,6 +218,7 @@ module.exports = {
                 children: [
                     '/content/workshop/sealed-secrets/introduction',
                     '/content/workshop/sealed-secrets/permissions',
+                    '/content/workshop/sealed-secrets/management',
                     '/content/workshop/sealed-secrets/workshop'
                 ]
             }
