@@ -4,13 +4,16 @@ Konfigurator Operator looks for `KonfiguratorTemplate` Custom Resource in the na
 
 In this example we will generate fluentd configurations dynamically so that our application specific logs can be parsed using regex.
 
-1. See already rendered configmap `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` in `logging` namespace without sample app config.
-2. Deploy a sample application with regex to use by Konfigurator in a separate namespace.
-3. Konfigurator operator will read the newly created resource and render the new config.
-4. `Reloader` will reload the pod as soon as the config is changed. 
-4. Verify if the newly renedered config is mounted on the specified pod.
+## Steps
+1. Deploy Konfigurator Operator (already running in namespace `logging`)
+2. Deploy KonfiguratorTemplate resource (already exist in `logging` namespace named `fluentd`) 
+3. Verify rendered configmap `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` in `logging` namespace without sample app config.
+4. Deploy a sample application with regex to be used by Konfigurator in a separate namespace.
+5. Konfigurator operator will read the newly created resource and render the new config.
+6. `Reloader` will reload the pods as soon as the config is updated.
+7. Verify the newly renedered config is mounted on the specified pod.
 
-## Konfigurator Operator
+## Deploy Konfigurator Operator
 
 Konfigurator Operator is deployed with following values in `logging` namespace. 
 
@@ -47,7 +50,7 @@ spec:
             fieldPath: metadata.namespace
 ```
 
-## KonfiguratorTemplate resource for fluentd
+## Deploy KonfiguratorTemplate resource
 
 Following is a Konfigurator Template that templatize `fluent.conf` and mounts this as a configMap on the `stakater-logging-fluentd-elasticsearch` DaemonSet so that the fluentd pod can use this config. This is also deployed in `logging` namespace.
 
@@ -290,6 +293,11 @@ spec:
       </label>
 ```
 
+## Verify rendered configmap
+
+`konfigurator-stakater-logging-fluentd-elasticsearch-rendered` can be seen in configMaps in logging `namespace`. This fluentd config will contain filters for different applications whose regex is passed in their annotations.
+
+
 ## Deploy a sample application
 
 1. Create a separate namespace `konfig-demo`
@@ -297,7 +305,7 @@ spec:
 ```
 oc create namespace konfig-demo
 ```
-2. Deploy a sample nordmart application named `nordmart-konfig-demo` with regex passed under `values.deployment.fluentdConfigAnnotations`
+2. Use the following manifest to deploy a sample nordmart application named `nordmart-konfig-demo` with regex passed under `values.deployment.fluentdConfigAnnotations`.
 
 ```
 apiVersion: helm.fluxcd.io/v1
@@ -358,9 +366,18 @@ spec:
       enabled: false
 ```
 
-3. Konfigurator operator in `logging` namespace will read the annotations from the newly created deployment and generate the fluentd config with name `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` and mounts the new configMap on `stakater-logging-fluentd-elasticsearch` DaemonSet in `logging` namespace.
+## Konfigurator in action
 
-4. `Reloader` operator running in the `control` namespace will rollout the daemonset with the new configMap mounted because of the following annotation on fluentd-elasticsearch daemonset.
+Konfigurator operator in `logging` namespace will read the annotations from the newly created deployment and generate the fluentd config with name `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` and mounts the new configMap on `stakater-logging-fluentd-elasticsearch` DaemonSet in `logging` namespace.
+
+## Reloader reloads DaemonSet/Pods
+
+`Reloader` operator running in the `control` namespace will rollout the daemonset with the new configMap mounted because of the following annotation on fluentd-elasticsearch daemonset.
 ```
 configmap.reloader.stakater.com/reload: konfigurator-stakater-logging-fluentd-elasticsearch-rendered
 ```
+Reloader details can be found [here](https://github.com/stakater/Reloader)
+
+## Verify newly rendered config
+
+`konfigurator-stakater-logging-fluentd-elasticsearch-rendered` will get updated and the parsing regex for `nordmart-konfig-demo` will be seen in the fluentd configurations that will be mounted on all the pods of the DaemoSet `stakater-fluent-elasticsearch`
