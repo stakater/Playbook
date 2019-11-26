@@ -1,5 +1,7 @@
 # Sealed Secret 
 
+[![SealedSecret Architecture Diagram](../image/sealed-secret.png)](https://engineering.bitnami.com/articles/sealed-secrets.html)
+
 ## Overview
 
 [SealedSecrets](https://github.com/bitnami-labs/sealed-secrets) controller solves the problem of storing kubernetes secret data securely by encrypting the configurations. It can only be decrypted by sealed secret controller running in cluster.
