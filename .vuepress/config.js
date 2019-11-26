@@ -202,6 +202,13 @@ module.exports = {
                 ]
             },
             {
+                title: 'Workshop: Konfigurator',
+                children: [
+                    '/content/workshop/konfigurator/introduction',
+                    '/content/workshop/konfigurator/scenario'
+                ]
+            },
+            {
                 title: 'Stakater Platform',
                 children: [
                     '/content/stacks/control',
