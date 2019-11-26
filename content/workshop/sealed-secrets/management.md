@@ -44,15 +44,9 @@ sudo kubeseal --fetch-cert --controller-name=CONTROLLER-NAME --controller-namesp
 
 6. Re-seal your secrets with the new key.
 
-### User Secret Rotation
-
-The sealing key renewal and SealedSecret rotation are not a substitute for rotating your actual secrets. The best practice is to periodically rotate all your actual secrets (e.g. change the password) and craft new SealedSecret resource with those new secrets.
-
-But if the sealed secrets controller were not renewing the sealing key that rotation would be moot, since the attacker could just decrypt the new secrets as well. Thus you need to do both: periodically renew the sealing key and rotate your actual secrets!
-
 ## How to reuse SealedSecret Key
 
-Sealed secret has one problem that when a decryption key is generated only once, so a sealed secret generated for one cluster will not be usable in another cluster. This problem can be resolved by reusing the descryption key. To do it follow the steps given below:
+Sealed secret has one problem that when a decryption key is generated only once, so a sealed secret generated for one cluster will not be usable in another cluster. This problem can be resolved by reusing the decryption key. To do it follow the steps given below:
 
 1. Get the decryption key using the command given below:
 
@@ -60,7 +54,7 @@ Sealed secret has one problem that when a decryption key is generated only once,
     sudo  kubectl get secret -n NAMESPACE -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > MASTER.yaml
     ```
 
-    Store this key at the secure location like Azure's key vault.
+    Store this key at the secure location like data key vault.
 
 2. Now this key can be used in another cluster like
     ```bash

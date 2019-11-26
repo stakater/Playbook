@@ -4,13 +4,6 @@
 
 This section contains the caveats in the current version of SealedSecret.
 
-Latest version is:
-
-```
-Chart Version: 1.6.0
-Image Version: V0.9.5
-```
-
 ## ClusterRole Issue
 
 It requires ClusterRole to watch the SealedSecrets. If ClusterRole is not provided, it doesn't operate and continually generates error regarding the cluster-scope RBAC issue.
@@ -54,79 +47,36 @@ rules:
       - patch
 ```
 
+## Multi-tenancy
+
+SealedSecret Controller uses ClusterRole to watch SealedSecret resources in all cluster namespaces, so therefore mutli-tenancy cannot be acheived.
+
 ## Key Renewal / Rotation
 
 Its keys are renewed after 30 days by default. New key will not be able to decrypt the old sealed secrets. So if a secret is deleted from a namespace then its controller will not be able to generate secret from the old sealed secret, which makes the old sealed secrets useless.
 
 So, the user needs to generate new sealed secrets from the secrets again.
 
-## SealedSecret Decryption
+## Secret Key Security
 
-**Offline Decryption**
+If secret key is compromised then all the SealedSecrets become useless.
 
-SealedSecret can be decrypted offline using its secret key, which is kind of a security leak. The users need to make sure that secret key must never be used outside the cluster.
+## Secret Key Storage
 
-There is another issue, which is given below
+SealedSecert's secret key must be place in a secure source like online data vaults etc.
 
-```bash
-# the command
-kubeseal < SECRET-KEY.yaml --recovery-unseal --recovery-private-key SECRET-KEY.yaml
-```
+## SealedSecrets Management
 
-```bash
-# error
-error: cannot fetch certificate: services "sealed-secrets-controller" not found
-```
+Before using SealedSecrets following questions must be answered:
 
-**Online Decryption**
+1. Who will generate SealedSecrets?
+2. Who will maintain it?
 
-SealedSecret can be descrypted using the controller running in the cluster. It is a more secure way to decrypt sealed secrets. Its command is given in the key management section.
+## Similar Tools
 
-In online key decryption method, the secret key was pulled from the cluster. Secret Key is returned in list format:
+List of alternative tools are given below:
 
-```yaml
-apiVersion: v1
+1. [Kamus](https://github.com/Soluto/kamus).
 
-items:
+2. [Helm Secrets](https://github.com/futuresimple/helm-secrets).
 
-- apiVersion: v1
-  data:
-    tls.crt: ...
-    tls.key: ...
-  kind: Secret
-  metadata:
-    generateName: sealed-secrets-key
-    labels:
-      sealedsecrets.bitnami.com/sealed-secrets-key: active
-    name: sealed-secrets-key2qh5f
-    namespace: test-sealed-secret
-  type: kubernetes.io/tls
-
-- apiVersion: v1
-  data:
-    tls.crt: ...
-    tls.key: ...
-  kind: Secret
-  metadata:
-    generateName: sealed-secrets-key
-    labels:
-      sealedsecrets.bitnami.com/sealed-secrets-key: compromised
-    name: sealed-secrets-keyscxhn
-    namespace: test-sealed-secret
-  type: kubernetes.io/tls
-
-kind: List
-metadata:
-  resourceVersion: ""
-  selfLink: ""
-```
-
-When it is used to decrypt the data it generates following error:
-
-```bash
-error: converting (v1.List) to (v1.Secret): ObjectMeta not present in src
-```
-
-SealedSecret team is working on this [issue](https://github.com/bitnami-labs/sealed-secrets/issues/319) resolution.
-
-It can be temporary fixed by creating a new secret from the secret key file that contains secrets list.

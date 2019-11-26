@@ -2,16 +2,57 @@
 
 ## Overview
 
-In this document, we will follow a scenario in which we want to deploy a MySQL instance for the Nordmart Catalog microservice.
+In this document, we will follow a scenario in which we want to deploy a MySQL instance for the Nordmart Catalog microservice. Following version of sealed secret will be used in this workshop
 
+```
+Chart Version: 1.6.0
+Image Version: V0.9.5
+```
 
 ## Scenario Guidelines
 
 1. There are two ways to install the SealedSecret server side controller:
+
+    ClusterRole use in both methods:
+
+    ```yaml
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+    name: secrets-unsealer
+    labels:
+        app.kubernetes.io/name: "sealed-secret-name"
+    rules:
+    - apiGroups:
+        - bitnami.com
+        resources:
+        - sealedsecrets
+        verbs:
+        - get
+        - list
+        - watch
+        - update
+    - apiGroups:
+        - ""
+        resources:
+        - secrets
+        verbs:
+        - get
+        - create
+        - update
+        - delete
+    - apiGroups:
+        - ""
+        resources:
+        - events
+        verbs:
+        - create
+        - patch
+    ```
     
     1. Using Kubernetes manifest:
-    ```bash
 
+    ```bash
     kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.9.5/controller.yaml
     ```
     It will create a CRD and install the SealedSecret controller in the `kube-system` namespace.
@@ -121,7 +162,7 @@ spec:
     mysql_database: Raz+1@2ZQzia921@ea21@a21az23.......
 ```
 
-6. Use the command given below to create a sealed secret in the cluster:
+6. Add the command in your CI/CD tool to create the SealedSecret, it can also be created manually:
 
 ```
 sudo kubectl apply -f SEALED-SECRET.yaml -n NAMESPACE
@@ -218,7 +259,7 @@ sudo kubectl -n NAMESPACE exec -it POD-NAME /bin/bash
 mysql -u root -p
 ```
 
-11. If the `mysql-secret` is updated we will use [Reloader](https://github.com/stakater/Reloader#secret) tool to update MySQL deployment. It requires following annotations to be added in MySQL statefulset manifest:
+11. If the `mysql-secret` is updated we will use [Reloader](https://github.com/stakater/Reloader#secret) tool to update MySQL Statefulset. It requires following annotations to be added in MySQL statefulset manifest:
 
 ```yaml
 kind: Deployment
