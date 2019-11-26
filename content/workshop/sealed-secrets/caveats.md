@@ -70,7 +70,7 @@ There is another issue, which is given below
 
 ```bash
 # the command
-kubeseal < <secret-key>.yaml --recovery-unseal --recovery-private-key <secret.key>
+kubeseal < SECRET-KEY.yaml --recovery-unseal --recovery-private-key SECRET-KEY.yaml
 ```
 
 ```bash

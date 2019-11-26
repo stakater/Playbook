@@ -1,7 +1,5 @@
 # Introduction
 
-[![SealedSecret Architecture Diagram](../image/sealed-secret.png)](https://engineering.bitnami.com/articles/sealed-secrets.html)
-
 ## Overview
 
 [SealedSecrets](https://github.com/bitnami-labs/sealed-secrets) controller solves the problem of storing kubernetes secret data securely by encrypting the configurations. It can only be decrypted by sealed secret controller running in cluster.
@@ -18,8 +16,12 @@ Sealed Secrets resolved the issue by encryting the data which is only decryptabl
 
 SealedSecrets is composed of two components:
 
-* `Controller`: A cluster-side controller/operator.
+* `Controller`: A cluster-side component for data encryption.
 * `Kubeseal`: A client-side utility for data encryption. It uses asymmetric cryptography methods for data encryption.
+
+[![SealedSecret Architecture Diagram](../image/sealed-secret.png)](https://engineering.bitnami.com/articles/sealed-secrets.html)
+
+[Source](https://engineering.bitnami.com/articles/sealed-secrets.html)
 
 ### Working
 
@@ -27,10 +29,28 @@ SealedSecrets Controller generate a public/private key pair that it uses to encr
 
 SealedSecrets Controller stores key pair as a secret. To reuse the key pair, store the key pair secret locally (never check key pair on git) and apply the key pair secret when you want to reuse the key pair with a different controller.
 
-Use the following command to get the key pair secret:
+There are two ways to seal a secret:
+
+1. Using Controller
+
+Use the command given below to generate sealed-secret:
 
 ```bash
-oc get secret sealed-secrets-name -n <namespace>
+sudo kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE  < UNSEALED-SECRET.yaml > SEALED-SECRET.yaml
+```
+
+2. Using Cert
+
+Use the following command to get the cert and store it in a file:
+
+```bash
+sudo kubeseal --fetch-cert --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE
+```
+
+To encrypt the data with cert use the command given below:
+
+```bash
+sudo kubeseal --cert CERT-FILE < UNSEALED-SECRET.yaml -o yaml > SEALED-SECRET.yaml
 ```
 
 An example is of how sealed secret encryptes the data is given below:

@@ -22,10 +22,10 @@ In this document, we will follow a scenario in which we want to deploy a MySQL i
     apiVersion: helm.fluxcd.io/v1
     kind: HelmRelease
     metadata:
-    name: stakater-sealed-secret
-    namespace: sealed-secret-namespace
+    name: stakater
+    namespace: SEALED-SECRET-NAMESPACE
     spec:
-    releaseName: stakater-sealed-secret
+    releaseName: stakater
     chart:
         repository: https://kubernetes-charts.storage.googleapis.com
         name: sealed-secrets
@@ -56,26 +56,18 @@ In this document, we will follow a scenario in which we want to deploy a MySQL i
 2. Install the Sealed Secret Client side tools using the steps given below:
 
 ```bash
-$ release=$(curl --silent "https://api.github.com/repos/bitnami-labs/sealed-secrets/releases/latest" | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
+release=$(curl --silent "https://api.github.com/repos/bitnami-labs/sealed-secrets/releases/latest" | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
 
-$ GOOS=$(go env GOOS)
+GOOS=$(go env GOOS)
 
-$ GOARCH=$(go env GOARCH)
+GOARCH=$(go env GOARCH)
 
-$ wget https://github.com/bitnami-labs/sealed-secrets/releases/download/$release/kubeseal-$GOOS-$GOARCH
+wget https://github.com/bitnami-labs/sealed-secrets/releases/download/$release/kubeseal-$GOOS-$GOARCH
 
-$ sudo install -m 755 kubeseal-$GOOS-$GOARCH /usr/local/bin/kubeseal
+sudo install -m 755 kubeseal-$GOOS-$GOARCH /usr/local/bin/kubeseal
 ```
 
-3. Now get the SealedSecret controller public key using the command given below:
-
-```bash
-$ sudo kubeseal --fetch-cert --controller-name=<sealed-sealed-secrets> --controller-namespace=<sealed-secret-namespace>
-```
-
-Store the key return by above command in a file.
-
-4. Create a secret that will be used in the MySQL manifest:
+3. Create a secret that will be used in the MySQL manifest:
 
 ```yaml
 apiVersion: v1
@@ -89,11 +81,32 @@ data:
   mysql_database: dGVzdC1kYXRhYmFzZQ==  # -< base64 encoded test-database
 ```
 
-5. Use the command given below to sealed the above secret:
+4. There are two ways to seal the above secret:
+
+**Using Controller**
+
+Use the command given below to generate sealed-secret:
+
 ```bash
-$ sudo kubeseal --cert <name-of-file-created-in-step-3> < <above-secret-filename>.yaml -o yaml > <sealed-secret-filename>.yaml
+sudo kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE  < UNSEALED-SECRET.yaml > SEALED-SECRET.yaml
 ```
-It will generate a manifest like this:
+
+**Using Cert**
+
+Use the following command to get the cert and store it in a file:
+
+```bash
+sudo kubeseal --fetch-cert --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE
+```
+
+To encrypt the data with cert use the command given below:
+
+```bash
+sudo kubeseal --cert CERT-FILE < UNSEALED-SECRET.yaml -o yaml > SEALED-SECRET.yaml
+```
+
+
+Once the secret is sealedm it will look like this:
 
 ```yaml
 apiVersion: bitnami.com/v1alpha1
@@ -111,7 +124,7 @@ spec:
 6. Use the command given below to create a sealed secret in the cluster:
 
 ```
-$ sudo kubectl apply -f <sealed-secret-filename>.yaml -n <namespace-name>
+sudo kubectl apply -f SEALED-SECRET.yaml -n NAMESPACE
 ```
 
 7. Once the sealed secret resource is created the controller will perform following operations:
@@ -199,10 +212,10 @@ spec:
 ```bash
 # enter the mysql pod
 
-$ sudo kubectl -n <namespace-name> exec -it <pod-name> /bin/bash
+sudo kubectl -n NAMESPACE exec -it POD-NAME /bin/bash
 
 # use the mysql shell
-$ mysql -u root -p
+mysql -u root -p
 ```
 
 11. If the `mysql-secret` is updated we will use [Reloader](https://github.com/stakater/Reloader#secret) tool to update MySQL deployment. It requires following annotations to be added in MySQL statefulset manifest:
@@ -222,13 +235,13 @@ SealedSecret can be decrypted online using the steps given below:
 1. Get the secret key
 
 ```bash
-sudo  kubectl get secret -n <namespace> -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > <master-key.yaml>
+sudo  kubectl get secret -n NAMESPACE -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > MASTER.yaml
 ```
 
 2. Use the command given below to decrypt the SealedSecret:
 
 ```bash
-kubeseal --controller-name=<stakater-sealed-secret-sealed-secrets > --controller-namespace=<namespace> < <sealed>.yaml --recovery-unseal --recovery-private-key secret-key
+kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE < SEALED-SECRET.yaml --recovery-unseal --recovery-private-key MASTER.yaml
 ```
 
 
@@ -237,5 +250,5 @@ kubeseal --controller-name=<stakater-sealed-secret-sealed-secrets > --controller
 SealedSecret can be stored anywhere. The user just need to use the command given below to apply the changes:
 
 ```bash
-$ sudo kubectl apply -f <sealed-secret>.yaml -n <namespace>
+sudo kubectl apply -f SEALED-SECRET.yaml -n NAMESPACE
 ```

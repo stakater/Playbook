@@ -27,7 +27,7 @@ To renew the key before the expiration date, follow the guideline given below:
 1. Label the old key as compromised.
 
 ```bash
-sudo kubectl -n <namespace> label secrets <sealed-secrets-key> sealedsecrets.bitnami.com/sealed-secrets-key=compromised --overwrite=true
+sudo kubectl -n NAMESPACE label secrets SECRET-NAME sealedsecrets.bitnami.com/sealed-secrets-key=compromised --overwrite=true
 ```
 
 2. Make sure that the `compromised` label is assigned. 
@@ -37,7 +37,7 @@ sudo kubectl -n <namespace> label secrets <sealed-secrets-key> sealedsecrets.bit
 4. Get the new public key:
     
 ```bash
-sudo kubeseal --fetch-cert --controller-name=<stakater-sealed-secret-sealed-secrets> --controller-namespace=<test-sealed-secret>
+sudo kubeseal --fetch-cert --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE
 ```
 
 5. Store the key in a file.
@@ -57,13 +57,13 @@ Sealed secret has one problem that when a decryption key is generated only once,
 1. Get the decryption key using the command given below:
 
     ```bash
-    sudo  kubectl get secret -n <namespace> -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > <master-key.yaml>
+    sudo  kubectl get secret -n NAMESPACE -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > MASTER.yaml
     ```
 
     Store this key at the secure location like Azure's key vault.
 
 2. Now this key can be used in another cluster like
     ```bash
-    sudo kubectl apply -f <master-key.yaml>
+    sudo kubectl apply -f MASTER.yaml
     ```
     Make sure the key is being created in the correct `namespace`. When the SealedSecret controller starts it will scan the namespace to check whether a key already exists or not.
