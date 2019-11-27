@@ -124,7 +124,7 @@ data:
 Use the command given below to generate sealed-secret:
 
 ```bash
-sudo kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE  < UNSEALED-SECRET.yaml -o yaml > SEALED-SECRET.yaml
+kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE  < UNSEALED-SECRET.yaml -o yaml > SEALED-SECRET.yaml
 ```
 
 **Using Cert**
@@ -160,7 +160,7 @@ spec:
 6. Now you can add the file to your version control and in your CI/CD, you can specify to `kubectl apply` this file to create the SealedSecret, for now I will apply it manually but this same command can run in Jenkins or Gitlab CI or any other tool you use:
 
 ```
-sudo kubectl apply -f SEALED-SECRET.json -n NAMESPACE
+sudo kubectl apply -f SEALED-SECRET.yaml -n NAMESPACE
 ```
 
 7. Once the sealed secret resource is created the controller will perform following operations:
@@ -180,7 +180,7 @@ metadata:
   labels:
     app: mysql
   name: mysql-svc
-  namespace: nordmart-dev-apps
+  namespace: demo
 spec:
   ports:
   - name: "mysql-port"
@@ -193,7 +193,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
-  namespace: nordmart-dev-apps
+  namespace: demo
 spec:
   serviceName: "mysql"
   selector:
@@ -223,7 +223,7 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-secret
+              name: mysql-secrets
               key: mysql_password
         ports:
         - containerPort: 3306
@@ -248,7 +248,7 @@ spec:
 ```bash
 # enter the mysql pod
 
-sudo kubectl -n NAMESPACE exec -it POD-NAME /bin/bash
+kubectl -n NAMESPACE exec -it POD-NAME /bin/bash
 
 # use the mysql shell
 mysql -u root -p
@@ -271,7 +271,7 @@ SealedSecret can be decrypted online using the steps given below:
 1. Get the secret key
 
 ```bash
-sudo  kubectl get secret -n NAMESPACE -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > MASTER.yaml
+ kubectl get secret -n NAMESPACE -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > MASTER.yaml
 ```
 
 2. Convert the list to a Secret Object.
@@ -288,5 +288,5 @@ kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE < SE
 SealedSecret can be stored anywhere. The user just need to use the command given below to apply the changes:
 
 ```bash
-sudo kubectl apply -f SEALED-SECRET.yaml -n NAMESPACE
+kubectl apply -f SEALED-SECRET.yaml -n NAMESPACE
 ```
