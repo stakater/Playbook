@@ -51,6 +51,11 @@ rules:
 
 SealedSecret Controller uses ClusterRole to watch SealedSecret resources in all cluster namespaces, so therefore mutli-tenancy cannot be acheived.
 
+## Where to Save Original Secrets
+
+Again the question arises, where do we save the original secrets.
+
+
 ## Key Renewal / Rotation
 
 Its keys are renewed after 30 days by default. New key will not be able to decrypt the old sealed secrets. So if a secret is deleted from a namespace then its controller will not be able to generate secret from the old sealed secret, which makes the old sealed secrets useless.
@@ -80,7 +85,9 @@ If one deletes the secret manually, it will not create it again, it only process
 
 List of alternative tools are given below:
 
-1. [Kamus](https://github.com/Soluto/kamus).
+1. [Vault](https://www.vaultproject.io/docs/platform/k8s/run.html).
 
-2. [Helm Secrets](https://github.com/futuresimple/helm-secrets).
+2. [Kamus](https://github.com/Soluto/kamus).
+
+3. [Helm Secrets](https://github.com/futuresimple/helm-secrets): Only when using helm
 
