@@ -59,7 +59,7 @@ Image Version: V0.9.5
  
     2. Using helm manifest:
 
-    ```yaml
+```yaml
   apiVersion: helm.fluxcd.io/v1
   kind: HelmRelease
   metadata:
@@ -86,7 +86,7 @@ Image Version: V0.9.5
       serviceAccount:
         create: true
         name: "stakater-sealed-secret-sa"
-    ```
+```
 
 2. Install the Sealed Secret Client side tools using the steps given below:
 
