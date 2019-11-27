@@ -16,18 +16,28 @@ Sealed Secrets resolved the issue by encryting the data which is only decryptabl
 
 SealedSecrets is composed of two components:
 
-* `Controller`: A cluster-side component for data encryption.
+* `Controller`: A cluster-side component for data decryption.
 * `Kubeseal`: A client-side utility for data encryption. It uses asymmetric cryptography methods for data encryption.
 
 [![SealedSecret Architecture Diagram](../image/sealed-secret.png)](https://engineering.bitnami.com/articles/sealed-secrets.html)
 
 [Source](https://engineering.bitnami.com/articles/sealed-secrets.html)
 
+
+### Terms
+
+Following terms will be used a lot in this workshop, so following is their explanation.
+
+* `Secret`: Kubernetes secret which stores data in base64 form.
+* `Kubeseal`: A client-side CLI used for data encryption.
+* `SealedSecret`: CRD created by SealedSecret Operator, which means the resource that is encrypted and can be pushed to git as well.
+* `Key Pair`: The public-private key pair used to encrypt data.
+
 ### Working
 
 SealedSecrets Controller generate a public/private key pair that it uses to encrypt/decrypt data. This key pair is generated once when the SealedSecrets Controller is deployed. The secrets sealed by one controller cannot be decrypted by another controller because the key pair is different for every deployed controller. 
 
-SealedSecrets Controller stores key pair as a secret. To reuse the key pair, store the key pair secret locally (never check key pair on git) and apply the key pair secret when you want to reuse the key pair with a different controller.
+So an issue arises, that if you want to replicate your environment, can you use the same SealedSecrets into another cluster/environment. So answer is yes. SealedSecrets Controller stores key pair as a K8s secret. To reuse it, you can fetch the key pair secret and keep it in a secure place like Vault (never check key pair on git) and apply the key pair secret whenever you want to reuse the key pair with a different controller.
 
 There are two ways to seal a secret:
 
@@ -50,7 +60,7 @@ sudo kubeseal --fetch-cert --controller-name=CONTROLLER-NAME --controller-namesp
 To encrypt the data with cert use the command given below:
 
 ```bash
-sudo kubeseal --cert CERT-FILE < UNSEALED-SECRET.yaml -o yaml > SEALED-SECRET.yaml
+sudo kubeseal --cert CERT-FILE < UNSEALED-SECRET.yaml > SEALED-SECRET.yaml
 ```
 
 An example is of how sealed secret encryptes the data is given below:

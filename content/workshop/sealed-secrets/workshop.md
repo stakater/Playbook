@@ -60,36 +60,30 @@ Image Version: V0.9.5
     2. Using helm manifest:
 
     ```yaml
-    apiVersion: helm.fluxcd.io/v1
-    kind: HelmRelease
-    metadata:
+  apiVersion: helm.fluxcd.io/v1
+  kind: HelmRelease
+  metadata:
     name: stakater
-    namespace: SEALED-SECRET-NAMESPACE
-    spec:
+    namespace: demo
+  spec:
     releaseName: stakater
     chart:
-        repository: https://kubernetes-charts.storage.googleapis.com
-        name: sealed-secrets
-        version: 1.6.0
+      repository: https://kubernetes-charts.storage.googleapis.com
+      name: sealed-secrets
+      version: 1.6.0
     values:
-
-        image:
+      image:
         repository: quay.io/bitnami/sealed-secrets-controller
         tag: v0.9.5
         pullPolicy: IfNotPresent
-
-        controller:
+      controller:
         create: true
-
-        crd:
+      crd:
         create: false
-
-        rbac:
+      rbac:
         create: true
-
-        secretName: "sealed-secrets-key"
-
-        serviceAccount:
+      secretName: "sealed-secrets-key"
+      serviceAccount:
         create: true
         name: "stakater-sealed-secret-sa"
     ```
@@ -97,14 +91,15 @@ Image Version: V0.9.5
 2. Install the Sealed Secret Client side tools using the steps given below:
 
 ```bash
+# Set release variable to latest
 release=$(curl --silent "https://api.github.com/repos/bitnami-labs/sealed-secrets/releases/latest" | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
-
+# Set your OS
 GOOS=$(go env GOOS)
-
+# Set your Architecture
 GOARCH=$(go env GOARCH)
-
+# Get the Kubeseal Binary
 wget https://github.com/bitnami-labs/sealed-secrets/releases/download/$release/kubeseal-$GOOS-$GOARCH
-
+# Install the binary
 sudo install -m 755 kubeseal-$GOOS-$GOARCH /usr/local/bin/kubeseal
 ```
 
@@ -115,7 +110,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: mysql-secrets
-  namespace: nordmart-dev-apps
+  namespace: demo
 data:
   mysql_user: cm9vdA==  # <- base64 encoded root
   mysql_password: QG15c3FscGFzc3dvcmQ=  # <- base64 encoded @mysqlpassword
@@ -129,7 +124,7 @@ data:
 Use the command given below to generate sealed-secret:
 
 ```bash
-sudo kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE  < UNSEALED-SECRET.yaml > SEALED-SECRET.yaml
+sudo kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE  < UNSEALED-SECRET.yaml -o yaml > SEALED-SECRET.yaml
 ```
 
 **Using Cert**
@@ -137,7 +132,7 @@ sudo kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE
 Use the following command to get the cert and store it in a file:
 
 ```bash
-sudo kubeseal --fetch-cert --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE
+sudo kubeseal --fetch-cert --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE > CERT-FILE
 ```
 
 To encrypt the data with cert use the command given below:
@@ -147,14 +142,14 @@ sudo kubeseal --cert CERT-FILE < UNSEALED-SECRET.yaml -o yaml > SEALED-SECRET.ya
 ```
 
 
-Once the secret is sealedm it will look like this:
+Once the secret is sealed it will look like this:
 
 ```yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: mysql-secrets
-  namespace: nordmart-dev-apps
+  namespace: demo
 spec:
   encryptedData:
     mysql_user: AgBy3i4OJSWK+PiTySYZZA9rO43cGDEq.....
@@ -162,10 +157,10 @@ spec:
     mysql_database: Raz+1@2ZQzia921@ea21@a21az23.......
 ```
 
-6. Add the command in your CI/CD tool to create the SealedSecret, it can also be created manually:
+6. Now you can add the file to your version control and in your CI/CD, you can specify to `kubectl apply` this file to create the SealedSecret, for now I will apply it manually but this same command can run in Jenkins or Gitlab CI or any other tool you use:
 
 ```
-sudo kubectl apply -f SEALED-SECRET.yaml -n NAMESPACE
+sudo kubectl apply -f SEALED-SECRET.json -n NAMESPACE
 ```
 
 7. Once the sealed secret resource is created the controller will perform following operations:
@@ -279,10 +274,12 @@ SealedSecret can be decrypted online using the steps given below:
 sudo  kubectl get secret -n NAMESPACE -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml > MASTER.yaml
 ```
 
-2. Use the command given below to decrypt the SealedSecret:
+2. Convert the list to a Secret Object.
+
+3. Use the command given below to decrypt the SealedSecret:
 
 ```bash
-kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE < SEALED-SECRET.yaml --recovery-unseal --recovery-private-key MASTER.yaml
+kubeseal --controller-name=CONTROLLER-NAME --controller-namespace=NAMESPACE < SEALED-SECRET.yaml --recovery-unseal --recovery-private-key MASTER.yaml -o yaml > UNSEALED.yaml
 ```
 
 

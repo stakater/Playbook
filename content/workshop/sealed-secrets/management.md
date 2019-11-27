@@ -13,7 +13,7 @@ In this method the SealedSecret keys will be rotated/renewed. The are two ways f
 
 #### Scheduled
 
-Keys are automatically renewed every `30 days`. This can be configured on controller startup with the `--key-renew-period=<value>` flag. The value field can be given as golang duration flag (eg: 720h30m). A value of 0 will disable automatic key renewal.
+By default, KeyPairs are automatically renewed every `30 days`. This can be configured on controller startup with the `--key-renew-period=<value>` flag. The value field can be given as golang duration flag (eg: 720h30m). A value of 0 will disable automatic key renewal.
 
 The feature has been historically called "key rotation" but this term can be confusing. Sealed secrets are not automatically rotated and old keys are not deleted when new keys are generated. Old sealed secrets resources can be still decrypted.
 
@@ -43,10 +43,13 @@ sudo kubeseal --fetch-cert --controller-name=CONTROLLER-NAME --controller-namesp
 5. Store the key in a file.
 
 6. Re-seal your secrets with the new key.
+```bash
+sudo kubeseal --cert CERT-FILE < UNSEALED-SECRET.yaml -o yaml > SEALED-SECRET.yaml
+```
 
 ## How to reuse SealedSecret Key
 
-Sealed secret has one problem that when a decryption key is generated only once, so a sealed secret generated for one cluster will not be usable in another cluster. This problem can be resolved by reusing the decryption key. To do it follow the steps given below:
+Sealed secret has one problem that a key pair is generated only once, so a sealed secret generated for one cluster will not be usable in another cluster. This problem can be resolved by reusing the decryption key. To do it follow the steps given below:
 
 1. Get the decryption key using the command given below:
 
