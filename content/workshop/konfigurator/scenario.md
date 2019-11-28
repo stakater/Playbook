@@ -72,7 +72,7 @@ Following is a Konfigurator Template that templatize `fluent.conf` and mounts th
 ```
 kubectl apply -f fluent-template.yaml
 ```
-```
+```yaml
 apiVersion: konfigurator.stakater.com/v1alpha1
 kind: KonfiguratorTemplate
 metadata:
@@ -278,7 +278,7 @@ kubectl create namespace konfig-demo
 ```
 2. Use the following manifest to deploy a sample nordmart application named `nordmart-konfig-demo` with regex passed under `values.deployment.fluentdConfigAnnotations`.
 
-```
+```yaml
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
@@ -353,7 +353,7 @@ Reloader details can be found [here](https://github.com/stakater/Reloader)
 
 ## Verify newly rendered config
 
-`konfigurator-stakater-logging-fluentd-elasticsearch-rendered` will get updated and the parsing regex for `nordmart-konfig-demo` will be seen in the fluentd configurations that will be mounted on all the pods of the DaemoSet `stakater-fluent-elasticsearch`
+`konfigurator-stakater-logging-fluentd-elasticsearch-rendered` will get updated and the parsing regex for `nordmart-konfig-demo` will be seen in the fluentd configurations that will be mounted on all the pods of the DaemonSet `stakater-fluent-elasticsearch`
 
 ## After Parsing
 
