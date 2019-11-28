@@ -356,6 +356,140 @@ From K8s dashboard:
 ```
 configmap.reloader.stakater.com/reload: konfigurator-stakater-logging-fluentd-elasticsearch-rendered
 ```
+Complete stakater-fluentd-elasticsearch manifest is as follows:
+```
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: stakater-logging-fluentd-elasticsearch
+  namespace: logging
+spec:
+  releaseName: stakater-logging-fluentd-elasticsearch
+  chart:
+    repository: https://kiwigrid.github.io
+    name: fluentd-elasticsearch
+    version: 4.9.1
+  values:
+    image:
+      pullPolicy: Always
+      repository: stakater/fluentd-elasticsearch
+      tag: v1.0.0
+      
+    awsSigningSidecar:
+      enabled: false
+      image:
+        repository: abutaha/aws-es-proxy
+        tag: 0.9
+      
+    priorityClassName: 
+    hostLogDir:
+      dockerContainers: /var/lib/docker/containers
+      libSystemdDir: /usr/lib64
+      varLog: /var/log
+      
+    resources:
+      {}
+      
+    elasticsearch:
+      auth:
+        enabled: false
+        password: yourPass
+        user: yourUser
+      bufferChunkLimit: 2M
+      bufferQueueLimit: 8
+      host: elasticsearch-client.logging
+      logLevel: info
+      logstashPrefix: logstash
+      path: ""
+      port: 9200
+      scheme: http
+      sslVerify: false
+      sslVersion: TLSv1_2
+      typeName: _doc
+      
+    fluentdArgs: --no-supervisor -q
+    env:
+      {}
+      
+    secret:
+      {}
+      
+    rbac:
+      create: true
+      
+    serviceAccount:
+      create: true
+      name: ""
+      
+    podSecurityPolicy:
+      annotations: {}
+      enabled: false
+      
+    livenessProbe:
+      enabled: false
+      
+    annotations:
+      configmap.reloader.stakater.com/reload: konfigurator-stakater-logging-fluentd-elasticsearch-rendered,stakater-fluentd-elasticsearch
+          
+    podAnnotations:
+      prometheus.io/port: "24231"
+      prometheus.io/scrape: "true"
+      
+    updateStrategy:
+      type: RollingUpdate
+      
+    tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+      
+    affinity:
+      {}
+      
+    nodeSelector:
+      {}
+      
+    service:
+      ports:
+      - name: monitor-agent
+        port: 24231
+        type: ClusterIP
+      
+    serviceMonitor:
+      enabled: false
+      interval: 10s
+      labels: {}
+      path: /metrics
+      port: 24231
+      
+    prometheusRule:
+      enabled: false
+      labels: {}
+      prometheusNamespace: monitoring
+      
+    configMaps:
+      useDefaults:
+        containersInputConf: true
+        forwardInputConf: true
+        monitoringConf: true
+        outputConf: false
+        systemConf: true
+        systemInputConf: true
+      
+    extraConfigMaps:
+      output.conf: |
+        # Empty Output conf
+      
+    extraVolumes:
+      - hostPath:
+          path: /var/data
+        name: vardata
+      
+    extraVolumeMounts:
+      - mountPath: /var/data
+        name: vardata
+        readOnly: true
+```
 Reloader details can be found [here](https://github.com/stakater/Reloader)
 
 ## After Parsing
