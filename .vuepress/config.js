@@ -192,7 +192,19 @@ module.exports = {
                 ]
             },
             {
-                title: 'Workshop: Scenario',
+                title: 'Stakater Platform',
+                children: [
+                    '/content/stacks/control',
+                    '/content/stacks/delivery',
+                    '/content/stacks/logging',
+                    '/content/stacks/monitoring',
+                    '/content/stacks/security',
+                    '/content/stacks/alerting',
+                    '/content/stacks/tracing'
+                ]
+            },
+            {
+                title: 'Workshop: Nordmart',
                 children: [
                     '/content/workshop/routes',
                     '/content/workshop/nordmart-intro',
@@ -209,15 +221,13 @@ module.exports = {
                 ]
             },
             {
-                title: 'Stakater Platform',
+                title: 'Workshop - Sealed Secrets',
                 children: [
-                    '/content/stacks/control',
-                    '/content/stacks/delivery',
-                    '/content/stacks/logging',
-                    '/content/stacks/monitoring',
-                    '/content/stacks/security',
-                    '/content/stacks/alerting',
-                    '/content/stacks/tracing'
+                    '/content/workshop/sealed-secrets/introduction',
+                    '/content/workshop/sealed-secrets/workshop',
+                    '/content/workshop/sealed-secrets/management',
+                    '/content/workshop/sealed-secrets/caveats'
+
                 ]
             }
         ],
