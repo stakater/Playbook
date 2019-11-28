@@ -31,7 +31,7 @@ Raw logs are being pushed in elasticsearch and are seen unparsed as below:
 
 ## Deploy Konfigurator Operator
 
-Konfigurator Operator is deployed with following values in `logging` namespace. 
+Konfigurator Operator is already deployed with following values in `logging` namespace. 
 
 ```
 apiVersion: helm.fluxcd.io/v1
@@ -68,8 +68,10 @@ spec:
 
 ## Deploy KonfiguratorTemplate resource
 
-Following is a Konfigurator Template that templatize `fluent.conf` and mounts this as a configMap on the `stakater-logging-fluentd-elasticsearch` DaemonSet so that the fluentd pod can use this config. This is also deployed in `logging` namespace.
-
+Following is a Konfigurator Template that templatize `fluent.conf` and mounts this as a configMap on the `stakater-logging-fluentd-elasticsearch` DaemonSet so that the fluentd pod can use this config. This is also deployed in `logging` namespace. Save the following manifest in a file named `fluent-template.yaml` and apply by running
+```
+kubectl apply -f fluent-template.yaml
+```
 ```
 apiVersion: konfigurator.stakater.com/v1alpha1
 kind: KonfiguratorTemplate
