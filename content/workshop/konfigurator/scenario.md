@@ -22,12 +22,11 @@ Raw logs are being pushed in elasticsearch and are seen unparsed as below:
 
 ## Steps
 1. Deploy Konfigurator Operator (already running in namespace `logging`)
-2. Deploy KonfiguratorTemplate resource (already exist in `logging` namespace named `fluentd`) 
+2. Deploy KonfiguratorTemplate resource for templating fluentd config.
 3. Verify rendered configmap `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` in `logging` namespace without sample app config.
 4. Deploy a sample application with regex to be used by Konfigurator in a separate namespace.
-5. Konfigurator operator will read the newly created resource and render the new config.
+5. Konfigurator will read the newly created resource and render the new config.
 6. `Reloader` will reload the pods as soon as the config is updated.
-7. Verify the newly renedered config is mounted on the specified pod.
 
 ## Deploy Konfigurator Operator
 
@@ -65,10 +64,14 @@ spec:
           fieldRef:
             fieldPath: metadata.namespace
 ```
+Konfigurator Operator creates CRD (Custom Resource Definition) `konfiguratorTemplate` and watches resources of this type in namespaces. You can view the CRD via running this command
+```
+kubectl describe crd konfiguratortemplates.konfigurator.stakater.com
+``` 
 
 ## Deploy KonfiguratorTemplate resource
 
-Following is a Konfigurator Template that templatize `fluent.conf` and mounts this as a configMap on the `stakater-logging-fluentd-elasticsearch` DaemonSet so that the fluentd pod can use this config. Save the following manifest in a file named `fluent-template.yaml` and apply by running
+Following is a Konfigurator Template that will templatize `fluent.conf` and mounts the template as a configMap on the `stakater-logging-fluentd-elasticsearch` DaemonSet so that the fluentd pod can use this config. Save the following manifest in a file named `fluent-template.yaml` and apply by running
 ```
 kubectl apply -f fluent-template.yaml
 ```
@@ -266,7 +269,7 @@ spec:
 
 ## Verify rendered configmap
 
-`konfigurator-stakater-logging-fluentd-elasticsearch-rendered` can be seen in configMaps in logging `namespace`. This fluentd config will contain filters for different applications whose regex is passed in their annotations.
+`konfigurator-stakater-logging-fluentd-elasticsearch-rendered` can be seen in configMaps in logging `namespace`. This fluentd config will contain filters for different applications whose regex were provided in their pod annotations.
 
 
 ## Deploy a sample application
@@ -338,22 +341,22 @@ spec:
 
 ## Konfigurator in action
 
-Konfigurator operator in `logging` namespace will read the annotations from the newly created deployment and generate the fluentd config with name `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` and mounts the new configMap on `stakater-logging-fluentd-elasticsearch` DaemonSet in `logging` namespace.
+Konfigurator operator in `logging` namespace will read the annotations from the newly created pod and generate the fluentd config with name `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` and mounts the new configMap on `stakater-logging-fluentd-elasticsearch` DaemonSet in `logging` namespace.
 
-The newly rendered fluentd config can be seen as follows:
+Verify that the newly rendered fluentd configMap has entry for `konfig-demo` by running the following
+```
+kubectl describe configmap konfigurator-stakater-logging-fluentd-elasticsearch-rendered -n logging
+```
+From K8s dashboard:
 ![Diagram](./img/rendered.png)
 
 ## Reloader reloads DaemonSet/Pods
 
-`Reloader` operator running in the `control` namespace will rollout the daemonset with the new configMap mounted because of the following annotation on fluentd-elasticsearch daemonset.
+`Reloader` operator running in the `control` namespace will rollout the daemonset with the new configMap mounted because of the following annotation on `stakater-fluentd-elasticsearch` daemonset.
 ```
 configmap.reloader.stakater.com/reload: konfigurator-stakater-logging-fluentd-elasticsearch-rendered
 ```
 Reloader details can be found [here](https://github.com/stakater/Reloader)
-
-## Verify newly rendered config
-
-`konfigurator-stakater-logging-fluentd-elasticsearch-rendered` will get updated and the parsing regex for `nordmart-konfig-demo` will be seen in the fluentd configurations that will be mounted on all the pods of the DaemonSet `stakater-fluent-elasticsearch`
 
 ## After Parsing
 

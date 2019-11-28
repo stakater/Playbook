@@ -4,8 +4,8 @@
 
 ### Problem
 
-New Services that are needed to be configured in Nginx Ingress Controller have to be manually changed in the configMap for Nginx Ingress Controller to use.
+Addition of new services/ingresses require configurational changes in Nginx ingress controller and we have to manually change nginx configuration for this purpose.
 
 ### Solution
 
-Templatize Nginx Ingress Controller configMap with Konfigurator to watch all services/ingresses and generate configurations dynamically without manual intervention
+Templatize Nginx Ingress Controller configMap with Konfigurator to watch all services/ingresses and generate configurations dynamically without manual intervention. That configuration can then be directly used in nginx ingress controller using a configMap that is managed by Konfigurator.
