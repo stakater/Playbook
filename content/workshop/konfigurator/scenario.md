@@ -1,8 +1,24 @@
 # Example Scenario
 
+![Diagram](./img/scenario.png)
+
 Konfigurator Operator looks for `KonfiguratorTemplate` Custom Resource in the namespaces specified, render the configuration and then mount these configmaps/secrets to the specified resource.
 
-In this example we will generate fluentd configurations dynamically so that our application specific logs can be parsed using regex.
+In this example we will generate fluentd configurations dynamically so that our application specific logs can be parsed.
+
+Our application service `nordmart-catalog` is a java application that generate logs of the following format:
+```
+2019-11-27 11:04:12.682  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+``` 
+and the regex to parse this log line:
+```
+/^(?<time>\d+(?:-\d+){2}\s+\d+(?::\d+){2}.\d+)\s*(?<level>\S+) (?<pid>\d+) --- \[(?<thread>[\s\S]*?)\] (?<class>\S+)\s*:\s*(?<message>[\s\S]*?)(?=\g<time>|\Z)/
+```
+
+## Before Parsing
+
+Raw logs are being pushed in elasticsearch and are seen unparsed as below:
+![Diagram](./img/raw_log.png)
 
 ## Steps
 1. Deploy Konfigurator Operator (already running in namespace `logging`)
@@ -117,7 +133,7 @@ spec:
       <filter kubernetes.var.log.containers.{{ (index $pod.ObjectMeta.OwnerReferences 0).Name }}**_{{ $pod.ObjectMeta.Namespace }}_{{ $containerConfig.containerName }}**.log>
               {{- end }}
           @type concat
-          key log
+          key message
           multiline_start_regexp {{ $containerConfig.expressionFirstLine }}
           flush_interval 5s
           timeout_label @LOGS
@@ -142,7 +158,7 @@ spec:
                       <filter kubernetes.var.log.containers.{{ (index $pod.ObjectMeta.OwnerReferences 0).Name }}**_{{ $pod.ObjectMeta.Namespace }}_{{ $containerConfig.containerName }}**.log>
                   {{- end }}
                           @type parser
-                          key_name log
+                          key_name message
                           reserve_data true
                           <parse>
                               @type regexp
@@ -152,14 +168,6 @@ spec:
                       </filter>
               {{- end }}
           {{- end }}
-
-          # Concatenate multi-line logs (>=16KB)
-          <filter kubernetes.var.log.containers.**>
-              @type concat
-              key log
-              multiline_end_regexp /\n$/
-              separator ""
-          </filter>
 
           # Send parsed logs to both output and notification labels
           <match **>
@@ -181,53 +189,14 @@ spec:
 
       <label @OUTPUT>
       
-      # Rewrite tags as pliro.kubernetes.** for pliro and stakater.kubernetes.** for the rest of the logs
-        <match kubernetes.**>
-          @type rewrite_tag_filter
-          <rule>
-            key $.kubernetes_namespace_name
-            pattern /pliro-[a-z]+/
-            tag stakater.${tag}
-            invert true
-          </rule>
-          <rule>
-            key $.kubernetes_namespace_name
-            pattern /pliro-[a-z]+/
-            tag $1.${tag}
-          </rule>
-        </match>
-      
-      # Send stakater.kubernetes.** to elasticsearch in logging stack
-        <match stakater.kubernetes.**>
-          @id elasticsearch
-          @type elasticsearch
-          @log_level info
-          include_tag_key true
-          type_name _doc
-          host "#{ENV['OUTPUT_HOST']}"
-          port "#{ENV['OUTPUT_PORT']}"
-          scheme "#{ENV['OUTPUT_SCHEME']}"
-          ssl_version "#{ENV['OUTPUT_SSL_VERSION']}"
-          ssl_verify false
-          logstash_prefix "#{ENV['LOGSTASH_PREFIX']}"
-          logstash_format true
-          flush_interval 30s
-          # Never wait longer than 5 minutes between retries.
-          max_retry_wait 60
-          # Disable the limit on the number of retries (retry forever).
-          disable_retry_limit
-          time_key timestamp
-          reload_connections false
-        </match>
-      
-      # Send the remaining pliro-(tools|dev|prod).kubernetes.** to elasticsearch in namespace pliro-tools  
-        <match *.kubernetes.**>  
+      # Send the the logs to elasticsearch 
+        <match kubernetes.**>  
           @id elasticsearch-pliro
           @type elasticsearch
           @log_level info
           include_tag_key true
           type_name _doc
-          host "pliro-elasticsearch-data.pliro-tools"
+          host "elasticsearch-data.logging"
           port "9200"
           scheme "#{ENV['OUTPUT_SCHEME']}"
           ssl_version "#{ENV['OUTPUT_SSL_VERSION']}"
@@ -303,7 +272,7 @@ spec:
 1. Create a separate namespace `konfig-demo`
 
 ```
-oc create namespace konfig-demo
+kubectl create namespace konfig-demo
 ```
 2. Use the following manifest to deploy a sample nordmart application named `nordmart-konfig-demo` with regex passed under `values.deployment.fluentdConfigAnnotations`.
 
@@ -326,13 +295,12 @@ spec:
         app: catalog
       volumes: {}
       image:
-        repository: docker-delivery.cp-stakater.com:443/stakater-lab/catalog
-        tag: v0.0.19
-      imagePullSecrets: "docker-registry-nexus-secret"
-      fluentdConfigAnnotations:  
-          regex: /^(?<time>\\d+(?:-\\d+){2}\\s+\\d+(?::\\d+){2}\\.\\d+)\\s*(?<level>\\S+) (?<pid>\\d+) --- \\[(?<thread>[\\s\\S]*?)\\] (?<class>\\S+)\\s*:\\s*(?<message>[\\s\\S]*?)(?=\\g<time>|\\Z)/
-          regexFirstLine: /^\\d+(?:-\\d+){2}\\s+\\d+(?::\\d+){2}\\.\\d+/
-          timeFormat: "%Y-%m-%d %H:%M:%S.%L"
+        repository: stakater/stakater-nordmart-catalog
+        tag: v0.0.1
+      fluentdConfigAnnotations:
+         regex: /^(?<time>\\d+(?:-\\d+){2}\\s+\\d+(?::\\d+){2}\\.\\d+)\\s*(?<level>\\S+) (?<pid>\\d+) --- \\[(?<thread>[\\s\\S]*?)\\] (?<class>\\S+)\\s*:\\s*(?<message>[\\s\\S]*?)(?=\\g<time>|\\Z)/
+         regexFirstLine: /^\\d+(?:-\\d+){2}\\s+\\d+(?::\\d+){2}\\.\\d+/
+         timeFormat: "%Y-%m-%d %H:%M:%S.%L"
       probes:
         readinessProbe:
           failureThreshold: 3
@@ -370,6 +338,9 @@ spec:
 
 Konfigurator operator in `logging` namespace will read the annotations from the newly created deployment and generate the fluentd config with name `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` and mounts the new configMap on `stakater-logging-fluentd-elasticsearch` DaemonSet in `logging` namespace.
 
+The newly rendered fluentd config can be seen as follows:
+![Diagram](./img/rendered.png)
+
 ## Reloader reloads DaemonSet/Pods
 
 `Reloader` operator running in the `control` namespace will rollout the daemonset with the new configMap mounted because of the following annotation on fluentd-elasticsearch daemonset.
@@ -381,3 +352,9 @@ Reloader details can be found [here](https://github.com/stakater/Reloader)
 ## Verify newly rendered config
 
 `konfigurator-stakater-logging-fluentd-elasticsearch-rendered` will get updated and the parsing regex for `nordmart-konfig-demo` will be seen in the fluentd configurations that will be mounted on all the pods of the DaemoSet `stakater-fluent-elasticsearch`
+
+## After Parsing
+
+After dynamic generation and parsing of the logs the parsed log entry can be seen as below:
+
+![Diagram](./img/parsed_log.png)
