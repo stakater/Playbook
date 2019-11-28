@@ -68,7 +68,7 @@ spec:
 
 ## Deploy KonfiguratorTemplate resource
 
-Following is a Konfigurator Template that templatize `fluent.conf` and mounts this as a configMap on the `stakater-logging-fluentd-elasticsearch` DaemonSet so that the fluentd pod can use this config. This is also deployed in `logging` namespace. Save the following manifest in a file named `fluent-template.yaml` and apply by running
+Following is a Konfigurator Template that templatize `fluent.conf` and mounts this as a configMap on the `stakater-logging-fluentd-elasticsearch` DaemonSet so that the fluentd pod can use this config. Save the following manifest in a file named `fluent-template.yaml` and apply by running
 ```
 kubectl apply -f fluent-template.yaml
 ```
