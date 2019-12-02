@@ -1,5 +1,7 @@
 # Konfigurator
 
+![Diagram](./img/Konfigurator.png)
+
 ## Introduction
 
 Konfigurator is an open source kubernetes operator developed by [Stakater](https://github.com/stakater) that can dynamically generate app configuration when kubernetes resources change. We at stakater use konfigurator to create dynamic configuration for fluentd configmap.

@@ -217,7 +217,9 @@ module.exports = {
                 title: 'Workshop: Konfigurator',
                 children: [
                     '/content/workshop/konfigurator/introduction',
-                    '/content/workshop/konfigurator/scenario'
+                    '/content/workshop/konfigurator/scenario',
+                    '/content/workshop/konfigurator/use-cases'
+                    
                 ]
             },
             {
