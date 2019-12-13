@@ -15,3 +15,16 @@ One can setup all these apps to send alerts/notifications to different slack cha
     This channel will only be used for production apps. If those apps go down, alerts will get fired in this channel.
 
     This approach can tidy things up as you will not have to setup different channels for different environments and different tools as that can create confusion. With this, you will have only two channels to concentrate upon for your team progress and status.
+
+3. **Naming Strategy for Multiple Cluster Alerts**
+
+    As currently, the team is working on multiple clusters and their alerts are being sent in a single slack channel, which is causing a lot of confusion. So the new naming strategy must be followed:
+
+    ```
+    stakater-platform-<clusterName>-alerts
+    ```
+4. **False Alerts**
+
+   List of false alerts is given below:
+
+   1. WatchDog: This is an alert meant to ensure that the entire alerting pipeline is functional.
