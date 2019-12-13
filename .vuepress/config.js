@@ -55,6 +55,7 @@ module.exports = {
                     '/content/processes/alerting/chowkidar',
                     '/content/processes/alerting/prometheus',
                     '/content/processes/alerting/uptime-checkers',
+                    '/content/processes/alerting/slack-notifications-for-teams'
                 ]
             },
             {
