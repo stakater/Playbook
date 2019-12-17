@@ -1,0 +1,55 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: nordmart-konfig-demo
+  namespace: konfig-demo
+spec:
+  releaseName: nordmart-konfig-demo
+  chart:
+    repository: https://stakater.github.io/stakater-charts/
+    name: application
+    version: 0.0.12
+  values:
+    applicationName: "catalog"
+    deployment:
+      podLabels:
+        app: catalog
+      volumes: {}
+      image:
+        repository: stakater/stakater-nordmart-catalog
+        tag: v0.0.1
+      fluentdConfigAnnotations:
+         regex: /^(?<time>\\d+(?:-\\d+){2}\\s+\\d+(?::\\d+){2}\\.\\d+)\\s*(?<level>\\S+) (?<pid>\\d+) --- \\[(?<thread>[\\s\\S]*?)\\] (?<class>\\S+)\\s*:\\s*(?<message>[\\s\\S]*?)(?=\\g<time>|\\Z)/
+         regexFirstLine: /^\\d+(?:-\\d+){2}\\s+\\d+(?::\\d+){2}\\.\\d+/
+         timeFormat: "%Y-%m-%d %H:%M:%S.%L"
+      probes:
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+          initialDelaySeconds: 10
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+          initialDelaySeconds: 10
+          httpGet:
+            path: /actuator/health
+            port: 8080
+    service:
+      ports:
+      - port: 8080
+        name: web
+        protocol: TCP
+        targetPort: 8080
+    rbac:
+      create: false
+      serviceAccount:
+        name: default
+    configMap:
+      enabled: false

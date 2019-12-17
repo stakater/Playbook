@@ -55,6 +55,7 @@ module.exports = {
                     '/content/processes/alerting/chowkidar',
                     '/content/processes/alerting/prometheus',
                     '/content/processes/alerting/uptime-checkers',
+                    '/content/processes/alerting/slack-notifications-for-teams'
                 ]
             },
             {
@@ -192,16 +193,6 @@ module.exports = {
                 ]
             },
             {
-                title: 'Workshop: Scenario',
-                children: [
-                    '/content/workshop/routes',
-                    '/content/workshop/nordmart-intro',
-                    '/content/workshop/nordmart-ci-cd',
-                    '/content/workshop/nordmart-scenario',
-                    '/content/workshop/add-new-service.md'
-                ]
-            },
-            {
                 title: 'Stakater Platform',
                 children: [
                     '/content/stacks/control',
@@ -211,6 +202,35 @@ module.exports = {
                     '/content/stacks/security',
                     '/content/stacks/alerting',
                     '/content/stacks/tracing'
+                ]
+            },
+            {
+                title: 'Workshop: Nordmart',
+                children: [
+                    '/content/workshop/routes',
+                    '/content/workshop/nordmart-intro',
+                    '/content/workshop/nordmart-ci-cd',
+                    '/content/workshop/nordmart-scenario',
+                    '/content/workshop/add-new-service.md'
+                ]
+            },
+            {
+                title: 'Workshop: Konfigurator',
+                children: [
+                    '/content/workshop/konfigurator/introduction',
+                    '/content/workshop/konfigurator/scenario',
+                    '/content/workshop/konfigurator/use-cases'
+                    
+                ]
+            },
+            {
+                title: 'Workshop - Sealed Secrets',
+                children: [
+                    '/content/workshop/sealed-secrets/introduction',
+                    '/content/workshop/sealed-secrets/workshop',
+                    '/content/workshop/sealed-secrets/management',
+                    '/content/workshop/sealed-secrets/caveats'
+
                 ]
             }
         ],
