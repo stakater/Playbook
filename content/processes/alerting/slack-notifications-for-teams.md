@@ -23,8 +23,15 @@ One can setup all these apps to send alerts/notifications to different slack cha
     ```
     stakater-platform-<clusterName>-alerts
     ```
-4. **False Alerts**
+4. **Alert Chart**
 
-   List of false alerts is given below:
+   Alert list for Stakater Platform is given below:
 
-   1. WatchDog: This is an alert meant to ensure that the entire alerting pipeline is functional.
+
+   | Name | Severity | Description |
+   |---|---|---|
+   | WatchDog | None | It shows that the entire alerting pipeline is functional. |
+   | HighCPULoad | High | It shows the one of the cluster's node has high CPU usage. |
+   | HighMemoryLoad | High | It show that one of the cluster's node has high memory usage.|
+   | KubePodCrashLooping | High | It shows that pod is restarting multiple times in 5 mintues. |
+   | KubeDeploymentReplicasMismatch | High | It show that replicas of a deployment doesn't match the desired state. |
