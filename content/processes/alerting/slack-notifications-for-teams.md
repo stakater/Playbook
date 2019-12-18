@@ -34,4 +34,5 @@ One can setup all these apps to send alerts/notifications to different slack cha
    | HighCPULoad | High | It shows the one of the cluster's node has high CPU usage. |
    | HighMemoryLoad | High | It show that one of the cluster's node has high memory usage.|
    | KubePodCrashLooping | High | It shows that pod is restarting multiple times in 5 mintues. |
-   | KubeDeploymentReplicasMismatch | High | It show that replicas of a deployment doesn't match the desired state. |
+   | KubeDeploymentReplicasMismatch | High | It shows that replicas of a deployment doesn't match the desired state. |
+   | KubeAPIErrorsHigh | High | It shows that the api server requests are failing. |
