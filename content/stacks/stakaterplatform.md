@@ -34,7 +34,7 @@ Stakater Platform can be deployed using GitLab CI with the following steps:
 | :----------------------------: | :-------: | :----------------:|
 | STAKATER_PLATFORM_SSH_GIT_URL  |    Yes    |   null (e.g. `ssh://git@github.com/stakater/StakaterPlatform.git`) |
 | STAKATER_PLATFORM_BRANCH       |    Yes    |   master  |
-| KUBECONFIG                     |    Yes    |   null    |
+| KUBE_CONFIG                    |    Yes    |   null (Base64 encoded kubeconfig)    |
 
 4. The Pipline will deploy flux pod in flux namespace and output an ssh key which must be added to deploy keys in forked repo with read and write access to allow flux to initiate GitOps.
 
