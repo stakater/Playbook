@@ -195,6 +195,7 @@ module.exports = {
             {
                 title: 'Stakater Platform',
                 children: [
+                    '/content/stacks/stakaterplatform',
                     '/content/stacks/control',
                     '/content/stacks/delivery',
                     '/content/stacks/logging',
