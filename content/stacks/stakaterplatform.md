@@ -26,13 +26,13 @@ Stakater Platform can be deployed using GitLab CI with the following steps:
 | REPLACE_ADMIN_ACCOUNT_USERNAME      |    Yes    |   platform/delivery/nexus.yaml  |
 | REPLACE_CLUSTER_ACCOUNT_USERNAME    |    Yes    |   platform/delivery/nexus.yaml |
 | SONARQUBE_PROPERTIES                |    Yes    |   platform/delivery/sonarqube.yaml  |
-| STORAGE_CLASS_NAME                  |    Yes    |   platform/delivery/jenkins-mvnstorage.yaml<br>platform/deliveryjenkins-pvc.yaml<br>platform/delivery/nexus-pvc.yaml<br>platform/delivery/sonarqube-pvc.yaml<br>platform/delivery/sonarqube.yaml<br>platform/logging/elasticsearch-cluster-data.yaml<br>platform/logging/elasticsearch-cluster-master.yaml<br>platform/monitoring/prometheus-operator.yaml<br>platform/security/postgresql.yaml |
+| STORAGE_CLASS_NAME                  |    Yes    |   - platform/delivery/jenkins-mvnstorage.yaml<br>- platform/deliveryjenkins-pvc.yaml<br>- platform/delivery/nexus-pvc.yaml<br>- platform/delivery/sonarqube-pvc.yaml<br>- platform/delivery/sonarqube.yaml<br>- platform/logging/elasticsearch-cluster-data.yaml<br>- platform/logging/elasticsearch-cluster-master.yaml<br>- platform/monitoring/prometheus-operator.yaml<br>- platform/security/postgresql.yaml |
 
 3. Edit the following variables in Environment variables for `gitlab-ci.yml` to deploy StakaterPlatform
 
 | Environment Var.               | Required  |   Default Value   |
 | :----------------------------: | :-------: | :----------------:|
-| STAKATER_PLATFORM_SSH_GIT_URL  |    Yes    |   null (e.g. `ssh://git@github.com/stakater/StakaterInfrastructure.git`) |
+| STAKATER_PLATFORM_SSH_GIT_URL  |    Yes    |   null (e.g. `ssh://git@github.com/stakater/StakaterPlatform.git`) |
 | STAKATER_PLATFORM_BRANCH       |    Yes    |   master  |
 | KUBECONFIG                     |    Yes    |   null    |
 
