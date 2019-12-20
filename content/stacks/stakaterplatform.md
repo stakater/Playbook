@@ -26,7 +26,6 @@ Stakater Platform can be deployed using GitLab CI with the following steps:
 | REPLACE_ADMIN_ACCOUNT_USERNAME      |    Yes    |   platform/delivery/nexus.yaml  |
 | REPLACE_CLUSTER_ACCOUNT_USERNAME    |    Yes    |   platform/delivery/nexus.yaml |
 | SONARQUBE_PROPERTIES                |    Yes    |   platform/delivery/sonarqube.yaml  |
-| STORAGE_CLASS_NAME                  |    Yes    |   - platform/delivery/jenkins-mvnstorage.yaml<br>- platform/deliveryjenkins-pvc.yaml<br>- platform/delivery/nexus-pvc.yaml<br>- platform/delivery/sonarqube-pvc.yaml<br>- platform/delivery/sonarqube.yaml<br>- platform/logging/elasticsearch-cluster-data.yaml<br>- platform/logging/elasticsearch-cluster-master.yaml<br>- platform/monitoring/prometheus-operator.yaml<br>- platform/security/postgresql.yaml |
 
 3. Edit the following variables in Environment variables for `gitlab-ci.yml` to deploy StakaterPlatform
 
@@ -35,12 +34,23 @@ Stakater Platform can be deployed using GitLab CI with the following steps:
 | STAKATER_PLATFORM_SSH_GIT_URL  |    Yes    |   null (e.g. `ssh://git@github.com/stakater/StakaterPlatform.git`) |
 | STAKATER_PLATFORM_BRANCH       |    Yes    |   master  |
 | KUBE_CONFIG                    |    Yes    |   null (Base64 encoded kubeconfig)    |
+| CLOUD_PROVIDER                 |    Yes    |   aws             |
+| AWS_ACCESS_KEY_ID              |  (if AWS) |   null            |
+| AWS_SECRET_ACCESS_KEY          |  (if AWS) |   null            |
 
 4. The Pipline will deploy flux pod in flux namespace and output an ssh key which must be added to deploy keys in forked repo with read and write access to allow flux to initiate GitOps.
 
+Find ssh key by the following commands
+```
+kubectl get pods -n flux
+kubectl logs <flux-pod-name> -n flux
+```
+
 5. After the key is added, all namespaces and tools will be deployed in the cluster using GitOps
 
-6. To make any further changes to the Platform, all changes must be done via commiting changes in git repo. Changes would be reflected in the cluster through GitOps workflow
+6. Add SealedSecrets Key for the sealed secrets to be unsealed in control namespace.
+
+7. To make any further changes to the Platform, all changes must be done via commiting changes in git repo. Changes would be reflected in the cluster through GitOps workflow
 
 ## SealedSecrets
 
