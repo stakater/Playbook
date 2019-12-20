@@ -59,3 +59,13 @@ kubectl logs <flux-pod-name> -n flux
 StakaterPlatform uses [SealedSecrets](https://github.com/bitnami-labs/sealed-secrets) to secure Secrets in Kubernetes Cluster.
 
 Sealed Secret resources needs to be updated when the platform is deployed. SealedSecrets controller is deployed in the control namespace and outputs the certificate in its logs. Use this certificate to regenerate sealed secrets for your cluster. More info [here](https://playbook.stakater.com/content/processes/security/sealed-secrets.html)
+
+
+## Kubernetes Support
+
+Stakater Platform has been tested on following environment:
+
+| Platform Version| K8s Version  | Infrastructure |
+|---|---|---|
+| v0.0.1 | 1.14 | eks.6 |
+
