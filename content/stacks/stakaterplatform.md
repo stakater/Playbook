@@ -1,6 +1,6 @@
 # StakaterPlatform
 
-Stakater Platform provides `zero-to-operations` stacks to control, monitor, log, trace and security for applications deployed on kubernetes using SecDevOps best practices.
+Stakater Platform provides stacks to control, monitor, log, trace and security for applications deployed on kubernetes using SecDevOps best practices.
 
 Stakater Platform consist of 6 stacks
 
@@ -51,6 +51,8 @@ kubectl logs <flux-pod-name> -n flux
 6. Add SealedSecrets Key for the sealed secrets to be unsealed in control namespace.
 
 7. To make any further changes to the Platform, all changes must be done via commiting changes in git repo. Changes would be reflected in the cluster through GitOps workflow
+
+8. Replace certificate in control/sealed-secrets-tls-cert-stakater.yaml with TLS certificate of your own domain
 
 ## SealedSecrets
 
