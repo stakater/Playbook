@@ -15,8 +15,13 @@ Stakater Platform consist of 6 stacks
 
 Stakater Platform can be deployed using GitLab CI with the following steps:
 
-1. Fork [StakaterPlatform](https://github.com/stakater/StakaterPlatform) repository in GitLab.
-2. Following variables should be updated against place holder values according to the requirements (commit changes back into the forked repo because we use GitOps ). See [SealedSecrets](https://playbook.stakater.com/content/stacks/control/stakaterplatform.html#SealedSecrets) section to configure secrets 
+### Pre-Pipeline 
+The sections contains some manual steps that must be done before running the pipeline:
+
+
+1. Fork [StakaterPlatform](https://github.com/stakater/StakaterPlatform) repository in GitLab. It is recommended to fork it in a private repository as you have to add sensitive information in it.
+
+2. Tools have been configured with default configurations. Which can be replaced based on the requirement. Secrets have base64 encoded data in it which is not secure, so it is recommeded to secure the secret either by using [SealedSecrets](https://playbook.stakater.com/content/stacks/control/stakaterplatform.html#SealedSecrets) or any other method of your choice. The table given below provide a list of configuration that can be modified by the user.
 
 | Variables                           | Required  |  File Path          |
 | :---------------------------------: | :-------: | :------------------:|
@@ -26,8 +31,29 @@ Stakater Platform can be deployed using GitLab CI with the following steps:
 | REPLACE_ADMIN_ACCOUNT_USERNAME      |    Yes    |   platform/delivery/nexus.yaml  |
 | REPLACE_CLUSTER_ACCOUNT_USERNAME    |    Yes    |   platform/delivery/nexus.yaml |
 | SONARQUBE_PROPERTIES                |    Yes    |   platform/delivery/sonarqube.yaml  |
+| SONARQUBE_PROPERTIES                |    Yes    |   platform/delivery/sonarqube.yaml  |
+| BASE64_ENCODED_IMC_CONFIG           |    Yes    |   |
+| BASE64_ENCODED_JENKINS_CFG          | 
+| BASE64_ENCODED_KEYCLOAK_CLIENT_ID   |
+| BASE64_ENCODED_KEYCLOAK_CLIENT_SECRET |
+| BASE64_ENCODED_ADMIN_ACCOUNT_JSON   |
+| BASE64_ENCODED_CLUSTER_ACCOUNT_JSON |
+| NEXUS_ADMIN_ACCOUNT_USERNAME        | 
+| NEXUS_CLUSTER_ACCOUNT_USERNAME      |
+| BASE64_ENCODED_HUB_TOKEN            |
+| BASE64_ENCODED_GITLAB_TOKEN         |
+| BASE64_ENCODED_BITBUCKET_TOKEN      |
+| BASE64_ENCODED_ALERTMANAGER_CONFIG  |
+| BASE64_ENCODED_KEYCLOAK_CONFIG      |
+| BASE64_ENCODED_PROXYINJECTOR_CONFIG |
+| TLS CERTS                           |
 
-3. Edit the following variables in Environment variables for `gitlab-ci.yml` to deploy StakaterPlatform
+
+    Once the above configuration have been modified. Commit the changes back in the repository. So that those changes can be used in pipeline for StakaterPlatform deployment.
+
+### Pipeline Execution
+
+1. Configure these enviornment variables in gitlab pipeline.  
 
 | Environment Var.               | Required  |   Default Value   |
 | :----------------------------: | :-------: | :----------------:|
@@ -38,27 +64,46 @@ Stakater Platform can be deployed using GitLab CI with the following steps:
 | AWS_ACCESS_KEY_ID              |  (if AWS) |   null            |
 | AWS_SECRET_ACCESS_KEY          |  (if AWS) |   null            |
 
-4. The Pipline will deploy flux pod in flux namespace and output an ssh key which must be added to deploy keys in forked repo with read and write access to allow flux to initiate GitOps.
+2. The Pipline will deploy flux pod in flux namespace and output an ssh key which must be added to deploy keys in forked repo with read and write access to allow flux to initiate GitOps.
 
-Find ssh key by the following commands
+SSH is printed by flux in its logs. Logs can be seen using the command given below:
+
+```bash
+# it will print all the pods names in flux namespace, copy the flux pod name and used it in the next command
+$ kubectl get pods -n flux
+
+
+# it will print the flux logs, SSH key can be found at the start of the logs
+$ kubectl logs <flux-pod-name> -n flux
 ```
-kubectl get pods -n flux
-kubectl logs <flux-pod-name> -n flux
+
+5. Once the key is added, all namespaces and tools will be deployed in the cluster using by flux. 
+
+6. If configuration need to be changed, change it locally and then commit the changes in the repository. Flux continously monitor the reposiotry and apply the changes on the cluster.
+
+### Deployment Validation
+
+Stakater Platform can be validated by using the following steps:
+
+1. URL given below belongs to a web application that contins link to all the platform components. Open each application to verfiy whether it is working or not.
+
+```bash
+https://forecastle-control.YOUR_DOMAIN.com
 ```
 
-5. After the key is added, all namespaces and tools will be deployed in the cluster using GitOps
+2. We will deploy [Nordmart](/content/workshop/nordmart-intro) application to further validate the platform deployment. Follow the steps given below:
 
-6. Add SealedSecrets Key for the sealed secrets to be unsealed in control namespace.
+    1. Open the Jenkins using the web application discussed in `step 1`.
 
-7. To make any further changes to the Platform, all changes must be done via commiting changes in git repo. Changes would be reflected in the cluster through GitOps workflow
+    2. Create a Gitlab 
 
-8. Replace certificate in control/sealed-secrets-tls-cert-stakater.yaml with TLS certificate of your own domain
+   
 
-## SealedSecrets
 
-StakaterPlatform uses [SealedSecrets](https://github.com/bitnami-labs/sealed-secrets) to secure Secrets in Kubernetes Cluster.
 
-Sealed Secret resources needs to be updated when the platform is deployed. SealedSecrets controller is deployed in the control namespace and outputs the certificate in its logs. Use this certificate to regenerate sealed secrets for your cluster. More info [here](https://playbook.stakater.com/content/processes/security/sealed-secrets.html)
+
+
+
 
 
 ## Compatibility Matrix
