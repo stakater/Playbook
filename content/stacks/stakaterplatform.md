@@ -94,16 +94,50 @@ https://forecastle-control.YOUR_DOMAIN.com
 2. We will deploy [Nordmart](/content/workshop/nordmart-intro) application to further validate the platform deployment. Follow the steps given below:
 
     1. Open the Jenkins using the web application discussed in `step 1`.
+    
+    2. Create an organization and fork the following repositories:
 
-    2. Create a Gitlab 
+        1. [Normart dev tools](https://github.com/stakater-lab/nordmart-dev-tools), it contains the tools required to deploy the web application.
+        2. [Nordmart dev apps](https://github.com/stakater-lab/nordmart-dev-apps), it contains the manifests for the normart appplication microservices.
 
-   
+    3. Create following credentials in Jenkins:
+
+        1. Credentials for cloning repositories.
+        2. Github token api, used for commenting on PRs.
+
+    4. Create a Github Organization for the nordmart application with following configuration.
+
+        1. Use the credentials created above.
+        2. Set organization name as the owner.
+        3. Add the regex filter for repositories to just get the nordmart repos. The regex is given below:
+        ```
+            .*nordmart.*
+        ```
+        4. Add the regex given below in the `Automatic branch project triggering` sections, as we will be triggering only master and PRs:
+        ```
+            PR-\d+|master
+        ```
+        5. Save the configuration, it will scan the organization and create pipeline for the repositories you forked in `step 2`.
+
+    5. Once repositories are forked. Make the required changes in the `nordmart-dev-tools` repository's Jenkinsfile. Jenkinsfile use the [Stakater Pipeline Library](https://github.com/stakater/stakater-pipeline-library).
+
+    6. Now run the pipeline. If pipeline run sucessfully, it will perform following things:
+        
+        1. Create a namespace named `nordmart-dev-apps`.
+        
+        2. Install flux in the namespace.
+
+    7. Flux need access to the `nordmart-dev-apps` repository to deploy the applications. Access can be provided to flux add its SSH key in repository. flux SSH key can be retrieved using the commands given below:
+    ```bash
+    # it will print all the pods names in nordmart-dev-apps namespace, copy the flux pod name and used it in the next command
+    $ kubectl get pods -n nordmart-dev-apps
 
 
-
-
-
-
+    # it will print the flux logs, SSH key can be found at the start of the logs
+    $ kubectl logs <flux-pod-name> -n nordmart-dev-apps
+    ```
+    
+    8. Once key is added, microservice will be deployed. Mircoservices will pull the images from Stakater's [dockerhub](https://hub.docker.com/u/stakater/).
 
 
 ## Compatibility Matrix
