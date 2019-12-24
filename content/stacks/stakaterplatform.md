@@ -13,13 +13,14 @@ Stakater Platform consist of 6 stacks
 
 ## How to Use
 
-Stakater Platform can be deployed using GitLab CI with the following steps:
+Stakater Platform can deployed using GitLab CI(other methods can also be used) with the following steps:
 
-### Pre-Pipeline 
-The sections contains some manual steps that must be done before running the pipeline:
+### Pre-Pipeline Configuration
+The sections contains steps that must be performed before running the pipeline:
 
+1. Fork [StakaterPlatform](https://github.com/stakater/StakaterPlatform) repository in Github and import it in you Gitlab.
 
-1. Fork [StakaterPlatform](https://github.com/stakater/StakaterPlatform) repository in GitLab. It is recommended to fork it in a private repository as you have to add sensitive information in it.
+It is recommended to fork it in a private repository as you have to add sensitive information in it.
 
 2. Tools have been configured with default configurations. Which can be replaced based on the requirement. Secrets have base64 encoded data in it which is not secure, so it is recommeded to secure the secret either by using [SealedSecrets](https://playbook.stakater.com/content/stacks/control/stakaterplatform.html#SealedSecrets) or any other method of your choice. The table given below provide a list of configuration that can be modified by the user.
 
@@ -81,7 +82,7 @@ $ kubectl logs <flux-pod-name> -n flux
 
 6. If configuration need to be changed, change it locally and then commit the changes in the repository. Flux continously monitor the reposiotry and apply the changes on the cluster.
 
-### Deployment Validation
+### Stkater Platform Deployment Validation
 
 Stakater Platform can be validated by using the following steps:
 
