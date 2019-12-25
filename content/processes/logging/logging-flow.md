@@ -9,6 +9,14 @@ The fluentd event contains information such as where an event comes from, the ti
 
 These log events are matched to an Output plugin type in the Fluentd configuration. We use the out_elasticsearch Output plugin to forward these records to Elasticsearch.
 
+## Eventrouter
+
+A kubernetes service that forwards events to a sink. Events are an essential part of a cluster and provide great insight
+to your cluster state, eventrouter makes it easy to persist those events in user specified sink i.e. stdout, AWS S3 etc.
+By default `kube-apiserver` has a `-event-ttl` flag set to 1 hour and it retains events for that specific amount of 
+time. Since, we use elasticsearch as the persistence layer of our logging stack all we do is print logs from 
+event-router to `STDOUT` and those logs are then picked up Fluentd and forwarded to elasticsearch.
+
 ## Logrotate
 
 Log rotation essentially renames the old log file, and creates a new log file in its place for continued capturing of logs. This is done so that the file size remains manageable. At Stakater we use the linux logrotate utility for this, also as a daemonset so that it runs on every node like fluentd. At the moment there isn’t a public chart available in the official helm repository, we are using our own which you can find here.
