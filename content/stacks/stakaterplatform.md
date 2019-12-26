@@ -171,4 +171,4 @@ Stakater Platform has been tested on following environment:
 
 | Platform Version| K8s Version  | Infrastructure |
 |---|---|---|
-| v0.0.1 | 1.14 | eks.6 ![eks logo](./image/eks.png) |
+| v0.0.1 | 1.14 | eks.6 ![eks logo](./image/eks.png =250x) |
