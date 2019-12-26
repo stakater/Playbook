@@ -1,6 +1,11 @@
 # CI/CD for NordMart
 
-Nordmart has 5 microservices for now. The strategy we use is each microservice will have its own codebase and repository and will be using the same pipeline library function `releaseApplication`, a generic function to build application, run unit tests, build & push docker image, run end-to-end tests.
+Nordmart has 5 microservices for now. The strategy we use is each microservice will have its own codebase and repository and will be using the same pipeline library function [`releaseApplication`](https://github.com/stakater/stakater-pipeline-library/blob/master/vars/releaseApplication.groovy), a generic function for:
+
+1. application build.
+2. unit tests execution. 
+3. build & push docker image
+4. run end-to-end tests.
 
 For versioning, we also have different strategies for PR and master. For master, we use semantic versioning. And for PR, we use `0.0.0-PR-Number-BuildNumber-SNAPSHOT`.
 

@@ -11,6 +11,13 @@ Stakater Platform consist of 6 stacks
 - [Security](https://playbook.stakater.com/content/stacks/security.html)
 - [Tracing](https://playbook.stakater.com/content/stacks/tracing.html)
 
+
+### Prerequisite Knowledge
+
+1. [Helm Operator](https://playbook.stakater.com/content/processes/deployment/Helm-operator.html#the-helmrelease-custom-resource).
+
+2. [Flux](https://playbook.stakater.com/content/processes/gitops/gitops-with-flux.html#get-started-with-flux-helm).
+
 ## Platfrom Deployment
 
 ### Pre-Requisites
@@ -31,7 +38,7 @@ The sections contains steps that must be performed before running the pipeline:
 
 It is recommended to fork it in a private repository as you have to add sensitive information in it.
 
-2. Tools have been configured with default configurations. Which can be replaced based on the requirement. Secrets have base64 encoded data in it which is `NOT SECURE`, so it is recommeded to secure the secret either by using [SealedSecrets](https://playbook.stakater.com/content/stacks/control/stakaterplatform.html#SealedSecrets) or any other method of your choice.
+2. Tools have been configured with default configurations. Which can be replaced based on the requirement. Secrets have base64 encoded data in it which is `NOT SECURE`, so it is recommeded to secure the secret either by using [SealedSecrets](https://playbook.stakater.com/content/workshop/sealed-secrets/introduction.html) or any other method of your choice.
 
 #### Mandatory Configurations
 
@@ -109,7 +116,7 @@ Stakater Platform can be validated by using the following steps:
 https://forecastle-control.DOMAIN.com
 ```
 
-2. We will deploy [Nordmart](/content/workshop/nordmart-intro) application to further validate the platform deployment. Follow the steps given below:
+2. We will deploy [Nordmart](https://playbook.stakater.com/content/workshop/nordmart-intro.html#introduction) application to further validate the platform deployment. Follow the steps given below:
 
     - Open the Jenkins using the web application discussed in `step 1`.
     
@@ -164,4 +171,4 @@ Stakater Platform has been tested on following environment:
 
 | Platform Version| K8s Version  | Infrastructure |
 |---|---|---|
-| v0.0.1 | 1.14 | eks.6 |
+| v0.0.1 | 1.14 | eks.6 ![eks logo](./eks.png) |
