@@ -13,12 +13,21 @@ Stakater Platform consist of 6 stacks
 
 ## Platfrom Deployment
 
-This section contains steps to deploy Stakater Platform on Kubernetes cluster using Gitlab CI pipeline.
+### Pre-Requisites
+
+1. This Document expects that the user has familiarity with the following technologies:
+- Basic working understanding of Kubernetes and kubectl
+- Helm Charts
+- Kubernetes Operators
+- Flux
+
+2. Before deploying, user must have a `valid working domain` on Route53. e.g. (example.com, subdmain.example.com etc.) and AWS Credentials (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY) that has access to create Route53 entries.
+
 
 ### Pre-Pipeline Configuration
 The sections contains steps that must be performed before running the pipeline:
 
-1. Fork [StakaterPlatform](https://github.com/stakater/StakaterPlatform) repository in Github and import it in you Gitlab.
+1. Fork [StakaterPlatform](https://github.com/stakater/StakaterPlatform) repository in Github and import it in your Gitlab account.
 
 It is recommended to fork it in a private repository as you have to add sensitive information in it.
 
@@ -39,8 +48,8 @@ These configurations must be checked into the forked repository.
 Following Environment variables should be configured in CI/CD Pipeline `Varaibles` in GitLab
 
 | Variables                           | Required  |  File Path          |  Description         |
-| :---------------------------------: | :-------: | :------------------:|:-------------------: |
-| CLOUD_PROVIDER              |    Yes    |   None | Cloud provider name (Supported values: `aws`). Configures Storage Classes  |
+| :--------------------------------- | :-------: | :------------------|:------------------- |
+| CLOUD_PROVIDER              |    Yes    |   None | Cloud provider name Default:`aws` (Supported values: `aws`). Configures Storage Classes  |
 | KUBE_CONFIG   |    Yes    |   None | Base64 Encoded Kubernetes Cluster Config |
 | STAKATER_PLATFORM_SSH_GIT_URL |    Yes    |   flux.yaml | URL of the forked repository (e.g. git@gitlab.com/stakater/stakaterplatform.git ). Used by `Flux` to maintain state |
 | STAKATER_PLATFORM_BRANCH      |    Yes    |   flux.yaml  | Forked repository branch used by flux |
@@ -48,8 +57,8 @@ Following Environment variables should be configured in CI/CD Pipeline `Varaible
 | USER_NAME                |    Yes    |   None  | User name to commit back changes to branch STAKATER_PLATFORM_BRANCH in the STAKATER_PLATFORM_SSH_GIT_URL repository |
 | REPO_ACCESS_TOKEN           |    Yes    |  None | Access token to commit back changes |
 | TARGET   |   Yes | None | Makefile Target (Targets: `deploy`, `destroy`) |
-| BASE64_ENCODED_AWS_ACCESS_KEY_ID    | Yes      | platform/control/secret-aws-creds.yaml | AWS Access Key to create Route53 entries by external-dns tool |
-| BASE64_ENCODED_AWS_SECRET_ACCESS_KEY   | Yes | platform/control/secret-aws-creds.yaml  | platform/control/secret-aws-creds.yaml | AWS Access Key to create Route53 entries by external-dns tool |
+| BASE64_ENCODED_AWS_ACCESS_KEY_ID    | Yes      | platform/control/secret-aws-creds.yaml | AWS Access Key Id to create Route53 entries by external-dns tool |
+| BASE64_ENCODED_AWS_SECRET_ACCESS_KEY   | Yes | platform/control/secret-aws-creds.yaml  | AWS Access Key Secret to create Route53 entries by external-dns tool |
 | DOMAIN |     Yes | Multiple Instances in files under platform/ directory | Domain used by Stakater Platform tools (e.g. platform.com) |
 | BASE64_ENCODED_IMC_CONFIG | Yes | platform/control/secret-imc-config.yaml | IngressMonitorController (IMC) config to automate ingress creation |
 | BASE64_ENCODED_JENKINS_CFG | Yes   | platform/delivery/secret-jenkins-cfg.yaml | Encoded Docker cfg json file used by jenkins for CI/CD pipelines |
@@ -60,10 +69,10 @@ Following Environment variables should be configured in CI/CD Pipeline `Varaible
 | BASE64_ENCODED_HUB_TOKEN  | Yes | platform/delivery/secret-jenkinshub-api-token.yaml | GitHub API token to post comments on PRs by Jenkins|
 | BASE64_ENCODED_GITLAB_TOKEN  | Yes | platform/delivery/secret-jenkinshub-api-token.yaml | GitLab API token to post comments on PRs by Jenkins|
 | BASE64_ENCODED_BITBUCKET_TOKEN | Yes | platform/delivery/secret-jenkinshub-api-token.yaml | BitBucket API token to post comments on PRs by Jenkins|
-| BASE64_ENCODED_ADMIN_ACCOUNT_JSON | Yes | platform/delivery/nexus.yaml | Base64 nexus json for admin account. e.g. <br>`{"name": "ADMIN_USER","type": "groovy","content": "security.addUser('ADMIN_USER', 'Stackator', 'Admin', 'jane.doe@example.com', true, 'PASSWORD', ['nx-admin'])"}` <br>  |
-| BASE64_ENCODED_CLUSTER_ACCOUNT_JSON | Yes | platform/delivery/nexus.yaml | Base64 nexus json for cluster account e.g. <br>`{"name": "CLUSTER_USER","type": "groovy","content": "security.addRole('CLUSTER_ROLE_NAME', 'cluster', 'User with privileges to allow read access to repo content and healtcheck',[ LIST_OF_PERMISSIONS], ['nx-anonymous']); security.addUser('CLUSTER_USER', 'Cluster', 'Cluster', 'EMAIL_ADDRESS', true, 'CLUSTER_USER_PASSWORD', ['cluster'])"}`<br> |
-| NEXUS_ADMIN_ACCOUNT_USERNAME | Yes | platform/delivery/nexus.yaml | Admin Account username for Nexus |
-| NEXUS_CLUSTER_ACCOUNT_USERNAME | Yes | platform/delivery/nexus.yaml | Cluster account username for Nexus |
+| BASE64_ENCODED_NEXUS_ADMIN_ACCOUNT_JSON | No | platform/delivery/nexus.yaml | Base64 nexus json for admin account. default value in plain text: <br>`{"name": "user-admin","type": "groovy","content": "security.addUser('user-admin', 'Stackator', 'Admin', 'user@gmail.com', true, 'stakater@qwerty786', ['nx-admin'])"}` <br>  |
+| BASE64_ENCODED_NEXUS_CLUSTER_ACCOUNT_JSON | No | platform/delivery/nexus.yaml | Base64 nexus json for cluster account default value in plain text: <br>`{"name": "cluster-admin","type": "groovy","content": "security.addRole('cluster', 'cluster', 'User with privileges to allow read access to repo content and healtcheck', ['nx-healthcheck-read','nx-repository-view-docker-stackator-docker-browse','nx-repository-view-docker-stackator-docker-read','nx-search-read'],  ['nx-anonymous']); security.addUser('cluster-admin', 'Cluster', 'Cluster', 'user@gmail.com', true, 'stakater@qwerty786', ['cluster'])"}`<br> |
+| NEXUS_ADMIN_ACCOUNT_USERNAME | No | platform/delivery/nexus.yaml | Admin Account username for Nexus. Default value:`user-admin` |
+| NEXUS_CLUSTER_ACCOUNT_USERNAME | No | platform/delivery/nexus.yaml | Cluster account username for Nexus. Default value:`cluster-admin`|
 | BASE64_ENCODED_ALERTMANAGER_CONFIG | Yes | platform/monitoring/secret-alertmanager-config.yaml | Base64 encoded Alertmanager config. |
 | BASE64_ENCODED_KEYCLOAK_CONFIG | Yes | platform/security/secret-keycloak-config.yaml | Base64 encoded KeyCloak config. |
 | BASE64_ENCODED_PROXYINJECTOR_CONFIG | Yes | platform/security/secret-pi-config.yaml | Base64 encoded ProxyInjector tool config to inject proxy for SSO with KeyCloak |
@@ -72,7 +81,7 @@ Following Environment variables should be configured in CI/CD Pipeline `Varaible
 
 1. Once the above variables are configured, start GitLab pipeline for the forked repository 
 
-2. The Pipline will deploy flux pod in flux namespace and output an ssh key which must be added to deploy keys in forked repo with read and write access to allow flux to initiate GitOps.
+2. The Pipline will deploy flux pod in flux namespace and output an ssh key which must be added to deploy keys in forked repo `with write access` to allow flux to initiate GitOps.
 
 SSH is printed by flux in its logs. Logs can be seen using the command given below:
 
@@ -85,9 +94,9 @@ $ kubectl get pods -n flux
 $ kubectl logs <flux-pod-name> -n flux
 ```
 
-5. Once the key is added, all namespaces and tools will be deployed in the cluster by flux. 
+5. Once the key is added, all namespaces and tools will be deployed in the k8s cluster by flux. 
 
-6. If configuration need to be changed, change it locally and then commit the changes in the repository. Flux continously monitor the reposiotry and apply the changes on the cluster.
+6. If configuration needs to be changed, change it locally and then commit the changes in the repository. Flux continously monitor the reposiotry and apply the changes on the cluster.
     Use tag `[skip ci]` in commit message to skip running CI pipeline for each commit.
 
 ### Stkater Platform Deployment Validation
@@ -156,5 +165,3 @@ Stakater Platform has been tested on following environment:
 | Platform Version| K8s Version  | Infrastructure |
 |---|---|---|
 | v0.0.1 | 1.14 | eks.6 |
-
-
