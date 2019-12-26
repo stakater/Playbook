@@ -23,3 +23,10 @@ We are using this one helm chart to deploy all the monitoring components:
 - **Kube State Metrics**: It is a service that generates metrics about kubernetes objects by using Kubebernetes API server.
 
 - **Grafana**: Grafana is an open source metric analytics & visualization suite with support for Elasticsearch, Prometheus etc. Currently, it is being used with Prometheus.
+
+
+## Storage Details
+
+|          Tool         |                            PVC                                     | Recommended Space |
+| :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
+| [Prometheus Operator](https://github.com/coreos/prometheus-operator)          | [prometheus-stakater-prometheus-db-prometheus-stakater-prometheus-0](https://github.com/helm/charts/tree/master/stable/prometheus-operator#persistent-volumes)                                 |     20Gi |
