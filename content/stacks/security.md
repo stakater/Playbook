@@ -841,3 +841,9 @@ Update the following variables to change default configurations:
   "dockerAuthenticationFlow": "docker auth"
 }
 ```
+
+## Storage Details
+
+|          Tool         |                            PVC                                     | Recommended Space |
+| :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
+| [Keycloak](https://github.com/keycloak/keycloak)         | [data-stakater-security-postgresql-postgresql-0](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak#database-setup)                                 |     1Gi |

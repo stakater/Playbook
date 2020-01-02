@@ -122,3 +122,9 @@ route:
         alertname: Watchdog
       receiver: alerts-null
 ```
+
+## Storage Details
+
+|          Tool         |                            PVC                                     | Recommended Space |
+| :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
+| [Prometheus Operator](https://github.com/coreos/prometheus-operator)          | [prometheus-stakater-prometheus-db-prometheus-stakater-prometheus-0](https://github.com/helm/charts/tree/master/stable/prometheus-operator#persistent-volumes)                                 |     6Gi |
