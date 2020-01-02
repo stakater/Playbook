@@ -34,22 +34,28 @@ Follow the guidelines given below to create CI/CD jenkins pipeline:
 2. Create an organization and fork the following repositories:
 
     2.1. [Normart dev tools](https://github.com/stakater-lab/nordmart-dev-tools), it contains the tools required to deploy the web application.
+
     2.2. [Nordmart dev apps](https://github.com/stakater-lab/nordmart-dev-apps), it contains the manifests for the normart appplication microservices.
+    
     2.3. [Stakater Nordmart web](https://github.com/stakater-lab/stakater-nordmart-web), it contains the manifests for the normart web application.
 
 3. Create following credentials in Jenkins:
 
     3.1. Credentials for cloning repositories.
+    
     3.2. Github token api, used for commenting on PRs.
 
 4. Create a Github Organization for the nordmart application with following configuration.
 
     4.1. Use the credentials created above.
+    
     4.2. Set organization name as the owner.
+    
     4.3. Add the regex filter for repositories to just get the nordmart repos. The regex is given below:
     ```
         .*nordmart.*
     ```
+    
     4.4. Add the regex given below in the `Automatic branch project triggering` sections, as we will be triggering only master and PRs:
     ```
         PR-\d+|master
@@ -69,6 +75,7 @@ Follow the guidelines given below to create CI/CD jenkins pipeline:
 6. Now run the pipeline. If pipeline run sucessfully, it will perform following things:
     
     6.1. Create a namespace named `nordmart-dev-apps`.
+
     6.2. Install flux in the namespace.
 
 7. Flux need access to the `nordmart-dev-apps` repository to deploy the applications. Access can be provided to flux add its SSH key in repository. flux SSH key can be retrieved using the commands given below:
