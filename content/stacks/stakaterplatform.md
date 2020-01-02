@@ -18,3 +18,12 @@ StakaterPlatform gives you a head start for managing your kubernetes cluster by 
 ## Workflow
 
 StakaterPlatform works on GitOps principle using an opensource tool [Flux](https://github.com/fluxcd/flux) which makes sure that cluster is always in the desired state by tracking a git repository. To make changes in your cluster, commit your changes in the git repository and the changes will be reflected in the kubernetes cluster.
+
+## Compatibility Matrix
+
+StakaterPlatform has been tested on following kubernetes flavors:
+
+| Platform Version| K8s Version  | Infrastructure |
+|---|---|---|
+| v0.0.1 | 1.14 | eks.6 [![image](./image/eks.png)](https://aws.amazon.com/eks/) |
+| v0.0.1 | 1.14.8 | aks [![image](./image/aks.png)](https://docs.microsoft.com/en-us/azure/aks/) |
