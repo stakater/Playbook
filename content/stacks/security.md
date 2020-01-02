@@ -15,4 +15,4 @@ Security Stack includes applications related to providing authentication on your
 
 |          Tool         |                            PVC                                     | Recommended Space |
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
-| [Keycloak](https://github.com/keycloak/keycloak)         | [data-stakater-security-postgresql-postgresql-0](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak#database-setup)                                 |     20Gi |
+| [Keycloak](https://github.com/keycloak/keycloak)         | [data-stakater-security-postgresql-postgresql-0](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak#database-setup)                                 |     1Gi |

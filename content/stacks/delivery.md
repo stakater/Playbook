@@ -56,6 +56,6 @@ Here is stakater pipeline library for Jenkins & Gitlab
 
 |          Tool         |                            PVC                                     | Recommended Space |
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
-| [Jenkins](https://github.com/jenkinsci/jenkins)          | [stakater-delivery-jenkins](https://github.com/helm/charts/tree/master/stable/jenkins#persistence)                                 |     20Gi |
+| [Jenkins](https://github.com/jenkinsci/jenkins)          | [stakater-delivery-jenkins](https://github.com/helm/charts/tree/master/stable/jenkins#persistence)                                 |     8Gi |
 | [SonarQube](https://github.com/SonarSource/sonarqube)           | [stakater-delivery-sonarqube](https://github.com/helm/charts/tree/master/stable/sonarqube#configuration)                             |     20Gi |
 | [Sonatype-Nexus](https://github.com/sonatype/nexus-public)           | [stakater-delivery-sonatype-nexus-data-big](https://github.com/helm/charts/tree/master/stable/sonatype-nexus#persistence)                             |     80Gi |

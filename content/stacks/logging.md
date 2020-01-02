@@ -22,8 +22,8 @@ Logging Stack contains all tools required to collect and store logs of your pods
 |          Tool         |                            PVC                                     | Recommended Space |
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
 | [Elasticsearch](https://github.com/elastic/elasticsearch)          | [PVC details](https://github.com/elastic/helm-charts/tree/master/elasticsearch)                                 |     - |
-| -          | elasticsearch-master-elasticsearch-master-0                                |     20Gi |
-| -          | elasticsearch-data-elasticsearch-data-0                             |     100Gi |
-| -          | elasticsearch-data-elasticsearch-data-1                                 |     100Gi |
+| -          | elasticsearch-master-elasticsearch-master-0                                |     8Gi |
+| -          | elasticsearch-data-elasticsearch-data-0                             |     20Gi |
+| -          | elasticsearch-data-elasticsearch-data-1                                 |     20Gi |
 
 **Details:** Our recommended configuration for elasticsearch, used in StakaterPlatform, is to have 1 master node, 1 client node and 2 data nodes. Persistence should be enabled for master and data nodes. 

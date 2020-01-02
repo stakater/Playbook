@@ -29,4 +29,4 @@ We are using this one helm chart to deploy all the monitoring components:
 
 |          Tool         |                            PVC                                     | Recommended Space |
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
-| [Prometheus Operator](https://github.com/coreos/prometheus-operator)          | [prometheus-stakater-prometheus-db-prometheus-stakater-prometheus-0](https://github.com/helm/charts/tree/master/stable/prometheus-operator#persistent-volumes)                                 |     20Gi |
+| [Prometheus Operator](https://github.com/coreos/prometheus-operator)          | [prometheus-stakater-prometheus-db-prometheus-stakater-prometheus-0](https://github.com/helm/charts/tree/master/stable/prometheus-operator#persistent-volumes)                                 |     6Gi |
