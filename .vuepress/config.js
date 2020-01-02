@@ -14,6 +14,29 @@ module.exports = {
     themeConfig: {
         sidebar: [
             {
+                title: 'Nordmart',
+                children: [
+                    '/content/workshop/routes',
+                    '/content/workshop/nordmart-intro',
+                    '/content/workshop/nordmart-ci-cd',
+                    '/content/workshop/nordmart-scenario',
+                    '/content/workshop/add-new-service.md'
+                ]
+            },
+            {
+                title: 'Stakater Platform',
+                children: [
+                    '/content/stacks/stakaterplatform',
+                    '/content/stacks/control',
+                    '/content/stacks/delivery',
+                    '/content/stacks/logging',
+                    '/content/stacks/monitoring',
+                    '/content/stacks/security',
+                    '/content/stacks/alerting',
+                    '/content/stacks/tracing'
+                ]
+            },
+            {
                 title: 'Processes: Versioning',
                 children: [
                     '/content/processes/versioning/introduction',
@@ -193,29 +216,6 @@ module.exports = {
                 ]
             },
             {
-                title: 'Stakater Platform',
-                children: [
-                    '/content/stacks/stakaterplatform',
-                    '/content/stacks/control',
-                    '/content/stacks/delivery',
-                    '/content/stacks/logging',
-                    '/content/stacks/monitoring',
-                    '/content/stacks/security',
-                    '/content/stacks/alerting',
-                    '/content/stacks/tracing'
-                ]
-            },
-            {
-                title: 'Workshop: Nordmart',
-                children: [
-                    '/content/workshop/routes',
-                    '/content/workshop/nordmart-intro',
-                    '/content/workshop/nordmart-ci-cd',
-                    '/content/workshop/nordmart-scenario',
-                    '/content/workshop/add-new-service.md'
-                ]
-            },
-            {
                 title: 'Workshop: Konfigurator',
                 children: [
                     '/content/workshop/konfigurator/introduction',
@@ -225,7 +225,7 @@ module.exports = {
                 ]
             },
             {
-                title: 'Workshop - Sealed Secrets',
+                title: 'Workshop: Sealed Secrets',
                 children: [
                     '/content/workshop/sealed-secrets/introduction',
                     '/content/workshop/sealed-secrets/workshop',
