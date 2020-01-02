@@ -41,3 +41,13 @@ Following two values should be replaced with the admin account and cluster accou
 Following value should be replaced with appropriate properties for sonarqube.
 
 - `SONARQUBE_PROPERTIES`                 Location: values.sonarProperties
+
+## Draft Packs
+
+Here are the [Build Packs](https://github.com/stakater/draft-pack)
+
+## Stakater Pipeline Library
+
+Here is stakater pipeline library for Jenkins & Gitlab
+
+[Stakater Pipeline Library](https://github.com/stakater/stakater-pipeline-library)
