@@ -64,8 +64,6 @@ Follow the guidelines given below to create CI/CD jenkins pipeline:
     ![Nordmart Organization](./image/nordmart-organization.png)
 
 
-    ![Jenkins Configuration](./image/jenkins-configuration.png)
-
 5. Once repositories are forked. Make the required changes in the `nordmart-dev-tools` repository's Jenkinsfile. Jenkinsfile use the [Stakater Pipeline Library](https://github.com/stakater/stakater-pipeline-library).
 
 6. Now run the pipeline. If pipeline run sucessfully, it will perform following things:
@@ -82,3 +80,61 @@ $ kubectl -n flux logs deployment/flux | grep identity.pub | cut -d '"' -f2
 ```
     
 9. Once key is added, microservice will be deployed. Mircoservices will pull the images from Stakater's [dockerhub](https://hub.docker.com/u/stakater/).
+
+10. Nordmart application can be access via following URL:
+
+    ```bash
+    https://web-dev.YOUR_DOMAIN
+    ```
+
+## Using Custom Images
+
+In previous section public dockerhub images were deployed but what if we want to deployed our own image. Follow the guidelines given below to deploy your own images:
+
+1. We will build and deploy [stakater-nordmart-web](https://github.com/stakater-lab/stakater-nordmart-web) image.
+
+2. To build an image, run a pipeline for stakater-nordmart-web master branch. But before running the pipeline change the following paramters in [Jenkinsfile](https://github.com/stakater-lab/stakater-nordmart-web/blob/master/Jenkinsfile) of your forked repository:
+
+
+| Parameter | Description | Default Value |
+|---|---|---|
+| notifySlack | Notify on slack channel. It should be configure to `false` unless slack channel exists.| false |
+|gitUser| Username for Git | username |
+| gitEmail | Email for Git | user@gmail.com |
+|usePersonalAccessToken| Personal Access token for the repository | true |
+|tokenCredentialID| ID of the credentials created in previous section's `step 3` | GithubToken |
+|dockerRepositoryURL| URL of the repository used to push image after build. Replace the `DOMAIN` value in the default URL provided. | docker-delivery.DOMAIN:443 |
+|e2eTestJob| Boolean check to run e2e tests. If tests needs to executed provide any value otherwise assign `false` to it. | false |
+| e2eJobName | Name of the tests branch. It must only be provided if above parameter `e2eTestJob` is configured| "" |
+
+
+3. Run the pipeline for the branch in which the above changes are done.
+
+4. If pipeline is executed successfully it must build and push an image on nexus repository.
+
+5. Nexus registry can be access on this following url:
+    ```bash
+    nexus-delivery.DOAMIN
+    ```
+
+    It requires username and password to access the nexus repository, which was configured during nexus deployment.
+
+6. If image is build and available in the nexus registry. Update the configurations parameter given below in web microservice [manifest](https://github.com/stakater-lab/nordmart-dev-apps/blob/master/releases/web-helm-release.yaml) of you branch:
+
+    1. `repository`: Replace the old value(`stakater/stakater-nordmart-web`) with this one `docker-delivery.DOMAIN:443/stakater-lab/web`. After this change it will point to nexus registry instead of dockerhub registry.
+
+    2. `tag`: Replace it with  image tag for the build.
+
+    Once these parameters are configured commit your changes.
+
+7. Now the image for the previous build should be deployed. It can be verified using the command given below:
+
+    ```bash
+    # get all pods name in nordmart-dev-apps
+    kubectl get pods -n nordmart-dev-apps
+
+    # get the manifest of web microservice pod
+    kubectl describe pod <POD_NAME> -n nordmart-dev-apps
+
+    Now check repository and tag name in the manifest show by the output of previous command.
+    ```
