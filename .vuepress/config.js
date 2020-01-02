@@ -68,6 +68,7 @@ module.exports = {
                     '/content/processes/logging/introduction',
                     '/content/processes/logging/log-generation',
                     '/content/processes/logging/logging-flow',
+                    '/content/processes/logging/configure-kibana',
                     '/content/processes/logging/birds-eye-view',
                 ]
             },
