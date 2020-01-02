@@ -14,16 +14,6 @@ module.exports = {
     themeConfig: {
         sidebar: [
             {
-                title: 'Nordmart',
-                children: [
-                    '/content/workshop/routes',
-                    '/content/workshop/nordmart-intro',
-                    '/content/workshop/nordmart-ci-cd',
-                    '/content/workshop/nordmart-scenario',
-                    '/content/workshop/add-new-service.md'
-                ]
-            },
-            {
                 title: 'Stakater Platform',
                 children: [
                     '/content/stacks/stakaterplatform',
@@ -34,6 +24,16 @@ module.exports = {
                     '/content/stacks/security',
                     '/content/stacks/alerting',
                     '/content/stacks/tracing'
+                ]
+            },
+            {
+                title: 'Nordmart',
+                children: [
+                    '/content/workshop/routes',
+                    '/content/workshop/nordmart-intro',
+                    '/content/workshop/nordmart-ci-cd',
+                    '/content/workshop/nordmart-scenario',
+                    '/content/workshop/add-new-service.md'
                 ]
             },
             {
