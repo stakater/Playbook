@@ -29,12 +29,13 @@ Prod environment is already deployed in the cluster.
 
 Follow the guidelines given below to create CI/CD jenkins pipeline:
 
-1. Open the Jenkins using the web application discussed in `step 1`.
+1. Open the Jenkins using the link provided in Forecastle.
 
 2. Create an organization and fork the following repositories:
 
     2.1. [Normart dev tools](https://github.com/stakater-lab/nordmart-dev-tools), it contains the tools required to deploy the web application.
     2.2. [Nordmart dev apps](https://github.com/stakater-lab/nordmart-dev-apps), it contains the manifests for the normart appplication microservices.
+    2.3. [Stakater Nordmart web](https://github.com/stakater-lab/stakater-nordmart-web), it contains the manifests for the normart web application.
 
 3. Create following credentials in Jenkins:
 
@@ -53,7 +54,17 @@ Follow the guidelines given below to create CI/CD jenkins pipeline:
     ```
         PR-\d+|master
     ```
+    Once all the configurations are done, the configuration panel should look like this:
+    ![Jenkins Configuration](./image/jenkins-configuration.png)
+    
     4.5. Save the configuration, it will scan the organization and create pipeline for the repositories you forked in `step 2`.
+    
+    After organization scan, jenkins panel should look like this:
+
+    ![Nordmart Organization](./image/nordmart-organization.png)
+
+
+    ![Jenkins Configuration](./image/jenkins-configuration.png)
 
 5. Once repositories are forked. Make the required changes in the `nordmart-dev-tools` repository's Jenkinsfile. Jenkinsfile use the [Stakater Pipeline Library](https://github.com/stakater/stakater-pipeline-library).
 
