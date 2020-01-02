@@ -1,6 +1,6 @@
 # Control Stack
 
-This stack provides tools that control's the components of Stakater Platform.
+This stack provides tools that controls the components of StakaterPlatform.
 
 ![Control](./image/control.png)
 
@@ -20,6 +20,30 @@ This stack provides tools that control's the components of Stakater Platform.
 | [Xposer](https://github.com/stakater/Xposer) | [Stakater](https://github.com/stakater/Xposer/tree/master/deployments/kubernetes/chart/xposer) | Yes | N/A |  None |
 
 
+## Default Configurations
 
+Following are the default configurations that are used by StakaterPlatform for `Control` stack. These configurations can be found under `config/` directory in the StakaterPlatform Github [repository](https://github.com/stakater/StakaterPlatform)
 
+### IngressMonitorController IMC
 
+IMC supports multiple online monitor services. By default UptimeRobot is configured. Provide `IMC_API_KEY` and `IMC_ALERT_CONTACTS` in `variables.config` to monitor every ingress via UptimeRobot.
+
+| Variables | Description | Default |  
+|:---|:---|---|
+| IMC_API_KEY | API key of the monitor service provider |`nil` |
+| IMC_ALERT_CONTACTS | Alert contacts for the monitor service provider |`nil` |
+
+For more details See IMC [Github Repository](https://github.com/stakater/IngressMonitorController)
+
+`configs/imc.yaml:`
+```
+# For more details: https://github.com/stakater/IngressMonitorController
+providers:
+  - name: UptimeRobot
+    apiKey: IMC_API_KEY
+    apiURL: https://api.uptimerobot.com/v2/
+    alertContacts: "IMC_ALERT_CONTACTS"
+enableMonitorDeletion: true
+monitorNameTemplate: "{{.IngressName}}-{{.Namespace}}"
+resyncPeriod: 0 # how often (in seconds) monitors should be synced to their Kubernetes resources (0 = disabled)
+```
