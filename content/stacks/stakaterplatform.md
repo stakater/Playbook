@@ -3,12 +3,13 @@
 ## Overview 
 Kick-start your kubernetes cluster with Stakater Platform. A consolidated solution for logging, tracing, monitoring, delivery, security and much more.
 
-StakaterPlatform consist of 6 stacks:
+Stakater Platform consist of 7 stacks;
 - [Control](https://playbook.stakater.com/content/stacks/control.html)
 - [Delivery](https://playbook.stakater.com/content/stacks/delivery.html)
 - [Logging](https://playbook.stakater.com/content/stacks/logging.html)
 - [Monitoring](https://playbook.stakater.com/content/stacks/monitoring.html)
 - [Security](https://playbook.stakater.com/content/stacks/security.html)
+- [Alerting](https://playbook.stakater.com/content/stacks/alerting.html)
 - [Tracing](https://playbook.stakater.com/content/stacks/tracing.html)
 
 ## Why StakaterPlatform ?
