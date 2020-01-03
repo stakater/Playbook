@@ -122,3 +122,61 @@ It is necessary to create or obtain a client configuration for any application t
 The traditional method in the OAuth2 specification for authentication is to use a client id and secret. The client has a secret, which needs to be known to both the application and the Keycloak server. You can generate the secret for a particular client in the Keycloak administration console or then specify the secret in the keycloak realm json.
 
 **Note:** It's recommended to whitelist keycloak URLs containing the slugs `/auth/admin` and `/auth/realms/master/protocol/openid-connect`. These URLs should only be accessible to the admins. We use nginx to restrict access [nginx-restrict-service-access](https://github.com/stakater/til/blob/master/nginx-ingress/restrict-service-access-by-ip-whitelisting.md)
+
+## KeyCloak with Identity Providers
+
+Follow the following steps to harden the KeyCloak authentication by using Open ID Connect (OIDC) plugin to autheticate users via authetication service.
+
+### Google
+
+1. Open https://console.developers.google.com and select your project.
+2. Open credentials tab from lab navigation bar
+3. Open `OAuth consent screen` tab and select Application type, give application name and add your authorized domain. In our case, it is `stakater.com`
+4. Open `Credentials` tab and create `OAuth 2.0 client IDs`. Give your `Authorized redirect URIs`. In stakater's case it is https://keycloak.tools.stakater.com/auth/realms/stakater/broker/google/endpoint
+Here is how to build this url
+    - https://keycloak.tools.stakater.com is your external url for keycloak.
+    - `stakater` is your realm name.
+5. Enable api for `google+` by searching it from top search bar in google console.
+6. Add `google` authentication provider in KeyCloak using this [link](https://www.keycloak.org/docs/6.0/server_admin/index.html#google)
+7. After performing these steps, update the `clientId` and `clientSecret` with newly created `OAuth 2.0 client IDs` of your google identity provider in keycloak.
+8. If you face `Invalid parameter: redirect_uri` or `URI mismatch` when authenticating with google, please make sure
+    - You have correct `clientId` and `clientSecret` of google idp.
+    - Your keycloak client has `Valid Redirect URIs`. It must contain the internal endpoint keycloak service.
+    - Your `Authorized redirect URIs` in google console has valid uris.
+
+### Azure Active Directory
+
+Follow [this](https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration#deploy-cluster) tutorial if you want to deploy Azure Active directory with Azure Kubernetes Service AKS
+
+1. Create Users in Azure using the Administrator account using [this](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory). The new Users will be shown as source *Azure Active Directory* as below
+
+![Diagram](./image/add-users-ad.png)
+
+2. Go to your Azure AD instance, select *App Registrations* on the left panel and click *Endpoints* on the top panel displayed. Copy values for *OAuth 2.0 authorization  endpoint (v2)* and *OAuth 2.0 token endpoint (v2)* values. these will be used in the Keycloak configurations.
+
+3. Go to your Azure AD instance, select *App Registrations* on the left panel and Select Azure AD Client Application created when Azure Active directory was created. Copy the *Application (client) ID*. Click *Certificates and Secrets* from the left panel and click *New Client Secret* button and create a new secret. Copy the value of the secret.
+
+4. After the users are created open Keycloak administrative console and Select Identity Providers in the left panel.
+
+5. Click on the Add Provider drop down and select OpenID Connect v1.0 
+
+6. Fill in the Options as below:
+  
+    * alias: azure-ad
+    * Display Name: Microsoft Azure AD
+    * First login flow: first broker login
+    * Authorization URL: (*OAuth 2.0 authorization  endpoint (v2)*)
+    * Token URL: (*OAuth 2.0 token endpoint (v2)*)
+    * Client ID: (*Application (client) ID*) from step 3
+    * Client secret: client secret from step 3
+    * Prompt: unspecified
+
+7. Click Save to create the OIDC type Identity Provider.
+
+8. Copy the Redirect URI form the created Identity Provider. In Azure AD instance go to App Registration, Select AD Client application, select Authentication, and paste this URI in Redirect URI field and type Web and click the add button to add.
+
+![Diagram](./image/redirect-URI.png)
+
+9. Open application in browser to test Keycloak is working fine with Azure AD.
+
+
