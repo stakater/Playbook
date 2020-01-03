@@ -1,12 +1,12 @@
 # Configuring Slack Alerts for a Team
 
-Most of the teams use slack for their collaborration. And as slack gives support for multiple apps like Jira, Github/Gitlab, Jenkins and the list goes on. One can also configure Prometheus AlertManager to send alerts on slack based on your cluster's state.
+Most of the teams use slack for their collaboration. And as slack gives support for multiple apps like Jira, Github/Gitlab, Jenkins and the list goes on. One can also configure Prometheus AlertManager to send alerts on slack based on your cluster's state.
 
 One can setup all these apps to send alerts/notifications to different slack channels so that the team can coordinate. We believe in using two slack channels for all of your alerts and notifications other than your team collaboration channels. These channels can have `notifications` appended to them but as Channel names must be fewer than 22 characters, so this might not be possible for most teams.
 
 1. **{project-name}-dev**
 
-    This channel can be used for all the mock or dev apps. The state of your apps or if any of the app goes down, one can configure prometheus to send alerts on this channle. In addition to the apps, one can also add the infra-structure apps like Jenkins, Nginx Controller, etc or your cluster health goes down.
+    This channel can be used for all the mock or dev apps. The state of your apps or if any of the app goes down, one can configure prometheus to send alerts on this channel. In addition to the apps, one can also add the infra-structure apps like Jenkins, Nginx Controller, etc or your cluster health goes down.
 
     The same channel can be used for your Jira, or Gitlab/Github related tasks. E.g. if a ticket is created or is marked done, you can configure Jira to send notifications to this channel.
 
