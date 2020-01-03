@@ -3,12 +3,13 @@
 ## Overview 
 Stakater platform provides out of the box stacks to control, monitor, log, trace and security for applications deployed on kubernetes using CI/CD pipelines.
 
-Stakater Platform consist of 6 stacks
+Stakater Platform consist of 7 stacks;
 - [Control](https://playbook.stakater.com/content/stacks/control.html)
 - [Delivery](https://playbook.stakater.com/content/stacks/delivery.html)
 - [Logging](https://playbook.stakater.com/content/stacks/logging.html)
 - [Monitoring](https://playbook.stakater.com/content/stacks/monitoring.html)
 - [Security](https://playbook.stakater.com/content/stacks/security.html)
+- [Alerting](https://playbook.stakater.com/content/stacks/alerting.html)
 - [Tracing](https://playbook.stakater.com/content/stacks/tracing.html)
 
 ## Platfrom Deployment
@@ -156,5 +157,4 @@ Stakater Platform has been tested on following environment:
 | Platform Version| K8s Version  | Infrastructure |
 |---|---|---|
 | v0.0.1 | 1.14 | eks.6 |
-
 

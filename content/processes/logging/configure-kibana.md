@@ -14,7 +14,7 @@ Management -> Index Patterns -> Create Index Pattern
 Once index pattern is created kibana will take a few seconds to fetch data from ES and after that you'll start seeing logs in kibana.
 
 
-## Useful Resource:
+## Useful Resources
 
 https://logz.io/learn/complete-guide-elk-stack
 

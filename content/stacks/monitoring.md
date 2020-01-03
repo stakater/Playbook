@@ -9,8 +9,9 @@ Monitoring Stack includes all tools related to monitoring your application as we
 |          Tool         |                            Chart Repository                                      | Cherry Pickable | SSO | Pre-Requisites |
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
 | [Prometheus Operator](https://github.com/coreos/prometheus-operator)         | [Public](https://github.com/helm/charts/tree/master/stable/prometheus-operator)                                 |       Yes       | N/A |      None      |
+| [Metrics server](https://github.com/coreos/prometheus-operator)         | [Public](https://github.com/helm/charts/tree/master/stable/metrics-server)                                 |       Yes       | N/A |      None      |
 
-We are using this one helm chart to deploy all the monitoring components:
+We are using Prometheus Operator helm chart to deploy following monitoring components:
 
 - **Prometheus**: It is an opensource monitoring solution for metrics and alerting.
 
@@ -24,6 +25,12 @@ We are using this one helm chart to deploy all the monitoring components:
 
 - **Grafana**: Grafana is an open source metric analytics & visualization suite with support for Elasticsearch, Prometheus etc. Currently, it is being used with Prometheus.
 
+
+Metrics-server is a cluster level component that uses Summary API to scrape metrics from all nodes & pods served by kubelet. 
+It allows us to query resource metrics using kubectl right from the command line.
+
+
+It is a cluster level component which periodically scrapes metrics from all Kubernetes nodes served by Kubelet through Summary API
 
 ## Storage Details
 
