@@ -19,7 +19,7 @@ Nordmart is an online store web application built using Spring Boot, WildFly Swa
 ## Architecture
 
 The diagram given below shows architecture of the application.
-```
+```text
                               +-------------+
                               |             |
                               |     Web     |
@@ -46,6 +46,13 @@ The diagram given below shows architecture of the application.
           | Spring Boot |     |WildFly Swarm|     | Spring Boot |
           |             |     |             |     |             |
           +------+------+     +-------------+     +-------------+
+                 |                                       |
+                 v                                       v
+          +------+------+                         +------+------+
+          |             |                         |             |
+          |    MySQL    |                         |    MySQL    |
+          |             |                         |             |
+          +-------------+                         +-------------+
 ```
 
 ## Views
