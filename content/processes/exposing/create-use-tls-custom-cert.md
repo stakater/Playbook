@@ -1,4 +1,4 @@
-# Creating SSL Certificate
+# Creating & using custom SSL Certificate
 
 For TLS you need to have certificates against your domain. In this day and age it's mandatory to secure your website with HTTPS. 
 There are multiple ways of creating certificates, we use [Let's Encrypt](https://letsencrypt.org/) as our certificate authority. 
