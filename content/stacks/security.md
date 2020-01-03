@@ -847,3 +847,8 @@ Update the following variables to change default configurations:
 |          Tool         |                            PVC                                     | Recommended Space |
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
 | [Keycloak](https://github.com/keycloak/keycloak)         | [data-stakater-security-postgresql-postgresql-0](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak#database-setup)                                 |     1Gi |
+
+
+## Configuring KeyCloak with identity Providers
+
+To configure keyCloak with Identity Providers like `Google oidc` and `Azure Active Directory` See section [KeyCloak with Identity Providers](https://playbook.stakater.com/content/processes/security/keycloak.html#keycloak-with-identity-providers)
