@@ -37,7 +37,7 @@ This was the previous architecture of the application.
 
 ### View
 
- ![Diagram](./image/home.png)
+ ![Diagram](content/workshop/image/home.png)
 
 
  ## Updated Architecture & UI
@@ -79,7 +79,7 @@ This is now the updated architecture for the application with review service add
 
 ### Updated View
 
- ![Diagram](./image/updated-view.png)
+ ![Diagram](content/workshop/image/updated-view.png)
 
 ## Working
 

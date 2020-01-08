@@ -14,9 +14,22 @@ module.exports = {
     themeConfig: {
         sidebar: [
             {
+                title: 'Getting Started - Creating Cluster',
+                children: [
+                    '/content/createcluster/cluster-aws',
+                    '/content/createcluster/cluster-azure',
+                    '/content/createcluster/cluster-openshift-azure'
+                ]
+            },
+            {
                 title: 'Stakater Platform',
                 children: [
-                    '/content/stacks/stakaterplatform',
+                    '/content/stakaterplatform/stakaterplatform'
+                ]
+            },
+            {
+                title: 'Stacks',
+                children: [
                     '/content/stacks/control',
                     '/content/stacks/delivery',
                     '/content/stacks/logging',
@@ -29,11 +42,11 @@ module.exports = {
             {
                 title: 'Nordmart',
                 children: [
-                    '/content/workshop/routes',
-                    '/content/workshop/nordmart-intro',
-                    '/content/workshop/nordmart-ci-cd',
-                    '/content/workshop/nordmart-scenario',
-                    '/content/workshop/add-new-service.md'
+                    '/content/nordmart/nordmart-intro',
+                    '/content/nordmart/routes',
+                    '/content/nordmart/nordmart-ci-cd',
+                    '/content/nordmart/nordmart-scenario',
+                    '/content/nordmart/add-new-service.md'
                 ]
             },
             {
@@ -110,8 +123,6 @@ module.exports = {
             {
                 title: 'Processes: Bootstrapping',
                 children: [
-                    '/content/processes/bootstrapping/cluster-aws',  
-                    '/content/processes/bootstrapping/cluster-azure',
                     '/content/processes/bootstrapping/maven-apps',
                     '/content/processes/bootstrapping/gitlab-project-via-terraform',
                     '/content/processes/bootstrapping/deploying-stakater-stacks',
