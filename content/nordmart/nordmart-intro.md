@@ -61,11 +61,11 @@ The app contains two main screens.
 
 * First one is the home screen which lists all the products. It fetches all the products from catalog and their available stock value from inventory and displays them. You can add an item to the cart using the respective `Add To Cart` button.
 
-  ![Diagram](./image/home.png)
+  ![Diagram](content/workshop/image/home.png)
 
 * Second is the cart screen which shows the items currently in your cost and their cost.
 
-  ![Diagram](./image/cart.png)
+  ![Diagram](content/workshop/image/cart.png)
 
 ## Monitoring
 
@@ -73,8 +73,8 @@ Dasbhoards given below can be used to monitor application by configuring them in
 
 * JVM metrics dashboard is offered via the monitoring stack which displays JVM metrices.
 
-  ![Diagram](./image/jvm.png)
+  ![Diagram](content/workshop/image/jvm.png)
 
 * Catalog service metrics dashboard can be configured using this [config](https://github.com/stakater-lab/nordmart-dev-apps/blob/master/releases/catalog-service-dashboard.yaml).
 
-  ![Diagram](./image/catalog-service.png)
+  ![Diagram](content/workshop/image/catalog-service.png)
