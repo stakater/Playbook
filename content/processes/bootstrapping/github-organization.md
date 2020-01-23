@@ -208,6 +208,9 @@ resource "github_team" "developers" {
 
 ### Add a User
 
+One thing to note is module name should contain `underscore (_) and not hyphen (-)`
+
+
 Add a file `user-<username>.tf`, copy following manifest in it.
 
 ```tf
@@ -235,8 +238,8 @@ module "<repo_name>" {
   enable_branch_protection = true
   protected_branch_name = "master"
   enforce_admins = false
-  status_checks = []
-  require_status_checks = false
+  status_checks = ["build"]  # name of the pipeline triggered check below
+  require_status_checks = true
   has_wiki = false
   has_projects = false
   dismiss_stale_reviews = true
@@ -284,6 +287,32 @@ module "<repo_name>" {
     }
   ]
 ```
+
+Now the repository will be created, you can setup CI/CD in it. If you want to setup CI/CD through Github Actions, you can do the following:
+
+1. Clone the repo
+2. Create folders .github/workflow
+3. Create a ci.yml, copy following content
+
+```yml
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    steps:
+    - uses: actions/checkout@v1
+    - name: List
+      run: ls
+    - name: Build
+      run: echo helloworld
+```
+
+The above will run on PRs for any branch and its name is `build`, used in the `status_checks` parameter above.
 
 ### Creating PR & Pushing changes
 
