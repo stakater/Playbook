@@ -123,6 +123,7 @@ module.exports = {
             {
                 title: 'Processes: Bootstrapping',
                 children: [
+                    '/content/processes/bootstrapping/github-organization',
                     '/content/processes/bootstrapping/maven-apps',
                     '/content/processes/bootstrapping/gitlab-project-via-terraform',
                     '/content/processes/bootstrapping/deploying-stakater-stacks',
