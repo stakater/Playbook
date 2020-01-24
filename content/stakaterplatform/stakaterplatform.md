@@ -1,7 +1,8 @@
 # StakaterPlatform
 
 ## Overview 
-Kick-start your kubernetes cluster with Stakater Platform. A consolidated solution for logging, tracing, monitoring, delivery, security and much more.
+
+Stakater has developed a consolidated solution named StakaterPlatform that gives head-start to individuals and companies with a set of seven stacks containing opensource tools based on industry's recommendation and best practices for monitoring, logging, security, tracing, delivery, tracing and alerting of Kubernetes cluster. End-users only need to focus on developing their application while everything else will be managed by StakaterPlatform.
 
 Stakater Platform consist of 7 stacks;
 - [Control](https://playbook.stakater.com/content/stacks/control.html)
@@ -11,12 +12,6 @@ Stakater Platform consist of 7 stacks;
 - [Security](https://playbook.stakater.com/content/stacks/security.html)
 - [Alerting](https://playbook.stakater.com/content/stacks/alerting.html)
 - [Tracing](https://playbook.stakater.com/content/stacks/tracing.html)
-
-## Why StakaterPlatform ?
-
-StakaterPlatform gives you a head start for managing your kubernetes cluster by providing open source tools across seven 
-stacks so that you are only concerned about developing your applications, StakaterPlatform will take care of the rest.
-
 
 ## Workflow
 
