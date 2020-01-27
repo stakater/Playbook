@@ -2,7 +2,9 @@
 
 ## Overview 
 
-Stakater has developed a consolidated solution named [StakaterPlatform](https://github.com/stakater/StakaterPlatform) that gives head-start to individuals and companies with a set of seven stacks containing opensource tools based on industry's recommendation and best practices for monitoring, logging, security, tracing, delivery, tracing and alerting of Kubernetes cluster. End-users only need to focus on developing their application while everything else will be managed by StakaterPlatform. StakaterPlatform consist of 7 [stacks](../stacks/introduction).
+Stakater has developed a consolidated solution named [StakaterPlatform](https://github.com/stakater/StakaterPlatform) that gives head-start to individuals and companies with a set of seven stacks containing opensource tools based on industry's recommendation and best practices for monitoring, logging, security, tracing, control, delivery and alerting of Kubernetes cluster. 
+
+End-users only need to focus on developing their application while everything else will be managed by StakaterPlatform. StakaterPlatform consist of 7 [stacks](../stacks/introduction).
 
 ## Workflow
 
@@ -22,9 +24,9 @@ StakaterPlatform works on GitOps principle using an opensource tool [Flux](https
 2. Update [configuration variables](#Basic-Configuration) in `variables.config` file and provide the relevant values.
 3. [Recommended but optional] To take full advantage of the tool stack configure [Additional Variables](docs/detailed-config.md) as well.
 4. Ensure that correct context is set for kubectl & helm.
-5. run `make configure`, this will make all required substitutions based on configuration variables in the repository. When prompted commit those changes.
+5. Run `make configure`, this will make all required substitutions based on configuration variables in the repository. When prompted commit those changes.
 6. [Add the public SSH key](https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account) of flux(configs/flux.pub) to your Git repository with **write access**.
-7. Once changes are committed, run `make deploy` this will deploy flux, which will in turn deploy StakaterPlatform via GitOps. Estimated time for everything to be up and running is 5-10 
+7. Once changes are committed, run `make deploy` this will deploy flux, which will in turn deploy StakaterPlatform via GitOps strategy. Estimated time for everything to be up and running is 5-10.
 9. Use the printed dashboard token to access the Kubernetes dashboard at `dashboard-control.YOURDOMAINNAME`
 10. Visit `https://forecastle-control.YOURDOMAINNAME` and you'll be able to view all applications deployed by StakaterPlatform.
 
@@ -49,7 +51,7 @@ StakaterPlatform works on GitOps principle using an opensource tool [Flux](https
 | AWS_SECRET_ACCESS_KEY | (Define only if `CLOUD_PROVIDER` is `aws`) AWS Secret Access Key. |
 
 6. [Add the public SSH key](https://docs.gitlab.com/ee/ssh/#per-repository-deploy-keys)(Deploy Keys) to your GitLab account with **write access** printed at the end of pipeline logs.
-7. Once key is added StakaterPlatform will deploy on your cluster (Estimated time: 10-15 minutes). :confetti_ball: :confetti_ball:
+7. Once key is added, StakaterPlatform will deploy on your cluster (Estimated time: 10-15 minutes). :confetti_ball: :confetti_ball:
 8. Use the printed dashboard token to access the Kubernetes dashboard at `dashboard-control.DOMAIN`
 
 ## Verification
@@ -82,18 +84,18 @@ For generating certificates view: [Creating & using custom SSL certificates](htt
 
 To take full advantage of our tool stack, it is recommended to have the following things set-up:
 1. 3 Slack channels with [webhook's](https://slack.com/intl/en-pk/help/articles/115005265063-Incoming-WebHooks-for-Slack) added. These are required for:
-    * Dev-notifications: Notifications regarding up/down time and regarding new builds from jenkins
-    * infra-alerts: Alerts from infrastructure
-    * apps-alerts: Alerts for apps
-2. An account at (Uptime Robot)[https://uptimerobot.com/] for (IMC)[https://github.com/stakater/IngressMonitorController] 
-to work and provide you with up/down time alerts. For other supported down time monitors visit https://github.com/stakater/IngressMonitorController#supported-uptime-checkers
+    * `Dev-notifications`: Notifications regarding up/down time and regarding new builds from jenkins
+    * `infra-alerts`: Alerts from infrastructure
+    * `apps-alerts`: Alerts for apps
+2. An account at (Uptime Robot)[https://uptimerobot.com/] for [IMC](https://github.com/stakater/IngressMonitorController)
+to work and provide you with up/down time alerts. For other supported down time monitors visit [Ingress Monitor Controller](https://github.com/stakater/IngressMonitorController#supported-uptime-checkers).
 
 
 ### Global Variables
 | Variables | Description | Default |  
 |---|---|---|
 | CLOUD_PROVIDER | Name of the k8s cloud provider | `nil` <br> (`aws` \| `azure`) |
-| DNS_PROVIDER | Cloud DNS Provider | `aws` (Route53) |
+| DNS_PROVIDER | Cloud DNS Provider | `aws` (Route53). Currently only `Route53` is supported. |
 | EXTERNAL_DNS_AWS_ACCESS_KEY_ID | AWS Access Key Id | `nil` |
 | EXTERNAL_DNS_AWS_SECRET_ACCESS_KEY | AWS Secret Access Key | `nil` |
 | DOMAIN | Domain to expose StakaterPlatform | `nil` |
@@ -107,7 +109,7 @@ to work and provide you with up/down time alerts. For other supported down time 
 | Variables | Description | Default |  
 |---|---|---|
 | KEYCLOAK_CLIENT_ID | Client ID for KeyCloak Gatekeeper  | `stakater-online-platform` |
-| KEYCLOAK_CLIENT_SECRET | Client Secret for KeyCloak Gatekeeper | `1ce66f91-2068-4f3d-9578-f03fa8259230` |
+| KEYCLOAK_CLIENT_SECRET | Client Secret for KeyCloak Gatekeeper | `1de22f11-2068-df5h-9418-dawzxqwe2` |
 | KEYCLOAK_DEFAULT_USERNAME | Username for the default user created |`stakater-user` |
 | KEYCLOAK_DEFAULT_PASSWORD | Password for the default user created |`zUPaZnEfmYpcdd6X` |
 | KEYCLOAK_DB_USER | KeyCloak DB (Postgresql) username |`admin` |
@@ -188,22 +190,21 @@ StakaterPlatform has been tested on following kubernetes flavors:
 
 ## Community
 
-If you have questions, check the [Documentation](https://playbook.stakater.com/content/stacks/stakaterplatform.html) and
- talk to us on slack [#community on Stakater Slack](https://stakater.slack.com/messages/community).
+If you have questions, talk to us on slack [#community on Stakater Slack](https://stakater.slack.com/messages/community).
  
 Click [here](https://slack-inviter.stakater.com) to join [Stakater](https://stakater.com) on Slack.
 
 
 ## Useful Resources
 
-[Stakater Platform](https://playbook.stakater.com/content/stacks/stakaterplatform.html)
+[Stakater Platform](/content/stakaterplatform/stakaterplatform)
 
-[Create Slack Webhook](https://playbook.stakater.com/content/processes/monitoring/creating-hooks-slack.html)
+[Create Slack Webhook](/content/stacks/monitoring/creating-hooks-slack.html)
 
-[Configuring Kibana](https://playbook.stakater.com/content/processes/logging/configure-kibana.html)
+[Configuring Kibana](/content/stacks/logging/configure-kibana.html)
 
-[Keycloak](https://playbook.stakater.com/content/processes/security/keycloak.html)
+[Keycloak](/content/stacks/security/keycloak.html)
 
-[Creating & using custom SSL certificates](https://playbook.stakater.com/content/processes/exposing/create-use-tls-custom-cert.html)
+[Creating & using custom SSL certificates](/content/processes/exposing/create-use-tls-custom-cert.html)
 
 [Excerpts of useful knowledge based on our teams learning](https://github.com/stakater/til)

@@ -2,16 +2,16 @@
 
 ## Overview
 
-This guide provides guideline regarding kubernetes cluster creation on AWS with [Kops](https://github.com/kubernetes/kops) using CI/CD pipeline. Kops is a utility that helps you `create`, `destroy`, `upgrade` and `maintain` production-grade, highly available, Kubernetes clusters.
+This guide provides guideline regarding kubernetes cluster management on AWS with [Kops](https://github.com/kubernetes/kops) using CI/CD pipeline. `Kops` is a utility that helps to `create`, `destroy`, `upgrade` and `maintain` production-grade and highly available Kubernetes cluster.
 
 ## Configuration
 
-* Kops will be use for cluster deployment.
-* Cluster can be deployed by using CLI, Gitlab CI/CD or Jenkins pipeline.
+* Kops will be used for cluster deployment.
+* Cluster can be created by using CLI utility, Gitlab or Jenkins pipeline.
 
 ## Deployment
 
-Kubernetes cluster deployment on AWS by using the following steps:
+Kubernetes cluster creation on AWS by following the following steps:
 
 ### 1. Pre-requisites
 
