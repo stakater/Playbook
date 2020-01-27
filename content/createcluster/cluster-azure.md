@@ -132,6 +132,7 @@ terraform apply
 kubectl proxy
 ```
 2. go to the following URL via web browser and verify if kubernetes cluster is running correctly.
-```
+
+```bash
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!
 ```

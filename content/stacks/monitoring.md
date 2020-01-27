@@ -1,8 +1,10 @@
 # Monitoring Stack
 
-Monitoring Stack includes all tools related to monitoring your application as well as the infrastructure.
-
 ![Monitoring](./image/monitoring.png)
+
+## Overview
+
+Monitoring Stack includes all tools related to monitoring your application as well as the infrastructure.
 
 ## Tools Matrix
 

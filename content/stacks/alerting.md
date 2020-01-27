@@ -1,8 +1,10 @@
 # Alerting Stack
 
-This stack provides tools that are responsible for alert functions of Stakater Platform.
-
 ![Alerting](./image/alerting.png)
+
+## Overview
+
+This stack provides tools that are responsible for alert functions of StakaterPlatform.
 
 ## Tools Matrix
 

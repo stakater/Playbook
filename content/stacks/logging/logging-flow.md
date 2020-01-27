@@ -9,6 +9,32 @@ The fluentd event contains information such as where an event comes from, the ti
 
 These log events are matched to an Output plugin type in the Fluentd configuration. We use the out_elasticsearch Output plugin to forward these records to Elasticsearch.
 
+## Konfigurator
+
+It is a kubernetes operator that can dynamically generate app configuration when kubernetes resources change. It uses `KonfiguratorTemplate` resource type to inject configurations on a specified path inside fluentd daemonset's container. 
+
+
+```yaml
+apiVersion: konfigurator.stakater.com/v1alpha1
+kind: KonfiguratorTemplate
+metadata:
+  name: fluentd
+  namespace: logging
+  labels:
+    app: konfigurator
+spec:
+  renderTarget: ConfigMap
+  app:
+    name: stakater-logging-fluentd
+    kind: DaemonSet
+    volumeMounts:
+      - mountPath: /etc/fluent
+        container: stakater-logging-fluentd
+  templates:
+    fluent.conf: |
+      <add fluentd configurations here>
+```
+
 ## Eventrouter
 
 A kubernetes service that forwards events to a sink. Events are an essential part of a cluster and provide great insight

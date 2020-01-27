@@ -2,21 +2,11 @@
 
 ## Overview 
 
-Stakater has developed a consolidated solution named StakaterPlatform that gives head-start to individuals and companies with a set of seven stacks containing opensource tools based on industry's recommendation and best practices for monitoring, logging, security, tracing, delivery, tracing and alerting of Kubernetes cluster. End-users only need to focus on developing their application while everything else will be managed by StakaterPlatform.
-
-Stakater Platform consist of 7 stacks;
-- [Control](https://playbook.stakater.com/content/stacks/control.html)
-- [Delivery](https://playbook.stakater.com/content/stacks/delivery.html)
-- [Logging](https://playbook.stakater.com/content/stacks/logging.html)
-- [Monitoring](https://playbook.stakater.com/content/stacks/monitoring.html)
-- [Security](https://playbook.stakater.com/content/stacks/security.html)
-- [Alerting](https://playbook.stakater.com/content/stacks/alerting.html)
-- [Tracing](https://playbook.stakater.com/content/stacks/tracing.html)
+Stakater has developed a consolidated solution named [StakaterPlatform](https://github.com/stakater/StakaterPlatform) that gives head-start to individuals and companies with a set of seven stacks containing opensource tools based on industry's recommendation and best practices for monitoring, logging, security, tracing, delivery, tracing and alerting of Kubernetes cluster. End-users only need to focus on developing their application while everything else will be managed by StakaterPlatform. StakaterPlatform consist of 7 [stacks](../stacks/introduction).
 
 ## Workflow
 
 StakaterPlatform works on GitOps principle using an opensource tool [Flux](https://github.com/fluxcd/flux) which makes sure that cluster is always in the desired state by tracking a git repository. To make changes in your cluster, commit your changes in the git repository and the changes will be reflected in the kubernetes cluster.
-
 
 ## Prerequisites
 

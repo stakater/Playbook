@@ -1,15 +1,14 @@
 # Tracing Stack
 
+## Overview
+
 Tracing Stack includes applications that create mesh of services and provide traces  for the communication between mesh components.
 
 ## Tools Matrix
 
-
-
-
 |          Tool         |                            Chart Repository                                      | Cherry Pickable | SSO | Pre-Requisites |
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
-| [Istio](https://istio.io/docs/reference/config/installation-options/)         | [Public](https://gcsweb.istio.io/gcs/istio-prerelease/prerelease/1.1.0/1.1.0/charts/)                                 |       Yes       | N/A |      None      |
+| [Istio](https://github.com/istio/operator)                                 |       Yes       | N/A |      None      |
 
 We are using this one helm chart to deploy all the tracing components:
 

@@ -14,7 +14,7 @@ module.exports = {
     themeConfig: {
         sidebar: [
             {
-                title: 'Getting Started - Creating Cluster',
+                title: 'Creating Cluster',
                 children: [
                     '/content/createcluster/cluster-aws',
                     '/content/createcluster/cluster-azure',
@@ -30,6 +30,7 @@ module.exports = {
             {
                 title: 'Stacks',
                 children: [
+                    '/content/stacks/introduction',
                     '/content/stacks/control',
                     '/content/stacks/delivery',
                     '/content/stacks/logging',
@@ -40,13 +41,103 @@ module.exports = {
                 ]
             },
             {
-                title: 'Nordmart',
+                title: 'Stack: Control',
+                children: [
+                    '/content/stacks/control/introduction',
+                    '/content/stacks/control/external-dns',
+                    '/content/stacks/control/nginx-ingress',
+                    '/content/stacks/control/descheduler',
+                    '/content/stacks/control/forecastle',
+                    '/content/stacks/control/reloader',
+                    '/content/stacks/control/kubernetesdashboard',
+                    '/content/stacks/control/gitwebhookproxy',
+                    '/content/stacks/control/ingressmonitorcontroller',
+                    '/content/stacks/control/xposer'
+                ]
+            },
+            {
+                title: 'Stack: Delivery',
+                children: [
+                    '/content/stacks/delivery/introduction',
+                    '/content/stacks/delivery/jenkins',
+                    '/content/stacks/delivery/sonatype-nexus'
+                ]
+            },
+            {
+                title: 'Stack: Logging',
+                children: [
+                    '/content/stacks/logging/introduction',
+                    '/content/stacks/logging/log-generation',
+                    '/content/stacks/logging/logging-flow',
+                    '/content/stacks/logging/configure-kibana',
+                ]
+            },
+            {
+                title: 'Stack: Monitoring',
+                children: [
+                    '/content/stacks/monitoring/introduction',
+                    '/content/stacks/monitoring/prometheus-operator-in-openshift',
+                    '/content/stacks/monitoring/prometheus-in-openshift',
+                    '/content/stacks/monitoring/alert-manager-in-openshift',
+                    '/content/stacks/monitoring/grafana-in-openshift',
+                    '/content/stacks/monitoring/monitoring-buisness-apps',
+                    '/content/stacks/monitoring/creating-hooks-slack'
+                ]
+            },
+            {
+                title: 'Stack: Security',
+                children: [
+                    '/content/stacks/security/introduction',
+                    '/content/stacks/security/keycloak',
+                    '/content/stacks/security/sealed-secrets',
+                    '/content/stacks/security/proxy-injector',
+                    '/content/stacks/security/micro-segmentation',
+                    '/content/stacks/security/ip-whitelisting',
+                    '/content/stacks/security/secrets-management',
+                    '/content/stacks/security/rbac',
+                    '/content/stacks/security/keycloak-gatekeeper'
+                ]
+            },
+            {
+                title: 'Stack: Alerting',
+                children: [
+                    '/content/stacks/alerting/introduction',
+                    // '/content/stacks/alerting/chowkidar',
+                    '/content/stacks/alerting/prometheus',
+                    '/content/stacks/alerting/uptime-checkers',
+                    '/content/stacks/alerting/slack-notifications-for-teams'
+                ]
+            },
+            {
+                title: 'Stack: Tracing',
+                children: [
+                    '/content/stacks/tracing/introduction',
+                ]
+            },
+            {
+                title: 'Application: Nordmart',
                 children: [
                     '/content/nordmart/nordmart-intro',
                     '/content/nordmart/routes',
                     '/content/nordmart/nordmart-ci-cd',
                     '/content/nordmart/nordmart-scenario',
                     '/content/nordmart/add-new-service.md'
+                ]
+            },
+            {
+                title: 'Processes: Bootstrapping',
+                children: [
+                    '/content/processes/bootstrapping/github-organization',
+                    '/content/processes/bootstrapping/maven-apps',
+                    '/content/processes/bootstrapping/gitlab-project-via-terraform',
+                    '/content/processes/bootstrapping/deploying-stakater-stacks',
+                    '/content/processes/bootstrapping/stack-global',
+                    '/content/processes/bootstrapping/stack-release',
+                    '/content/processes/bootstrapping/stack-logging',
+                    '/content/processes/bootstrapping/stack-monitoring',
+                    '/content/processes/bootstrapping/stack-tracing',
+                    '/content/processes/bootstrapping/gitlab-pipeline-configuration',
+                    'content/processes/bootstrapping/github-integration-with-gitlab-pipeline'
                 ]
             },
             {
@@ -76,64 +167,14 @@ module.exports = {
                 ]
             },
             {
-                title: 'Processes: Logging',
-                children: [
-                    '/content/processes/logging/introduction',
-                    '/content/processes/logging/log-generation',
-                    '/content/processes/logging/logging-flow',
-                    '/content/processes/logging/configure-kibana',
-                    '/content/processes/logging/birds-eye-view',
-                ]
-            },
-            {
-                title: 'Processes: Alerting',
-                children: [
-                    '/content/processes/alerting/introduction',
-                    '/content/processes/alerting/chowkidar',
-                    '/content/processes/alerting/prometheus',
-                    '/content/processes/alerting/uptime-checkers',
-                    '/content/processes/alerting/slack-notifications-for-teams'
-                ]
-            },
-            {
-                title: 'Processes: Security',
-                children: [
-                    '/content/processes/security/introduction',
-                    '/content/processes/security/micro-segmentation',
-                    '/content/processes/security/ip-whitelisting',
-                    '/content/processes/security/secrets-management',
-                    '/content/processes/security/sealed-secrets',
-                    '/content/processes/security/rbac',
-                    '/content/processes/security/keycloak',
-                    '/content/processes/security/keycloak-gatekeeper',
-                    '/content/processes/security/proxy-injector'
-                ]
-            },
-            {
                 title: 'Processes: GitOps',
                 children: [
                     '/content/processes/gitops/introduction',
                     '/content/processes/gitops/principles',
-                    '/content/processes/gitops/gitops-with-jenkins',
-                    '/content/processes/gitops/gitops-with-flux',
                     '/content/processes/gitops/birds-eye-view-jenkins',
-                    '/content/processes/gitops/birds-eye-view-flux'
-                ]
-            },
-            {
-                title: 'Processes: Bootstrapping',
-                children: [
-                    '/content/processes/bootstrapping/github-organization',
-                    '/content/processes/bootstrapping/maven-apps',
-                    '/content/processes/bootstrapping/gitlab-project-via-terraform',
-                    '/content/processes/bootstrapping/deploying-stakater-stacks',
-                    '/content/processes/bootstrapping/stack-global',
-                    '/content/processes/bootstrapping/stack-release',
-                    '/content/processes/bootstrapping/stack-logging',
-                    '/content/processes/bootstrapping/stack-monitoring',
-                    '/content/processes/bootstrapping/stack-tracing',
-                    '/content/processes/bootstrapping/gitlab-pipeline-configuration',
-                    'content/processes/bootstrapping/github-integration-with-gitlab-pipeline'
+                    '/content/processes/gitops/gitops-with-jenkins',
+                    '/content/processes/gitops/birds-eye-view-flux',
+                    '/content/processes/gitops/gitops-with-flux'
                 ]
             },
             {
@@ -144,17 +185,6 @@ module.exports = {
                     '/content/processes/deployment/Helm-operator',
                     '/content/processes/deployment/resources-cleanup',
                     '/content/processes/deployment/aks-azure'
-                ]
-            },
-            {
-                title: 'Processes: Monitoring',
-                children: [
-                    '/content/processes/monitoring/prometheus-operator-in-openshift',
-                    '/content/processes/monitoring/prometheus-in-openshift',
-                    '/content/processes/monitoring/alert-manager-in-openshift',
-                    '/content/processes/monitoring/grafana-in-openshift',
-                    '/content/processes/monitoring/monitoring-buisness-apps',
-                    '/content/processes/monitoring/creating-hooks-slack'
                 ]
             },
             {

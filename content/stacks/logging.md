@@ -1,8 +1,10 @@
 # Logging Stack
 
-Logging Stack contains all tools required to collect and store logs of your pods.
-
 ![Logging](./image/logging.png)
+
+## Overview
+
+Logging Stack contains all tools required to collect and store logs of your pods.
 
 ## Tools Matrix
 

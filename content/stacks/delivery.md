@@ -1,8 +1,10 @@
 # Delivery Stack
 
-Delivery Stack is responsible for CI/CD and respective saving artifacts of the pipelines.
-
 ![Delivery](./image/delivery.png)
+
+## Overview
+
+Delivery Stack is responsible for CI/CD and respective saving artifacts of the pipelines.
 
 ## Tools Matrix
 
