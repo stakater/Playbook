@@ -4,7 +4,7 @@
 
 ## Overview
 
-Security Stack includes applications related to providing authentication on your applications.
+Security Stack includes tools that provides authentication for applications.
 
 ## Tools Matrix
 
@@ -21,7 +21,7 @@ Following are the default configurations that are used by StakaterPlatform for `
 
 ### ProxyInjector
 
-ProxyInjector serves as a client proxy for KeyCloak SSO server. ProxyInjector Injects side proxy on the basis of annotations on pods.
+ProxyInjector serves as a client proxy for KeyCloak SSO server. ProxyInjector injects sidecar proxy on the basis of annotations on pods.
 
 For more information See ProxyInjector Github [repository](https://github.com/stakater/ProxyInjector)
 
@@ -30,12 +30,13 @@ Configure the following variables in `variables.config` to configure proxy sidec
 | Variables | Description | Default |  
 |---|---|---|
 | KEYCLOAK_CLIENT_ID | Client ID for KeyCloak Gatekeeper  | `stakater-online-platform` |
-| KEYCLOAK_CLIENT_SECRET | Client Secret for KeyCloak Gatekeeper | `1ce66f91-2068-4f3d-9578-f03fa8259230` |
+| KEYCLOAK_CLIENT_SECRET | Client Secret for KeyCloak Gatekeeper | `1d123a23-2068-3f5r-9120-f03fa1d1r5tyhf` |
 
-`Note: KEYCLOAK_CLIENT_ID and KEYCLOAK_CLIENT_SECRET variables will be used by both ProxyInjector and KeyCloak.`
+**Note:**
+KEYCLOAK_CLIENT_ID and KEYCLOAK_CLIENT_SECRET variables will be used by both ProxyInjector and KeyCloak.`
 
 
-`configs/proxyinjector.yaml:`
+**`configs/proxyinjector.yaml:`**
 ```
 gatekeeper-image : "keycloak/keycloak-gatekeeper:5.0.0"
 client-id: KEYCLOAK_CLIENT_ID
@@ -854,4 +855,4 @@ Update the following variables to change default configurations:
 
 ## Configuring KeyCloak with identity Providers
 
-To configure keyCloak with Identity Providers like `Google oidc` and `Azure Active Directory` See section [KeyCloak with Identity Providers](https://playbook.stakater.com/content/processes/security/keycloak.html#keycloak-with-identity-providers)
+To configure keyCloak with Identity Providers like `Google oidc` and `Azure Active Directory` See section [KeyCloak with Identity Providers](/content/stacks/security/keycloak.html#keycloak-with-identity-providers)

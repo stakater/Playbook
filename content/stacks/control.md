@@ -27,7 +27,7 @@ Following are the default configurations that are used by StakaterPlatform for `
 
 ### IngressMonitorController IMC
 
-IMC supports multiple online monitor services. By default UptimeRobot is configured. Provide `IMC_API_KEY` and `IMC_ALERT_CONTACTS` in `variables.config` to monitor every ingress via UptimeRobot.
+IMC supports multiple online monitoring services. By default `UptimeRobot` is configured. Provide `IMC_API_KEY` and `IMC_ALERT_CONTACTS` in `variables.config` to monitor every ingress via UptimeRobot.
 
 | Variables | Description | Default |  
 |:---|:---|---|

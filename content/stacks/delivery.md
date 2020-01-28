@@ -4,7 +4,7 @@
 
 ## Overview
 
-Delivery Stack is responsible for CI/CD and respective saving artifacts of the pipelines.
+Delivery Stack is responsible for CI/CD and artifacts management of pipelines.
 
 ## Tools Matrix
 
@@ -22,7 +22,7 @@ Following are the default configurations that are used by StakaterPlatform for `
 
 Jenkins provide automation pipelines for CI/CD workflow. 
 
-#### Maven Configs
+### Maven Configs
 
 Following variables should be configured in `variables.config` for Caching maven artifacts and speeding up maven builds.
 
@@ -114,7 +114,7 @@ Following variables should be configured in `variables.config` for Caching maven
 </settings>
 ```
 
-#### Jenkins docker cfg
+### Jenkins docker cfg
 
 Jenkins use docker to build images for CI/CD pipleline. To push and pull images from image registry ( Nexus in `StakaterPlatform`) docker configuration file needs to be provided. This configuration file corresponds to `$HOME/.docker/config.json`. Configure following varaibles in `variables.config` to allow pull/push from nexus repository in Jenkins
 

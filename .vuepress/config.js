@@ -130,12 +130,14 @@ module.exports = {
                     '/content/processes/bootstrapping/github-organization',
                     '/content/processes/bootstrapping/maven-apps',
                     '/content/processes/bootstrapping/gitlab-project-via-terraform',
-                    '/content/processes/bootstrapping/deploying-stakater-stacks',
-                    '/content/processes/bootstrapping/stack-global',
-                    '/content/processes/bootstrapping/stack-release',
-                    '/content/processes/bootstrapping/stack-logging',
-                    '/content/processes/bootstrapping/stack-monitoring',
-                    '/content/processes/bootstrapping/stack-tracing',
+                    // Documents given below have been disabled because now individual stack
+                    // has become part of StakaterPlatform.
+                    // '/content/processes/bootstrapping/deploying-stakater-stacks',
+                    // '/content/processes/bootstrapping/stack-global',
+                    // '/content/processes/bootstrapping/stack-release',
+                    // '/content/processes/bootstrapping/stack-logging',
+                    // '/content/processes/bootstrapping/stack-monitoring',
+                    // '/content/processes/bootstrapping/stack-tracing',
                     '/content/processes/bootstrapping/gitlab-pipeline-configuration',
                     'content/processes/bootstrapping/github-integration-with-gitlab-pipeline'
                 ]

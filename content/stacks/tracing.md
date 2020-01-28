@@ -9,3 +9,5 @@ Tracing Stack includes applications that create mesh of services and provide tra
 |          Tool         |                            Chart Repository                                      | Cherry Pickable | SSO | Pre-Requisites |
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
 | [Istio](https://github.com/istio/operator)                                 |       Yes       | N/A |      None      |
+
+Detail regarding tracing is provided in this [section](/content/stacks/tracing/introduction.html).

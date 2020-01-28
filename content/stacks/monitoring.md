@@ -4,7 +4,7 @@
 
 ## Overview
 
-Monitoring Stack includes all tools related to monitoring your application as well as the infrastructure.
+Monitoring Stack includes tools required for the monitoring of applications and infrastructure.
 
 ## Tools Matrix
 
@@ -126,10 +126,8 @@ route:
 ```
 
 Metrics-server is a cluster level component that uses Summary API to scrape metrics from all nodes & pods served by kubelet. 
-It allows us to query resource metrics using kubectl right from the command line.
+It allows us to query resource metrics using kubectl utility.
 
-
-It is a cluster level component which periodically scrapes metrics from all Kubernetes nodes served by Kubelet through Summary API
 
 ## Storage Details
 

@@ -1,53 +1,57 @@
-# Infrastructure Routes
+# Routes 
+
+This document have the routes for the StakaterPlatform and Nordmart Application. Once components are deployed the `DOMAIN` placeholder will be replaced by user specified domain.
+
+## Infrastructure Routes
 
 ### Control
 
-`Forecastle`: [https://forecastle-control.cp-stakater.com](https://forecastle-control.cp-stakater.com)
+`Forecastle`: [https://forecastle-control.DOMAIN](https://forecastle-control.DOMAIN)
 
-`Kubernetes Dashboard`: [https://dashboard-control.cp-stakater.com](https://dashboard-control.cp-stakater.com)
+`Kubernetes Dashboard`: [https://dashboard-control.DOMAIN](https://dashboard-control.DOMAIN)
 
 
 ### Delivery
-`Nexus`: [https://nexus-delivery.cp-stakater.com](https://nexus-delivery.cp-stakater.com)
+`Nexus`: [https://nexus-delivery.DOMAIN](https://nexus-delivery.DOMAIN)
 
-`Jenkins`: [https://jenkins-delivery.cp-stakater.com](https://jenkins-delivery.cp-stakater.com)
+`Jenkins`: [https://jenkins-delivery.DOMAIN](https://jenkins-delivery.DOMAIN)
 
-`Docker`: [https://docker-delivery.cp-stakater.com](https://docker-delivery.cp-stakater.com)
+`Docker`: [https://docker-delivery.DOMAIN](https://docker-delivery.DOMAIN)
 
 ### Security
 
-`KeyCloak`: [https://keycloak-security.cp-stakater.com](https://keycloak-security.cp-stakater.com) 
+`KeyCloak`: [https://keycloak-security.DOMAIN](https://keycloak-security.DOMAIN) 
 
 ### Tracing
 
-`Jaeger`: [https://jaeger-tracing.cp-stakater.com](https://jaeger-tracing.cp-stakater.com)
+`Jaeger`: [https://jaeger-tracing.DOMAIN](https://jaeger-tracing.DOMAIN)
 
 ### Logging
 
-`Kibana`: [https://kibana-logging.cp-stakater.com](https://kibana-logging.cp-stakater.com)
+`Kibana`: [https://kibana-logging.DOMAIN](https://kibana-logging.DOMAIN)
 
-`Cerebro`: [https://cerebro-logging.cp-stakater.com](https://cerebro-logging.cp-stakater.com)
+`Cerebro`: [https://cerebro-logging.DOMAIN](https://cerebro-logging.DOMAIN)
 
-`ElasticSearch`: [https://elasticsearch-logging.cp-stakater.com](https://elasticsearch-logging.cp-stakater.com)
+`ElasticSearch`: [https://elasticsearch-logging.DOMAIN](https://elasticsearch-logging.DOMAIN)
 
 ### Monitoring
 
-`Prometheus`: [https://prometheus-monitoring.cp-stakater.com](https://prometheus-monitoring.cp-stakater.com)
+`Prometheus`: [https://prometheus-monitoring.DOMAIN](https://prometheus-monitoring.DOMAIN)
 
-`Grafana`: [https://grafana-monitoring.cp-stakater.com](https://grafana-monitoring.cp-stakater.com)
+`Grafana`: [https://grafana-monitoring.DOMAIN](https://grafana-monitoring.DOMAIN)
 
-`AlertManager`: [https://alertmanager-monitoring.cp-stakater.com](https://alertmanager-monitoring.cp-stakater.com)
+`AlertManager`: [https://alertmanager-monitoring.DOMAIN](https://alertmanager-monitoring.DOMAIN)
 
 ## NordMart Routes
 
 ### Dev
 
-`Web`: [https://web-dev.cp-stakater.com](https://web-dev.cp-stakater.com)
+`Web`: [https://web-dev.DOMAIN](https://web-dev.DOMAIN)
 
-`Gateway`: [https://gateway-dev.cp-stakater.com](https://gateway-dev.cp-stakater.com)
+`Gateway`: [https://gateway-dev.DOMAIN](https://gateway-dev.DOMAIN)
 
 ### Prod
 
-`Web`: [https://web-prod.cp-stakater.com](https://web-prod.cp-stakater.com)
+`Web`: [https://web-prod.DOMAIN](https://web-prod.DOMAIN)
 
-`Gateway`: [https://gateway-prod.cp-stakater.com](https://gateway-prod.cp-stakater.com)
+`Gateway`: [https://gateway-prod.DOMAIN](https://gateway-prod.DOMAIN)
