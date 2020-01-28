@@ -122,11 +122,7 @@ module.exports = {
             {
                 title: 'Application: Nordmart',
                 children: [
-                    '/content/nordmart/nordmart-intro',
-                    '/content/nordmart/routes',
-                    '/content/nordmart/nordmart-ci-cd',
-                    '/content/nordmart/nordmart-scenario',
-                    '/content/nordmart/add-new-service.md'
+                    '/content/nordmart/nordmart-intro'
                 ]
             },
             {
@@ -210,6 +206,15 @@ module.exports = {
                     '/content/workshop/konfigurator/scenario',
                     '/content/workshop/konfigurator/use-cases'
                     
+                ]
+            },
+            {
+                title: 'Workshop: Nordmart',
+                children: [
+                    '/content/workshop/nordmart/nordmart-ci-cd',
+                    '/content/workshop/nordmart/nordmart-scenario',
+                    '/content/workshop/nordmart/routes',
+                    '/content/workshop/nordmart/add-new-service.md'
                 ]
             },
             {
