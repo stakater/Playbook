@@ -1,4 +1,4 @@
-# Openshift Container Platform Cluster deployment on Azure
+# OCP Cluster: Azure
 
 ## Introduction
 

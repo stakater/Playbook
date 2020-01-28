@@ -14,11 +14,16 @@ module.exports = {
     themeConfig: {
         sidebar: [
             {
-                title: 'Creating Cluster',
+                title: 'Kubernetes',
                 children: [
-                    '/content/createcluster/cluster-aws',
-                    '/content/createcluster/cluster-azure',
-                    '/content/createcluster/cluster-openshift-azure'
+                    '/content/kubernetes/cluster-aws',
+                    '/content/kubernetes/cluster-azure',
+                ]
+            },
+            {
+                title: 'Openshift',
+                children: [
+                    '/content/openshift/cluster-openshift-azure'
                 ]
             },
             {
@@ -27,19 +32,19 @@ module.exports = {
                     '/content/stakaterplatform/stakaterplatform'
                 ]
             },
-            {
-                title: 'Stacks',
-                children: [
-                    '/content/stacks/introduction',
-                    '/content/stacks/control',
-                    '/content/stacks/delivery',
-                    '/content/stacks/logging',
-                    '/content/stacks/monitoring',
-                    '/content/stacks/security',
-                    '/content/stacks/alerting',
-                    '/content/stacks/tracing'
-                ]
-            },
+            // {
+            //     title: 'Stacks',
+            //     children: [
+            //         '/content/stacks/introduction',
+            //         '/content/stacks/control',
+            //         '/content/stacks/delivery',
+            //         '/content/stacks/logging',
+            //         '/content/stacks/monitoring',
+            //         '/content/stacks/security',
+            //         '/content/stacks/alerting',
+            //         '/content/stacks/tracing'
+            //     ]
+            // },
             {
                 title: 'Stack: Control',
                 children: [

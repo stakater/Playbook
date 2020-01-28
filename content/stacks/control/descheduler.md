@@ -2,9 +2,15 @@
 
 ## Introduction
 
-Scheduling in Kubernetes is the process of binding pending pods to nodes, and is performed by a component of Kubernetes called kube-scheduler. The scheduler's decisions, whether or where a pod can or can not be scheduled, are guided by its configurable policy which comprises of set of rules, called predicates and priorities. The scheduler's decisions are influenced by its view of a Kubernetes cluster at that point of time when a new pod appears first time for scheduling. As Kubernetes clusters are very dynamic and their state change over time, there may be desired to move already running pods to some other nodes for various reasons:
+In Kubernetes the [`Kubernetes Scheduler`](https://kubernetes.io/docs/concepts/scheduling/kube-scheduler/) component schedule pods on nodes based on the defined policy. Pods can be scheduled on other nodes due to following reasons:
 
-Some nodes are under or over utilized.
-The original scheduling decision does not hold true any more, as taints or labels are added to or removed from nodes, pod/node affinity requirements are not satisfied any more.
-Some nodes failed and their pods moved to other nodes.
-New nodes are added to clusters.
+1. `Node utilization:` Pods will be scheduled to other nodes if a node is `under` or `over` utilized. 
+
+2. `Scheduling Policies:` Scheduling policies like taints, labels and node/pod affinity rules are changed. 
+
+3. `Node Failure:` A Node is failed its pods will be scheduled to other availble node in the cluster. 
+
+4. `Node Addition`: A node is added in the cluster then pods from the other nodes that are over utilized will be scheduled to the new node.
+
+[Deschedular](https://github.com/kubernetes-sigs/descheduler) based on its policy can move and evict pods but it doesn't reschedule them. Pods rescheduling is done by Kubernetes Scheduler.  
+
