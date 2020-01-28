@@ -33,8 +33,9 @@ StakaterPlatform works on GitOps principle using an opensource tool [Flux](https
 10. Visit `https://forecastle-control.YOURDOMAINNAME` and you'll be able to view all applications deployed by StakaterPlatform.
 
 
-**Note:** Since `variables.config` file and `configs/` directory contains private information those files are not being
- tracked in git and won't/shouldn't be committed. In case you want to commit those changes run `make track-secrets`.
+::: tip
+Since `variables.config` file and `configs/` directory contains private information those files are not being tracked in git and won't/shouldn't be committed. In case you want to commit those changes run `make track-secrets`.
+:::
 
 ## Install via GitLab CI Pipeline
 
@@ -623,8 +624,9 @@ Configure the following variables in `variables.config` to configure proxy sidec
 | KEYCLOAK_CLIENT_ID | Client ID for KeyCloak Gatekeeper  | `stakater-online-platform` |
 | KEYCLOAK_CLIENT_SECRET | Client Secret for KeyCloak Gatekeeper | `1d123a23-2068-3f5r-9120-f03fa1d1r5tyhf` |
 
-**Note:**
+::: tip
 KEYCLOAK_CLIENT_ID and KEYCLOAK_CLIENT_SECRET variables will be used by both ProxyInjector and KeyCloak.`
+:::
 
 
 **`configs/proxyinjector.yaml:`**
