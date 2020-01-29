@@ -45,80 +45,80 @@ module.exports = {
             //         '/content/stacks/tracing'
             //     ]
             // },
-            {
-                title: 'Stack: Control',
-                children: [
-                    '/content/stacks/control/introduction',
-                    '/content/stacks/control/external-dns',
-                    '/content/stacks/control/nginx-ingress',
-                    '/content/stacks/control/descheduler',
-                    '/content/stacks/control/forecastle',
-                    '/content/stacks/control/reloader',
-                    '/content/stacks/control/kubernetesdashboard',
-                    '/content/stacks/control/gitwebhookproxy',
-                    '/content/stacks/control/ingressmonitorcontroller',
-                    '/content/stacks/control/xposer'
-                ]
-            },
-            {
-                title: 'Stack: Delivery',
-                children: [
-                    '/content/stacks/delivery/introduction',
-                    '/content/stacks/delivery/jenkins',
-                    '/content/stacks/delivery/sonatype-nexus'
-                ]
-            },
-            {
-                title: 'Stack: Logging',
-                children: [
-                    '/content/stacks/logging/introduction',
-                    '/content/stacks/logging/log-generation',
-                    '/content/stacks/logging/logging-flow',
-                    '/content/stacks/logging/configure-kibana',
-                ]
-            },
-            {
-                title: 'Stack: Monitoring',
-                children: [
-                    '/content/stacks/monitoring/introduction',
-                    '/content/stacks/monitoring/prometheus-operator-in-openshift',
-                    '/content/stacks/monitoring/prometheus-in-openshift',
-                    '/content/stacks/monitoring/alert-manager-in-openshift',
-                    '/content/stacks/monitoring/grafana-in-openshift',
-                    '/content/stacks/monitoring/monitoring-buisness-apps',
-                    '/content/stacks/monitoring/creating-hooks-slack'
-                ]
-            },
-            {
-                title: 'Stack: Security',
-                children: [
-                    '/content/stacks/security/introduction',
-                    '/content/stacks/security/keycloak',
-                    '/content/stacks/security/sealed-secrets',
-                    '/content/stacks/security/proxy-injector',
-                    '/content/stacks/security/micro-segmentation',
-                    '/content/stacks/security/ip-whitelisting',
-                    '/content/stacks/security/secrets-management',
-                    '/content/stacks/security/rbac',
-                    '/content/stacks/security/keycloak-gatekeeper'
-                ]
-            },
-            {
-                title: 'Stack: Alerting',
-                children: [
-                    '/content/stacks/alerting/introduction',
-                    // '/content/stacks/alerting/chowkidar',
-                    '/content/stacks/alerting/prometheus',
-                    '/content/stacks/alerting/uptime-checkers',
-                    '/content/stacks/alerting/slack-notifications-for-teams'
-                ]
-            },
-            {
-                title: 'Stack: Tracing',
-                children: [
-                    '/content/stacks/tracing/introduction',
-                ]
-            },
+            // {
+            //     title: 'Stack: Control',
+            //     children: [
+            //         '/content/stacks/control/introduction',
+            //         '/content/stacks/control/external-dns',
+            //         '/content/stacks/control/nginx-ingress',
+            //         '/content/stacks/control/descheduler',
+            //         '/content/stacks/control/forecastle',
+            //         '/content/stacks/control/reloader',
+            //         '/content/stacks/control/kubernetesdashboard',
+            //         '/content/stacks/control/gitwebhookproxy',
+            //         '/content/stacks/control/ingressmonitorcontroller',
+            //         '/content/stacks/control/xposer'
+            //     ]
+            // },
+            // {
+            //     title: 'Stack: Delivery',
+            //     children: [
+            //         '/content/stacks/delivery/introduction',
+            //         '/content/stacks/delivery/jenkins',
+            //         '/content/stacks/delivery/sonatype-nexus'
+            //     ]
+            // },
+            // {
+            //     title: 'Stack: Logging',
+            //     children: [
+            //         '/content/stacks/logging/introduction',
+            //         '/content/stacks/logging/log-generation',
+            //         '/content/stacks/logging/logging-flow',
+            //         '/content/stacks/logging/configure-kibana',
+            //     ]
+            // },
+            // {
+            //     title: 'Stack: Monitoring',
+            //     children: [
+            //         '/content/stacks/monitoring/introduction',
+            //         '/content/stacks/monitoring/prometheus-operator-in-openshift',
+            //         '/content/stacks/monitoring/prometheus-in-openshift',
+            //         '/content/stacks/monitoring/alert-manager-in-openshift',
+            //         '/content/stacks/monitoring/grafana-in-openshift',
+            //         '/content/stacks/monitoring/monitoring-buisness-apps',
+            //         '/content/stacks/monitoring/creating-hooks-slack'
+            //     ]
+            // },
+            // {
+            //     title: 'Stack: Security',
+            //     children: [
+            //         '/content/stacks/security/introduction',
+            //         '/content/stacks/security/keycloak',
+            //         '/content/stacks/security/sealed-secrets',
+            //         '/content/stacks/security/proxy-injector',
+            //         '/content/stacks/security/micro-segmentation',
+            //         '/content/stacks/security/ip-whitelisting',
+            //         '/content/stacks/security/secrets-management',
+            //         '/content/stacks/security/rbac',
+            //         '/content/stacks/security/keycloak-gatekeeper'
+            //     ]
+            // },
+            // {
+            //     title: 'Stack: Alerting',
+            //     children: [
+            //         '/content/stacks/alerting/introduction',
+            //         // '/content/stacks/alerting/chowkidar',
+            //         '/content/stacks/alerting/prometheus',
+            //         '/content/stacks/alerting/uptime-checkers',
+            //         '/content/stacks/alerting/slack-notifications-for-teams'
+            //     ]
+            // },
+            // {
+            //     title: 'Stack: Tracing',
+            //     children: [
+            //         '/content/stacks/tracing/introduction',
+            //     ]
+            // },
             {
                 title: 'Application: Nordmart',
                 children: [
