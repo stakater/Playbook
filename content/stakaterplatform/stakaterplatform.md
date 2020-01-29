@@ -181,15 +181,6 @@ Run `make destroy` to remove StakaterPlatform from your cluster.
 - Replace all secrets with sealed-secrets. [Stakater Workshop - Sealed Secrets](https://playbook.stakater.com/content/workshop/sealed-secrets/introduction.html)
 - Use keycloak for SSO over all exposed applications
 
-## Compatibility Matrix
-
-StakaterPlatform has been tested on following kubernetes flavors:
-
-| Platform Version| K8s Version  | Infrastructure |
-|---|---|---|
-| v0.0.1 | 1.14 | [![image](./image/eks.png)](https://aws.amazon.com/eks/) &nbsp; eks.6 |
-| v0.0.1 | 1.14.8 | [![image](./image/aks.png)](https://docs.microsoft.com/en-us/azure/aks/) &nbsp; aks |
-
 <!-- #################################################### -->
 <!-- ###################  STACKS  ########################## -->
 <!-- #################################################### -->
@@ -3053,6 +3044,14 @@ We are currently using [Istio Operator](https://github.com/istio/operator) to de
 
 Detail regarding tracing is provided in this [section](/content/stacks/tracing/introduction.html).
 
+## Compatibility Matrix
+
+StakaterPlatform has been tested on following kubernetes flavors:
+
+| Platform Version| K8s Version  | Infrastructure |
+|---|---|---|
+| v0.0.1 | 1.14 | [![image](./image/eks.png)](https://aws.amazon.com/eks/) &nbsp; eks.6 |
+| v0.0.1 | 1.14.8 | [![image](./image/aks.png)](https://docs.microsoft.com/en-us/azure/aks/) &nbsp; aks |
 
 ## Community
 
