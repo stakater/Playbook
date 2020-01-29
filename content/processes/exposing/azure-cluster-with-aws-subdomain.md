@@ -1,5 +1,7 @@
 # Exposing Applications on Azure
 
+[[toc]]
+
 We have a domain stakater.com and want to create a Kubernetes cluster using AKS in Azure and expose applications on subdomain i.e. lab.stakater.com. We will be using External DNS and nginx ingress controller to expose our apps. This article will be referring to all the steps needed to do this.
 
 ## Create AKS cluster

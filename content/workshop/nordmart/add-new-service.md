@@ -1,5 +1,7 @@
 # Add New Service to Nordmart
 
+[[toc]]
+
 You would have to do the following steps to add a new service to Nordmart.
 
 ## Steps

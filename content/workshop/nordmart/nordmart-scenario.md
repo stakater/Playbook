@@ -1,5 +1,7 @@
 # Scenario
 
+[[toc]]
+
 We will be updating Nordmart and adding a Review Microservice so that reviews can be shown of products.
 
 ## Previous Architecture & UI

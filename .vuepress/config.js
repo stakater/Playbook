@@ -10,14 +10,16 @@ module.exports = {
             'vuepress-plugin-medium-zoom',
         ],
     ],
-
+    markdown: {
+        lineNumbers: true
+    },
     themeConfig: {
         sidebar: [
             {
                 title: 'Kubernetes',
                 children: [
-                    '/content/kubernetes/cluster-aws',
-                    '/content/kubernetes/cluster-azure',
+                    '/content/kubernetes/aws',
+                    '/content/kubernetes/azure',
                 ]
             },
             {

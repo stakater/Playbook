@@ -1,5 +1,7 @@
 # Gitlab Pipeline Configuraton
 
+[[toc]]
+
 ## Overview
 
 This guideline desribes how to configure pipeline on Gitlab.

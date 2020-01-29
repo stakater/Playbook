@@ -1,5 +1,7 @@
 # Nordmart Application deployment on OpenShift Container Platform
 
+[[toc]]
+
 ## Introduction
 
 This document contains the guideline to deploy Nordmart applicaton in the OpenShift cluster.
@@ -34,7 +36,7 @@ Follow the steps to deploy the cluster:
 
 3. Once key is added, flux will monitor the `nordmart-dev-apps` repository.
 
-4. Make sure that the images specified in the `nordmart-dev-apps/releases` (branch must be `azure-ocp-workshop-stakater`) manifests exists in the [nexus repository](nexus-delivery.cp-stakater.com).
+4. Make sure that the images specified in the `nordmart-dev-apps/releases` (branch must be `azure-ocp-workshop-stakater`) manifests exists in the nexus repository.
 
    **NOTE**: If image doesn't exist it will generate an error that it is not able to pull the specified image although image still exists. There is a catch that new image tag will not be deployed until a succesful deployment is done.
 

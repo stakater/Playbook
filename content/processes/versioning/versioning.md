@@ -1,5 +1,7 @@
 # Versioning
 
+[[toc]]
+
 ## Version Syntax
 We use Semantic Versioning (SemVer for short) for our projects. This is a popular versioning  methodology 
 to get rid of the problem of "dependency hell", where managing versioning for internal and external dependencies can

@@ -1,5 +1,7 @@
 # Stack: Monitoring
 
+[[toc]]
+
 ## Overview
 This document provides guidelines about the configuration required to deploy Monitoring stack on the kubernetes cluster.
 

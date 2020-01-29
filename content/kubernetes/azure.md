@@ -1,4 +1,6 @@
-# Cluster: Microsft Azure
+# Microsft Azure
+
+[[toc]]
 
 Azure Kubernetes Cluster can be created in two ways:
 1. Bash

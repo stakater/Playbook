@@ -1,4 +1,6 @@
-# Cluster: AWS
+# AWS
+
+[[toc]]
 
 ## Overview
 
@@ -31,7 +33,7 @@ If following resources are already available then continue `step 3` cluster crea
 * Create a folder `aws-resources-manifest` to store AWS resources manifest and add the following manifests:
   
   1. Create a file named `aws-resources-manifest/configuration_vars.tfvars` to store the variable values:
-  ```tf
+  ```terraform
   # Prefix for AWS resources
   resource_prefix=kops-
 
@@ -56,7 +58,7 @@ If following resources are already available then continue `step 3` cluster crea
 
   1. Create a file named `aws-resources-manifest/variables.tf`, to hold default values of variables so if a variable is not provided in `aws-resources-manifest/configuration_vars.tf` then default values specified in this file will be used:
       
-    ```tf
+    ```terraform
     variable resource_prefix {
       default = "kops-"
       description = "Prefix for resources"
@@ -95,7 +97,7 @@ If following resources are already available then continue `step 3` cluster crea
 
   2. Create a file named `aws-resources-manifest/provider.tf`, to hold the provider configuration
     
-    ```tf
+    ```terraform
     provider "aws" {
       region     = "${var.region}"
       access_key = "${var.aws_access_key}"
@@ -105,17 +107,16 @@ If following resources are already available then continue `step 3` cluster crea
 
   3. Create a file named `aws-resources-manifest/route53-zone.tf`, to hold route53 hosted zone data for managing DNS records on kubernetes cluster:
 
-    ```tf
+    ```terraform
     module "net_route53_zone" {
         source = "github.com/stakater/blueprint-utilities-aws.git//modules/route53/public?ref=v0.3.0"
         public_domain = "${var.public_domain}"
         force_destroy = "${var.force_destroy}"
     }
     ```
-    For different scenarios like assigning a sub domain hosted zone to kops etc, read the detailed [kops documentation](https://github.com/kubernetes/kops/blob/master/docs/aws.md#configure-dns)
 
   4. Create a file named `aws-resources-manifest/stackator-s3-kops-state.tf` to create `s3 bucket` to store terraform state of kops cluster:
-    ```tf
+    ```terraform
     module "stackator_s3_kops_state" {
       source = "github.com/stakater/blueprint-storage-aws.git//modules/s3/private?ref=v3.0.0"
       name = "${var.kops_state_bucket_name}"  

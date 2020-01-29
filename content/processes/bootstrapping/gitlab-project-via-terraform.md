@@ -1,5 +1,7 @@
 # Setup gitlab project via terraform
 
+[[toc]]
+
 So you have created a new Gitlab account, and now you want to create a group and a couple of projects. We will use terraform to setup everything from scratch
 
 ## Why terraform

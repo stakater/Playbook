@@ -24,7 +24,7 @@ StakaterPlatform works on GitOps principle using an opensource tool [Flux](https
 
 1. [Duplicate](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/duplicating-a-repository#mirroring-a-repository) this [repository](https://github.com/stakater/stakaterplatform).
 2. Update [configuration variables](#Basic-Configuration) in `variables.config` file and provide the relevant values.
-3. [Recommended but optional] To take full advantage of the tool stack configure [Additional Variables](docs/detailed-config.md) as well.
+3. [Recommended but optional] To take full advantage of the tool stack configure [Additional Variables](https://github.com/stakater/StakaterPlatform/blob/master/docs/detailed-config.md) as well.
 4. Ensure that correct context is set for kubectl & helm.
 5. Run `make configure`, this will make all required substitutions based on configuration variables in the repository. When prompted commit those changes.
 6. [Add the public SSH key](https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account) of flux(configs/flux.pub) to your Git repository with **write access**.
@@ -644,6 +644,20 @@ Once index pattern is created kibana will take a few seconds to fetch data from 
 #### Overview
 
 Monitoring Stack includes tools required for the monitoring of applications and infrastructure.
+
+We are using Prometheus Operator helm chart to deploy following monitoring components:
+
+- **Prometheus**: It is an opensource monitoring solution for metrics and alerting.
+
+- **Service Monitors**: CRD to generate prometheus configuration to monitor Kubernetes services.
+
+- **AlertManager**: It is part of Prometheus's alerting feature. Alert rules are defined in Prometheus server that send alerts to Alertmanager. Once alerts are received Alertmanager can group, inhibit or silence them.
+
+- **Node Exporter**: Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, with pluggable metric collectors.
+
+- **Kube State Metrics**: It is a service that generates metrics about kubernetes objects by using Kubebernetes API server.
+
+- **Grafana**: Grafana is an open source metric analytics & visualization suite with support for Elasticsearch, Prometheus etc. Currently, it is being used with Prometheus.
 
 #### Details
 
@@ -1558,20 +1572,6 @@ This will give you the webhook URL.
 | :-------------------: | :------------------------------------------------------------------------------: | :--------------:| :--:| :-------------:|
 | [Prometheus Operator](https://github.com/coreos/prometheus-operator)         | [Public](https://github.com/helm/charts/tree/master/stable/prometheus-operator)                                 |       Yes       | N/A |      None      |
 | [Metrics server](https://github.com/coreos/prometheus-operator)         | [Public](https://github.com/helm/charts/tree/master/stable/metrics-server)                                 |       Yes       | N/A |      None      |
-
-We are using Prometheus Operator helm chart to deploy following monitoring components:
-
-- **Prometheus**: It is an opensource monitoring solution for metrics and alerting.
-
-- **Service Monitors**: CRD to generate prometheus configuration to monitor Kubernetes services.
-
-- **AlertManager**: It is part of Prometheus's alerting feature. Alert rules are defined in Prometheus server that send alerts to Alertmanager. Once alerts are received Alertmanager can group, inhibit or silence them.
-
-- **Node Exporter**: Prometheus exporter for hardware and OS metrics exposed by *NIX kernels, with pluggable metric collectors.
-
-- **Kube State Metrics**: It is a service that generates metrics about kubernetes objects by using Kubebernetes API server.
-
-- **Grafana**: Grafana is an open source metric analytics & visualization suite with support for Elasticsearch, Prometheus etc. Currently, it is being used with Prometheus.
 
 #### Default Configurations
 
@@ -3016,7 +3016,7 @@ For the purpose of easy automation of configuring monitors and alerts with the U
 |       Tool        | URL  |  Description |
 | :---------------: | :--: | :-----------:|
 | UptimeRobot | [https://www.uptimerobot.com](https://www.uptimerobot.com) | Uptime Robot monitors URLs via [IngressMonitorController](https://github.com/stakater/IngressMonitorController) and inform downtime/uptime events on Slack |
-| Slack | [https://www.slack.com]([https://www.slack.com/]) | Slack is where all alerts from Stakater Platform is aggregated for the users to see via Logging/Monitoring/Alerting tools. |
+| Slack | [https://www.slack.com](https://www.slack.com/) | Slack is where all alerts from Stakater Platform is aggregated for the users to see via Logging/Monitoring/Alerting tools. |
 
 <!-- TRACING STACK -->
 ### Tracing Stack

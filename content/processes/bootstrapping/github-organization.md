@@ -1,5 +1,7 @@
 # Bootstrapping a Github Organization
 
+[[toc]]
+
 ## Steps 
 
 1. Create a bot user on Github. 
@@ -51,7 +53,7 @@ terraform.tfvars
 
 File containing the providers for terraform.
 
-```tf
+```terraform
 locals{
     github_organization = "<organization-name>"
 }
@@ -197,7 +199,7 @@ This will only run when a change is committed onto master. It will initialize an
 
 Add a file `team-developers.tf`, copy following manifest in it. Following file will create a `Developers` team, you can have it based on your own needs.
 
-```tf
+```terraform
 # Github Team for Developers
 resource "github_team" "developers" {
   name        = "Developers"
@@ -213,7 +215,7 @@ One thing to note is module name should contain `underscore (_) and not hyphen (
 
 Add a file `user-<username>.tf`, copy following manifest in it.
 
-```tf
+```terraform
 module "user_<user_name>" {
   source = "github.com/stakater/terraform-module-github.git//modules/user?ref=1.0.3"
   username = "<username>"
@@ -227,7 +229,7 @@ Add a file `repo-<repoName>.tf`, for repository there are a number of parameters
 
 One thing to note is module name should contain `underscore (_) and not hyphen (-) whereas in repository name and file name you can use hyphen(-)`, so when copying following manifest, take note of this.
 
-```tf
+```terraform
 module "<repo_name>" {
   source         = "github.com/stakater/terraform-module-github.git//modules/repository?ref=1.0.10"
   name           = "<repo-name>"
@@ -278,7 +280,7 @@ module "<repo_name>" {
 | webhooks | Array of Object | Webhooks to be added and their secrets |
 
 **Sample Webhook Structure:**
-```tf
+```terraform
   webhooks = [
     {
       url = "https://jenkins.delivery.domain.com/github-webhook/",

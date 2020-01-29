@@ -1,5 +1,7 @@
 # NordMart Web Application
 
+[[toc]]
+
 ## Introduction
 
 Nordmart is an online store web application built using Spring Boot, WildFly Swarm, Eclipse Vert.x, Node.js and AngularJS adopting the microservices architecture.

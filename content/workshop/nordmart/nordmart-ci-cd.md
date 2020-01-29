@@ -1,5 +1,7 @@
 # CI/CD for NordMart
 
+[[toc]]
+
 ## Overview
 
 Nordmart has 5 microservices for now. The strategy we use is each microservice will have its own codebase and repository and will be using the same pipeline library function [`releaseApplication`](https://github.com/stakater/stakater-pipeline-library/blob/master/vars/releaseApplication.groovy), a generic function for:

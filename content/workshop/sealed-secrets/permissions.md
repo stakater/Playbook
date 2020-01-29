@@ -1,5 +1,7 @@
 # SealedSecrets Caveats
 
+[[toc]]
+
 ## Overview
 
 Currently, the sealed secret default rbac is being used that gives minimum permission to the sealed secret controller. It create role and clusterRole for it.

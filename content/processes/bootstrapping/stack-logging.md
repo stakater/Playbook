@@ -1,5 +1,7 @@
 # Stack: Logging
 
+[[toc]]
+
 ## Overview
 This document provides guidelines about the configuration required to deploy Logging stack on the kubernetes cluster.
 

@@ -1,5 +1,7 @@
 # Routes 
 
+[[toc]]
+
 This document have the routes for the StakaterPlatform and Nordmart Application. Once components are deployed the `DOMAIN` placeholder will be replaced by user specified domain.
 
 ## Infrastructure Routes
@@ -9,7 +11,6 @@ This document have the routes for the StakaterPlatform and Nordmart Application.
 `Forecastle`: [https://forecastle-control.DOMAIN](https://forecastle-control.DOMAIN)
 
 `Kubernetes Dashboard`: [https://dashboard-control.DOMAIN](https://dashboard-control.DOMAIN)
-
 
 ### Delivery
 `Nexus`: [https://nexus-delivery.DOMAIN](https://nexus-delivery.DOMAIN)
@@ -25,6 +26,8 @@ This document have the routes for the StakaterPlatform and Nordmart Application.
 ### Tracing
 
 `Jaeger`: [https://jaeger-tracing.DOMAIN](https://jaeger-tracing.DOMAIN)
+
+`Kiali`: [https://kiali-tracing.DOMAIN](https://kiali-tracing.DOMAIN)
 
 ### Logging
 

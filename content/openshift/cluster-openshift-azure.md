@@ -1,5 +1,7 @@
 # OCP Cluster: Azure
 
+[[toc]]
+
 ## Introduction
 
 This document contains the guideline to deploy `Openshift Container Platform Cluster` on Azure. There are many ways to create an OCP cluster on Azure and also it supports Azure Openshift offering which is completely managed, but we encourage to create cluster on our own to have full control.

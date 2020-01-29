@@ -1,5 +1,7 @@
 # Forecastle
 
+[[toc]]
+
 Forecastle is a Kubernetes controller and a web dashboard. It watches Ingresses and looks for specific annotations on them to indicate whether the Ingress needs to be registered on the dashboard or not. If the relevant configuration is discovered in the annotations of the ingress, the Ingress URL is added to the Forecastle dashboard. The dashboard displays all the running applications that are registered with it, and provides a simple way to access them.
 
 The applications are automatically separated into sections based on the kubernetes namespace. The dashboard page also has a search bar which can be used to filter the application list to find a particular application without having to scroll through the whole list.
@@ -22,7 +24,7 @@ When an Ingress with the required annotations is created in the cluster, the ing
 
 While the Forecastle dashboard does not have a login mechanism built-in or support yet for integration with OAuth providers, etc., at Stakater we do use Keycloak single sign-on with Keycloak gatekeeper to protect the Forecastle dashboard. Keycloak gatekeeper redirects any unauthenticated requests to the Keycloak server, and once an authenticated session is established it forwards the requests to the target Forecastle container.
 
-It is therefore recommended to use some external authentication mechanism to protect access to the Forecastle dashboard, such as using [Keycloak](../../processes/security/keycloak.md) with [Stakater Proxy Injector](../../processes/security/proxy-injector.md).
+It is therefore recommended to use some external authentication mechanism to protect access to the Forecastle dashboard, such as using [Keycloak](../../stacks/security/keycloak.md) with [Stakater Proxy Injector](../../stacks/security/proxy-injector.md).
 
 ### Running multiple instances
 

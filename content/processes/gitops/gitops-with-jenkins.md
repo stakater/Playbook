@@ -1,4 +1,5 @@
 # GitOps with Jenkins
+[[toc]]
 
 ## Anti-pattern?
 

@@ -1,5 +1,7 @@
 # Stack: Release
 
+[[toc]]
+
 ## Overview
 This document provides guidelines about the configuration required to deploy Release stack on the kubernetes cluster.
 
