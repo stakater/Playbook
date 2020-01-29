@@ -194,7 +194,6 @@ StakaterPlatform has been tested on following kubernetes flavors:
 <!-- ###################  STACKS  ########################## -->
 <!-- #################################################### -->
 ## Stacks
-[[toc]]
 
 ### Control Stack
 
