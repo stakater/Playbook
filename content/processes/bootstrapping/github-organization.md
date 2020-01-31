@@ -210,8 +210,10 @@ resource "github_team" "developers" {
 
 ### Add a User
 
-One thing to note is module name should contain `underscore (_) and not hyphen (-)`
-
+One thing to note is module name should contain 
+::: tip Note
+`underscore (_) and not hyphen (-)`
+:::
 
 Add a file `user-<username>.tf`, copy following manifest in it.
 
@@ -227,7 +229,13 @@ module "user_<user_name>" {
 
 Add a file `repo-<repoName>.tf`, for repository there are a number of parameters that you might or might not want for your team, you can see the details below. 
 
-One thing to note is module name should contain `underscore (_) and not hyphen (-) whereas in repository name and file name you can use hyphen(-)`, so when copying following manifest, take note of this.
+One thing to note is module name should contain 
+
+::: tip Note
+`underscore (_) and not hyphen (-) whereas in repository name and file name you can use hyphen(-)`
+:::
+
+so when copying following manifest, take note of this.
 
 ```terraform
 module "<repo_name>" {

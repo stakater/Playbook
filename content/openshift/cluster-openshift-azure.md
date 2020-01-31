@@ -1,12 +1,18 @@
-# OCP Cluster: Azure
+# Azure
 
 [[toc]]
 
-## Introduction
+## Overview
 
 This document contains the guideline to deploy `Openshift Container Platform Cluster` on Azure. There are many ways to create an OCP cluster on Azure and also it supports Azure Openshift offering which is completely managed, but we encourage to create cluster on our own to have full control.
 
-## Method 1: Deploy using Terraform
+## Pre-requisites
+
+## Configuration and Deployment
+
+There are two ways to deploy the cluster:
+
+### Terraform
 
 We encourage to create all the Infrastructure and deploy OCP on it using Terraform & Ansible scripts. You can clone [stakater/terraform-azure-openshift](https://github.com/stakater/terraform-azure-openshift) repo and create an Openshift cluster on Azure by following the steps.
 
@@ -58,19 +64,11 @@ terraform apply -var-file=terraform-ocp.tfvars
 
 And your cluster will be ready. Today's cluster has been deployed using terraform.
 
-## Method 2: Using Azure's Red Hat OpenShift Container Platform Self-Managed
+### Azure's RedHat OpenShift Container Platform Self-Managed
 
 It is a simple method to bring up an Openshift cluster, you just have to pass configuration to it and it will create a cluster,
 
-### Issues Faced
-
-- You cannot manage it completely e.g. it will create self signed certs for the console url, which browsers does not support so it will be Not Secure.
-
-- You cannot change the count of master and infra nodes.
-
-- There are very little Azure VM Families, you can chose from the portal, and the default VM doesn't support attaching more than 4 disks per node.
-
-### Deployment
+#### Deployment
 
 Follow the steps to deploy the cluster:
 
@@ -78,33 +76,35 @@ Follow the steps to deploy the cluster:
 
 2. Provide the cluster configuration in deployment wizard and deploy the cluster. List  of required parameters are given below:
 
-    | Parameter Name | Description |
-    |---|---|
-    | Admin Username | Cluster admin username |
-    | Add User SSH public key | Cluster admin public SSH key |
-    | Subscription | Subscription name |
-    | Resource Group | Create a new resource group |
-    | Location | Europe west |
-    | OCP Cluster Name Prefix | NIL |
-    | Node sizes | Size should be changes to D2s_v3 |
-    | Key vault Resource Group Name | NIL |
-    | Key Vault Name | NIL |
-    | Secret Name | NIL |
-    | Virtual Network | Default new existing virtual network |
-    | Default CIDR Setting or Custom IP Range  | Default setting should be used |
-    | Openshift Admin User Password | NIL |
-    | RedHat Subscription Manager User Name | NIL |
-    | RedHat Subscription Manager User Password | NIL |
-    | RedHat Subscription Manager Openshift Pool ID | NIL |
-    | RedHat Subscription Manager Openshift Pool ID for Broker / Master Nodes | NIL |
-    | Azure AD Service Principal Client ID GUID | NIL |
-    | Azure AD Service Principal Client ID Secret | NIl |
-    | Container Native Storage | Disable it. |
-    | Cluster Logging | Default logging for the cluster. Enable it. |
-    | Configure Metrics for cluster | Disable it. |
-    | Default Router Subdomain | Subdomain that will be used for routes in the cluster. |
+| Parameter Name | Description |
+|---|---|
+| Admin Username | Cluster admin username |
+| Add User SSH public key | Cluster admin public SSH key |
+| Subscription | Subscription name |
+| Resource Group | Create a new resource group |
+| Location | Europe west |
+| OCP Cluster Name Prefix | NIL |
+| Node sizes | Size should be changes to D2s_v3 |
+| Key vault Resource Group Name | NIL |
+| Key Vault Name | NIL |
+| Secret Name | NIL |
+| Virtual Network | Default new existing virtual network |
+| Default CIDR Setting or Custom IP Range  | Default setting should be used |
+| Openshift Admin User Password | NIL |
+| RedHat Subscription Manager User Name | NIL |
+| RedHat Subscription Manager User Password | NIL |
+| RedHat Subscription Manager Openshift Pool ID | NIL |
+| RedHat Subscription Manager Openshift Pool ID for Broker / Master Nodes | NIL |
+| Azure AD Service Principal Client ID GUID | NIL |
+| Azure AD Service Principal Client ID Secret | NIl |
+| Container Native Storage | Disable it. |
+| Cluster Logging | Default logging for the cluster. Enable it. |
+| Configure Metrics for cluster | Disable it. |
+| Default Router Subdomain | Subdomain that will be used for routes in the cluster. |
 
-**NOTE**: `NIL` means that the paramter doesn't require any description because parameter name is self-explanatory. Details can be found on Azure offical documentation.
+::: tip Note
+`NIL` means that the paramter doesn't require any description because parameter name is self-explanatory. Details can be found on Azure offical documentation.
+:::
 
 3. Once cluster is deployed, the cluster can be accessed by these two methods:
 
@@ -118,3 +118,11 @@ Follow the steps to deploy the cluster:
 4. Add an wildcard entry in the Route53/DNS record for the cluster infra load balancer's ip address.
 
 5. Resize the infra nodes to `DS2_v2` because default DS2_v3 only allows 4 disk to be attached to a node but more disks are required. `DS2_v2` allows 8 disks to be attached.
+
+#### Issues Faced
+
+- You cannot manage it completely e.g. it will create self signed certs for the console url, which browsers does not support so it will be Not Secure.
+
+- You cannot change the count of master and infra nodes.
+
+- There are very little Azure VM Families, you can chose from the portal, and the default VM doesn't support attaching more than 4 disks per node.
