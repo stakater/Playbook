@@ -1,3 +1,0 @@
-# IP Whitelisting
-
-IP whitelisting allows you to create lists of trusted IP addresses or IP ranges from which your users can access your domains. On AWS, this can be implemented with security groups which act as virtual firewalls for your instance to control inbound and outbound traffic. Security groups act at the instance level, not the subnet level. Therefore, each instance in a subnet in your VPC could be assigned to a different set of security groups. For each security group, you add rules that control the inbound traffic to instances, and a separate set of rules that control the outbound traffic.
