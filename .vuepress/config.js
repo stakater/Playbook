@@ -14,11 +14,7 @@ module.exports = {
         lineNumbers: true,
         anchor: { permalink: false },
         // options for markdown-it-toc
-        toc: { includeLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-        extendMarkdown: md => {
-        // use more markdown-it plugins!
-        md.use(require('markdown-it-anchor'))
-        }
+        toc: { includeLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
     },
     themeConfig: {
         sidebar: [
