@@ -2,6 +2,8 @@
 
 ![Diagram](./img/scenario.png)
 
+[[toc]]
+
 Konfigurator Operator looks for `KonfiguratorTemplate` Custom Resource in the namespaces specified, render the configuration and then mount these configmaps/secrets to the specified resource.
 
 In this example we will generate fluentd configurations dynamically so that our application specific logs can be parsed.

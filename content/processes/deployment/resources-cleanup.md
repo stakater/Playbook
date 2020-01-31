@@ -1,4 +1,8 @@
-# Auto-cleanup resources on Kubernetes
+# Resource Cleanup
+
+[[toc]]
+
+## Auto-cleanup resources on Kubernetes
 
 Dangling resources in a deployment environment such as Kubernetes or Openshift can be a problem. It adds to clutter and may also consume resources unnecessarily. This is especially a problem when there are multiple administrators/developers that are managing the system, and the knowledge of the system is to some extent distributed between them. No one person may be able to definitively say why a particular empty or even non-empty namespace was created in the first place or why it has not been deleted since. This could be a temporary project created on a dev Openshift cluster for prototyping and testing a new feature, or it could be a temporary kubernetes namespace on a staging cluster to demo an application to a particular audience. Either way the scenario indicates that the namespace will be temporary, and all deployments being performed within that will not be required after a particular time. Following the principles of GitOps one can indeed perform all such system changes such as namespace creation and deployments, via Git functions, which inherently provides traceability of these changes. Hence one may be able to trace the creation of such a resource back to the intent as may be described in the commit message, or directly inquire from the committer about it’s purpose and validity. However such an effort to trace the timeline of these events from the git history, can quickly become a complex feat leading one away from more important tasks.
 

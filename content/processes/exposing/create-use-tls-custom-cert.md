@@ -1,10 +1,12 @@
 # Creating & using custom SSL Certificate
 
+[[toc]]
+
 For TLS you need to have certificates against your domain. In this day and age it's mandatory to secure your website with HTTPS. 
 There are multiple ways of creating certificates, we use [Let's Encrypt](https://letsencrypt.org/) as our certificate authority. 
 
 
-## 1. Create certificates using terraform
+## Create certificates using terraform
 
 We create certificate through terraform and LetsEncrypt using Acme, only con is that the certificate will have an expiry of 90 days.
 For that refer to [terraform-aws-certificate](https://github.com/stakater/terraform-aws-certificate/) repo. Generate LetsEncrypt certificates for AWS(Route 53) hosted domain using Terraform.!
@@ -34,7 +36,7 @@ This output can be mapped to the following fields in a secret that would contain
 **Note:** If you are using Azure as DNS provider use [terraform-azure-openshift](https://github.com/stakater/terraform-azure-openshift/tree/master/certs) repo and follow the same steps.
 
 
-## 2. Create certificates using https://www.sslforfree.com/
+## Create certificates using https://www.sslforfree.com/
 
 You can visit https://www.sslforfree.com/ and generate your certificates from there, this requires manual labour unlike terraform. 
 It supports FTP verification, and verification against DNS & HTTP challenges.

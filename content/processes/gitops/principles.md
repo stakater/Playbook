@@ -1,4 +1,7 @@
 # GitOps Principles
+
+[[toc]]
+
 GitOps is a methodology of Continuous Delivery, at the heart of which is the principle that Git be used as the source of truth for declarative infrastructure and applications.
 
 ## Declarative description of system

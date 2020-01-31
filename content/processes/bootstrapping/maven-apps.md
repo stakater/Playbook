@@ -1,5 +1,7 @@
 # Bootstrapping a Maven App
 
+[[toc]]
+
 For bootstrapping a maven application to use the complete set of files to use our artifacts, you can take the following steps:
 
 ## Build a Spring Boot Application

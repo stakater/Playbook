@@ -1,12 +1,14 @@
 # Helm Operator and Flux
 
+[[toc]]
+
 Helm Operator is a kubernetes operator that is built around the Helm tool to release charts to Kuberenetes cluster without using the `helm` command.
 
 The essential mechanism is this: the declaration of a `HelmRelease` is represented by a custom resource, specifying the chart and its values. Flux will apply it to the cluster, and once it's in the cluster, the Helm Operator will make sure the release exists by installing or upgrading it.
 
 ## The HelmRelease custom resource
 
-Each release of a chart is declared by a `HelmRelease` resource. The schema for these resources is given in the [custom resource definition](https://github.com/weaveworks/flux/blob/master/deploy-helm/flux-helm-release-crd.yaml). They look like this:
+Each release of a chart is declared by a `HelmRelease` resource. The schema for these resources is given in the [custom resource definition](https://raw.githubusercontent.com/fluxcd/flux/helm-0.10.1/deploy-helm/flux-helm-release-crd.yaml). They look like this:
 
 ```
 ---

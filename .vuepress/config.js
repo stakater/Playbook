@@ -10,15 +10,25 @@ module.exports = {
             'vuepress-plugin-medium-zoom',
         ],
     ],
-
+    markdown: {
+        lineNumbers: true,
+        anchor: { permalink: false },
+        // options for markdown-it-toc
+        toc: { includeLevel: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
+    },
     themeConfig: {
         sidebar: [
             {
-                title: 'Getting Started - Creating Cluster',
+                title: 'Kubernetes',
                 children: [
-                    '/content/createcluster/cluster-aws',
-                    '/content/createcluster/cluster-azure',
-                    '/content/createcluster/cluster-openshift-azure'
+                    '/content/kubernetes/aws',
+                    '/content/kubernetes/azure',
+                ]
+            },
+            {
+                title: 'Openshift',
+                children: [
+                    '/content/openshift/cluster-openshift-azure'
                 ]
             },
             {
@@ -28,25 +38,19 @@ module.exports = {
                 ]
             },
             {
-                title: 'Stacks',
+                title: 'Application: Nordmart',
                 children: [
-                    '/content/stacks/control',
-                    '/content/stacks/delivery',
-                    '/content/stacks/logging',
-                    '/content/stacks/monitoring',
-                    '/content/stacks/security',
-                    '/content/stacks/alerting',
-                    '/content/stacks/tracing'
+                    '/content/nordmart/nordmart-intro'
                 ]
             },
             {
-                title: 'Nordmart',
+                title: 'Processes: Bootstrapping',
                 children: [
-                    '/content/nordmart/nordmart-intro',
-                    '/content/nordmart/routes',
-                    '/content/nordmart/nordmart-ci-cd',
-                    '/content/nordmart/nordmart-scenario',
-                    '/content/nordmart/add-new-service.md'
+                    '/content/processes/bootstrapping/github-organization',
+                    '/content/processes/bootstrapping/maven-apps',
+                    '/content/processes/bootstrapping/gitlab-project-via-terraform',
+                    '/content/processes/bootstrapping/gitlab-pipeline-configuration',
+                    'content/processes/bootstrapping/github-integration-with-gitlab-pipeline'
                 ]
             },
             {
@@ -76,64 +80,14 @@ module.exports = {
                 ]
             },
             {
-                title: 'Processes: Logging',
-                children: [
-                    '/content/processes/logging/introduction',
-                    '/content/processes/logging/log-generation',
-                    '/content/processes/logging/logging-flow',
-                    '/content/processes/logging/configure-kibana',
-                    '/content/processes/logging/birds-eye-view',
-                ]
-            },
-            {
-                title: 'Processes: Alerting',
-                children: [
-                    '/content/processes/alerting/introduction',
-                    '/content/processes/alerting/chowkidar',
-                    '/content/processes/alerting/prometheus',
-                    '/content/processes/alerting/uptime-checkers',
-                    '/content/processes/alerting/slack-notifications-for-teams'
-                ]
-            },
-            {
-                title: 'Processes: Security',
-                children: [
-                    '/content/processes/security/introduction',
-                    '/content/processes/security/micro-segmentation',
-                    '/content/processes/security/ip-whitelisting',
-                    '/content/processes/security/secrets-management',
-                    '/content/processes/security/sealed-secrets',
-                    '/content/processes/security/rbac',
-                    '/content/processes/security/keycloak',
-                    '/content/processes/security/keycloak-gatekeeper',
-                    '/content/processes/security/proxy-injector'
-                ]
-            },
-            {
                 title: 'Processes: GitOps',
                 children: [
                     '/content/processes/gitops/introduction',
                     '/content/processes/gitops/principles',
-                    '/content/processes/gitops/gitops-with-jenkins',
-                    '/content/processes/gitops/gitops-with-flux',
                     '/content/processes/gitops/birds-eye-view-jenkins',
-                    '/content/processes/gitops/birds-eye-view-flux'
-                ]
-            },
-            {
-                title: 'Processes: Bootstrapping',
-                children: [
-                    '/content/processes/bootstrapping/github-organization',
-                    '/content/processes/bootstrapping/maven-apps',
-                    '/content/processes/bootstrapping/gitlab-project-via-terraform',
-                    '/content/processes/bootstrapping/deploying-stakater-stacks',
-                    '/content/processes/bootstrapping/stack-global',
-                    '/content/processes/bootstrapping/stack-release',
-                    '/content/processes/bootstrapping/stack-logging',
-                    '/content/processes/bootstrapping/stack-monitoring',
-                    '/content/processes/bootstrapping/stack-tracing',
-                    '/content/processes/bootstrapping/gitlab-pipeline-configuration',
-                    'content/processes/bootstrapping/github-integration-with-gitlab-pipeline'
+                    '/content/processes/gitops/gitops-with-jenkins',
+                    '/content/processes/gitops/birds-eye-view-flux',
+                    '/content/processes/gitops/gitops-with-flux'
                 ]
             },
             {
@@ -147,21 +101,9 @@ module.exports = {
                 ]
             },
             {
-                title: 'Processes: Monitoring',
-                children: [
-                    '/content/processes/monitoring/prometheus-operator-in-openshift',
-                    '/content/processes/monitoring/prometheus-in-openshift',
-                    '/content/processes/monitoring/alert-manager-in-openshift',
-                    '/content/processes/monitoring/grafana-in-openshift',
-                    '/content/processes/monitoring/monitoring-buisness-apps',
-                    '/content/processes/monitoring/creating-hooks-slack'
-                ]
-            },
-            {
                 title: 'Workshop: Setting Up',
                 children: [
                     '/content/workshop/cluster-deployment',
-                    //'/content/stacks/deploy',
                     '/content/workshop/aad-in-openshift',
                     '/content/workshop/application-deployment'
                 ]
@@ -173,6 +115,15 @@ module.exports = {
                     '/content/workshop/konfigurator/scenario',
                     '/content/workshop/konfigurator/use-cases'
                     
+                ]
+            },
+            {
+                title: 'Workshop: Nordmart',
+                children: [
+                    '/content/workshop/nordmart/nordmart-ci-cd',
+                    '/content/workshop/nordmart/nordmart-scenario',
+                    '/content/workshop/nordmart/routes',
+                    '/content/workshop/nordmart/add-new-service.md'
                 ]
             },
             {

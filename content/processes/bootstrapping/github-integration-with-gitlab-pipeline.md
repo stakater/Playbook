@@ -1,5 +1,7 @@
 # Github Repository Integration with Gitlab CI/CD Pipeline
 
+[[toc]]
+
 ## Overview
 
 This guide provides guideline on how to configure Github repository with Gitlab CI/CD pipeline.

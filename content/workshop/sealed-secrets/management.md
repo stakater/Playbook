@@ -1,5 +1,7 @@
 # Key Management
 
+[[toc]]
+
 ## Overview
 This document provides guidelines on the management of SealedSecret keys.
 

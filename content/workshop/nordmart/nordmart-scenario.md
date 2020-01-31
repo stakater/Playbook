@@ -1,5 +1,7 @@
 # Scenario
 
+[[toc]]
+
 We will be updating Nordmart and adding a Review Microservice so that reviews can be shown of products.
 
 ## Previous Architecture & UI
@@ -37,7 +39,7 @@ This was the previous architecture of the application.
 
 ### View
 
- ![Diagram](content/workshop/image/home.png)
+![Diagram](./images/home.png)
 
 
  ## Updated Architecture & UI
@@ -79,7 +81,7 @@ This is now the updated architecture for the application with review service add
 
 ### Updated View
 
- ![Diagram](content/workshop/image/updated-view.png)
+ ![Diagram](./images/updated-view.png)
 
 ## Working
 

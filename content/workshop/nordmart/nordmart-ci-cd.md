@@ -1,5 +1,7 @@
 # CI/CD for NordMart
 
+[[toc]]
+
 ## Overview
 
 Nordmart has 5 microservices for now. The strategy we use is each microservice will have its own codebase and repository and will be using the same pipeline library function [`releaseApplication`](https://github.com/stakater/stakater-pipeline-library/blob/master/vars/releaseApplication.groovy), a generic function for:
@@ -61,13 +63,13 @@ Follow the guidelines given below to create CI/CD jenkins pipeline:
         PR-\d+|master
     ```
     Once all the configurations are done, the configuration panel should look like this:
-    ![Jenkins Configuration](content/workshop/image/jenkins-configuration.png)
+    ![Jenkins Configuration](./images/jenkins-configuration.png)
     
     4.5. Save the configuration, it will scan the organization and create pipeline for the repositories you forked in `step 2`.
     
     After organization scan, jenkins panel should look like this:
 
-    ![Nordmart Organization](content/workshop/image/nordmart-organization.png)
+    ![Nordmart Organization](./images/nordmart-organization.png)
 
 
 5. Once repositories are forked. Make the required changes in the `nordmart-dev-tools` repository's Jenkinsfile. Jenkinsfile use the [Stakater Pipeline Library](https://github.com/stakater/stakater-pipeline-library).

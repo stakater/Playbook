@@ -1,5 +1,7 @@
 # Scenario
 
+[[toc]]
+
 ## Overview
 
 In this document, we will follow a scenario in which we want to deploy a MySQL instance for the Nordmart Catalog microservice. Following version of sealed secret will be used in this workshop

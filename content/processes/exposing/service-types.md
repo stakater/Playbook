@@ -1,5 +1,7 @@
 # Service Types
 
+[[toc]]
+
 There are several service types which can be used to expose apps for different requirements.
 
 ## ClusterIP

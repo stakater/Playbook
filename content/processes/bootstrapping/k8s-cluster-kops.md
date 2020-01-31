@@ -1,5 +1,7 @@
 # Bootstrapping & managing kubernetes cluster with kops
 
+[[toc]]
+
 This guide is for managing k8s cluster on AWS with kops
 
 ## Prerequisites

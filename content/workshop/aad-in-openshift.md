@@ -1,5 +1,7 @@
 # Adding Azure Active Directory Users to KeyCloak
 
+[[toc]]
+
 You can add Azure AD (Active directory) users to KeyCloak by following steps
 
 1. Create Azure AD instance

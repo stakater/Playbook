@@ -1,5 +1,7 @@
 # Other Use Cases
 
+[[toc]]
+
 Konfigurator is very helpful when there is need to dynamically generate stuff on the basis of Kubernetes API objects. Here are few examples:
 
 ## Dynamically generate nginx configuration file

@@ -1,5 +1,7 @@
 # Deploying Stakater Stacks
 
+[[toc]]
+
 ## Overview
 This guide provides guidelines on the deployment of Stakater Stacks. Currently, there are two ways to install Stakater Stacks on kubernetes:
 

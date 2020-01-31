@@ -1,5 +1,7 @@
 # Branching
 
+[[toc]]
+
 ## default(master) branch
 Development of a feature, enhancement or bug fix should start with a git branch.
 There should be no direct pushes to the master branch.

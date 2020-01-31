@@ -1,5 +1,7 @@
 # Caveats
 
+[[toc]]
+
 ## Overview
 
 This section contains the caveats in the current version of SealedSecret.

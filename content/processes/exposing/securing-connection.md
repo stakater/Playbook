@@ -1,3 +1,4 @@
+
 # Securing the Connection
 With a HTTPS connection, all communications are securely encrypted. A certificate enables a secure connection between the web server and the browser that connects to it. At Stakater we have used a couple of methods for handling certificates.
 
