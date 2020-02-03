@@ -61,25 +61,29 @@ If admin account is not available and you need to request admin consent for appl
 
 Azure Kuberbetes Service with Azure Active Directory requires following steps:
 
-1. Move to the `bash` folder
+
+::: details 1. Move to the bash folder
 
 ```bash
 cd bash/
 ```
+:::
 
 2. Edit the `config` file to setup the variables
 
-3. Make sure all three .sh files are executable
+::: details 3. Make sure all three .sh files are executable
 
 ```bash
 chmod 744 <file>
 ```
+:::
 
-4. Run by using the following command to start the deployment
+::: details 4. Run by using the following command to start the deployment
 
 ```bash
 bash ./deploy.sh
 ```
+:::
 
 5. After a while terminal will display this message: 
 
@@ -92,7 +96,6 @@ Use the above Nameservers and add their values in the hosted zones.
 :::
 
 6. Following line will be displayed on the terminal to request the admin to consent to the permissions if the account being used is `not an admin account`. When the admin has consented to the permissions, Press any key to continue the deployment
-
 
 ::: tip Note
 Ask Administrator to consent on the Application Permissions
@@ -107,8 +110,8 @@ This guide provides guideline regarding kubernetes cluster creation using [Terra
 
 **1. Pre-requisites**
 
-* Terraform [Install](https://www.terraform.io/downloads.html)
-* az-cli [Install](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+* Terraform [Install](https://www.terraform.io/downloads.html).
+* az-cli [Install](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).
 * A Micorsoft Azure account with admin rights (needed to grant consent to server application)
 
 ::: tip Note
@@ -121,39 +124,45 @@ All the configuration that is to be needed should be done in `variables.tf` file
 
 **3. Deployment**
 
-*  Move to terraform folder
+::: details 1.  Move to terraform folder
 ```bash
 cd terraform/
 ```
+:::
 
-* Edit `variables.tf` as per requirement.
+::: details 2. Edit `variables.tf` as per requirement.
 
 * Initialize Terraform
 ```bash
 terraform init
 ```
+:::
 
-* Plan Terraform deployment. Remove errors if it shows any errors
+::: details 3. Plan Terraform deployment. Remove errors if it shows any errors
 ```bash
 terraform plan
 ```
+:::
 
-* Apply the changes
+::: details 4. Apply the changes
 ```bash
 terraform apply
 ```
+:::
 
 ## Verification
 
-1. When deployment is complete, use the following command on the terminal to start the proxy server: 
+::: details 1. When deployment is complete, use the following command on the terminal to start the proxy server: 
 
 ```bash
 kubectl proxy
 ```
+:::
 
-2. Open any browser and pas the URL given below to check whether cluster is deployed successfully or not:
+::: details 2. Open any browser and pas the URL given below to check whether cluster is deployed successfully or not:
 
 
 ```bash
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!
 ```
+:::
