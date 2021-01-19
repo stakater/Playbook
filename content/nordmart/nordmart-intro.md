@@ -25,7 +25,7 @@ Nordmart is an online store web application built using Spring Boot, WildFly Swa
 * **Customer**: Spring Boot service exposing REST API to manage customer profile. It uses Cassandra as the Database. Details can be found on this [link](https://github.com/stakater-lab/stakater-nordmart-customer)
 
 
-## Tools
+## Shared Dependencies
 
 * **Keycloak**: Nordmart uses Keycloak to authenticate a user and get the Customer Profile. A user can go through products but he would have to Sign in to purchase an item.
 
