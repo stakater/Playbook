@@ -23,7 +23,7 @@ jobs:
 
       - name: Generate Tag
         id: generate_tag
-        uses: anothrNick/github-tag-action@1.26.0
+        uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
           WITH_V: true
@@ -69,11 +69,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
         with:
-          message: '@${{ github.actor }} Image is available for testing. `docker pull ${{ secrets.STAKATER_NEXUS_PROD_REGISTRY }}/${{ github.repository }}:${{ steps.generate_tag.outputs.new_tag }}`'
+          message: '@${{ github.actor }} Image is available for testing. `docker pull ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.new_tag }}`'
           allow-repeats: false
 
       - name: Push Latest Tag
-        uses: anothrNick/github-tag-action@1.26.0
+        uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
           WITH_V: true
