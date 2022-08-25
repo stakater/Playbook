@@ -11,7 +11,12 @@
   "author": "aziz@stakater.com",
   "license": "MIT",
   "devDependencies": {
+    "@vuepress/plugin-google-analytics": "^2.0.0-beta.50",
+    "@vuepress/plugin-pwa": "^2.0.0-beta.50",
+    "@vuepress/plugin-pwa-popup": "^2.0.0-beta.50",
+    "@vuepress/plugin-search": "^2.0.0-beta.50",
     "http-server": "^14.1.1",
-    "vuepress": "^2.0.0-beta.50"
+    "vuepress": "^2.0.0-beta.50",
+    "vuepress-plugin-photo-swipe": "^2.0.0-beta.91"
   }
 }

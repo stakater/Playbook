@@ -1,6 +1,10 @@
 import { defineUserConfig } from '@vuepress/cli' 
 import { defaultTheme } from '@vuepress/theme-default'
 import { head, navbarEn, sidebarEn } from './configs'
+import { searchPlugin } from '@vuepress/plugin-search';
+import { googleAnalyticsPlugin } from '@vuepress/plugin-google-analytics'
+import { pwaPlugin } from '@vuepress/plugin-pwa';
+import { pwaPopupPlugin } from '@vuepress/plugin-pwa-popup';
 
 export default defineUserConfig({
   // set site base to default value
@@ -53,4 +57,25 @@ export default defineUserConfig({
     },
   }),
 
+  plugins: [
+    searchPlugin({
+      maxSuggestions: 10,
+    }),
+    googleAnalyticsPlugin({
+      id: 'G-TTH1YYW5TX',
+    }),
+    pwaPlugin({
+      skipWaiting: false,
+      cleanupOutdatedCaches: true,
+      offlineGoogleAnalytics: true,
+    }),
+    pwaPopupPlugin({
+      locales: {
+        '/': {
+          message: 'New content is available.',
+          buttonText: 'Refresh',
+        },
+      }
+    }),
+  ],
 })
