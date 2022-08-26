@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/nodejs-12
+FROM registry.access.redhat.com/ubi8/nodejs-16
 
 LABEL name="Stakater Playbook" \
       maintainer="Stakater <stakater@aurorasolutions.io>" \
@@ -20,7 +20,7 @@ RUN npm install -g yarn
 RUN yarn install
 
 # build the application
-RUN yarn run build
+RUN yarn docs:build
 
 # Change ownership of cache to make it writable
 RUN chown -R 1001 ~/.cache
@@ -31,4 +31,4 @@ RUN chmod -R 755 $HOME
 # set non-root user
 USER 1001
 
-ENTRYPOINT ["yarn", "run", "serve"]
+ENTRYPOINT ["yarn", "docs:serve"]

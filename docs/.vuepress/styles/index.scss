@@ -1,0 +1,42 @@
+:root {
+    // brand colors
+    --c-brand: #6F0D43;
+    --c-brand-light: #ad3778;
+
+    --pwa-popup-z-index: 10;
+
+    --pwa-popup-text-color: #6F0D43;
+    --pwa-popup-bg-color: #ffffff;
+    --pwa-popup-border-color: #6F0D43;
+    --pwa-popup-shadow: 0 4px 16px var(--pwa-popup-border-color);
+
+    --pwa-popup-btn-text-color: #ffffff;
+    --pwa-popup-btn-bg-color: #6F0D43;
+    --pwa-popup-btn-hover-bg-color: #ad3778;
+}
+
+html.dark {
+    // brand colors
+    --c-brand: #F7B107;
+    --c-brand-light: #f79a30;
+
+    --pwa-popup-text-color: #F7B107;
+    --pwa-popup-bg-color: #ffffff;
+    --pwa-popup-border-color: #F7B107;
+    --pwa-popup-shadow: 0 4px 16px var(--pwa-popup-border-color);
+
+    --pwa-popup-btn-text-color: #ffffff;
+    --pwa-popup-btn-bg-color: #F7B107;
+    --pwa-popup-btn-hover-bg-color: #ffa600;
+    
+}
+
+
+.sidebar{
+    --scrollbar-color: var(--c-brand);
+}
+
+.back-to-top{
+    --back-to-top-color: var(--c-brand);
+    --back-to-top-color-hover: var(--c-brand-light);
+  }
