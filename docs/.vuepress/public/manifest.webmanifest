@@ -1,7 +1,7 @@
 {
     "name": "StakaterDocs",
     "short_name": "StakaterDocs",
-    "description": "SAAP Documentation",
+    "description": "KubeStack+ Documentation",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#fff",
