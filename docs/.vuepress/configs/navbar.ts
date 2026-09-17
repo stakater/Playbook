@@ -14,8 +14,8 @@ export const navbarEn: NavbarConfig = [
     text: "Offerings",
     children: [
       {
-        text: "SAAP",
-        link: "https://www.stakater.com/saap-kubernetes-openshift",
+        text: "KubeStack+",
+        link: "https://docs.stakater.com/kubestackplus/",
       },
       {
         text: "Consultancy",
